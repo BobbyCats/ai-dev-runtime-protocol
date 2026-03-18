@@ -1,0 +1,11 @@
+# Paths excluded from repo-map scanning and runtime searches.
+.git/*
+node_modules/*
+dist/*
+build/*
+.next/*
+.turbo/*
+.venv/*
+venv/*
+__pycache__/*
+.aidrp/cache/*

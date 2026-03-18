@@ -1,0 +1,129 @@
+{
+  "schema_version": "0.1.0",
+  "task_id": "harden-repo-map-ranking",
+  "generated_at": "2026-03-18T05:09:03+00:00",
+  "title": "Harden repo map ranking",
+  "type": "refactor",
+  "objective": "Improve candidate file ranking without expanding scope beyond repo-map logic.",
+  "scope": [
+    "Touch repo-map and ranking logic only."
+  ],
+  "non_goals": [],
+  "acceptance_criteria": [
+    "Repo map still generates JSON and Markdown.",
+    "Candidate ranking remains deterministic."
+  ],
+  "constraints": [
+    "Do not add third-party dependencies."
+  ],
+  "search_terms": [
+    "ranking",
+    "repo-map"
+  ],
+  "context_budget": {
+    "seed_file_limit": 12,
+    "candidate_file_limit": 10,
+    "hard_file_cap": 24,
+    "max_file_chars": 18000,
+    "max_snippet_chars": 1200
+  },
+  "read_order": [
+    "AGENTS.md",
+    ".aidrp/repo-map.md",
+    "src/aidrp/repo_map.py",
+    ".aidrp/repo-map.md",
+    "src/aidrp/cli.py",
+    "src/aidrp/debug_pack.py",
+    "templates/task-packet.md",
+    "src/aidrp/task_packet.py",
+    "AGENTS.md",
+    "ONBOARDING.md",
+    "README.md",
+    "tests/test_runtime_protocol.py"
+  ],
+  "candidate_files": [
+    {
+      "path": "src/aidrp/repo_map.py",
+      "language": "python",
+      "role": "source",
+      "score": 21,
+      "reason": "Matched tokens: and, candidate, map, repo"
+    },
+    {
+      "path": ".aidrp/repo-map.md",
+      "language": "markdown",
+      "role": "source",
+      "score": 15,
+      "reason": "Matched tokens: and, map, repo"
+    },
+    {
+      "path": "src/aidrp/cli.py",
+      "language": "python",
+      "role": "source",
+      "score": 15,
+      "reason": "Matched tokens: map, repo"
+    },
+    {
+      "path": "src/aidrp/debug_pack.py",
+      "language": "python",
+      "role": "source",
+      "score": 15,
+      "reason": "Matched tokens: map, repo"
+    },
+    {
+      "path": "templates/task-packet.md",
+      "language": "markdown",
+      "role": "source",
+      "score": 15,
+      "reason": "Matched tokens: and, candidate, scope"
+    },
+    {
+      "path": "src/aidrp/task_packet.py",
+      "language": "python",
+      "role": "source",
+      "score": 14,
+      "reason": "Matched tokens: map, repo"
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 13,
+      "reason": "Matched tokens: scope"
+    },
+    {
+      "path": "ONBOARDING.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 13,
+      "reason": "Matched tokens: only"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 13,
+      "reason": "Matched tokens: repo"
+    },
+    {
+      "path": "tests/test_runtime_protocol.py",
+      "language": "python",
+      "role": "test",
+      "score": 12,
+      "reason": "Matched tokens: map, repo"
+    }
+  ],
+  "validation_commands": {
+    "npm": [],
+    "python": [
+      "aidrp"
+    ],
+    "make": []
+  },
+  "deliverables": [
+    "Code changes scoped to the task",
+    "Updated or new tests for changed behavior",
+    "Decision trace for major tradeoffs",
+    "Follow-up notes for unresolved risks"
+  ]
+}

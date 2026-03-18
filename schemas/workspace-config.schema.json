@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycats.github.io/ai-dev-runtime-protocol/schemas/workspace-config.schema.json",
+  "title": "WorkspaceConfig",
+  "type": "object",
+  "required": ["schema_version", "context_budget", "validation_commands"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "ignore_globs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "max_file_size_kb": { "type": "integer", "minimum": 1 },
+    "context_budget": {
+      "type": "object",
+      "required": ["seed_file_limit", "candidate_file_limit", "hard_file_cap"],
+      "properties": {
+        "seed_file_limit": { "type": "integer", "minimum": 1 },
+        "candidate_file_limit": { "type": "integer", "minimum": 1 },
+        "hard_file_cap": { "type": "integer", "minimum": 1 },
+        "max_file_chars": { "type": "integer", "minimum": 100 },
+        "max_snippet_chars": { "type": "integer", "minimum": 50 }
+      }
+    },
+    "validation_commands": {
+      "type": "object",
+      "properties": {
+        "quick": { "type": "array", "items": { "type": "string" } },
+        "precommit": { "type": "array", "items": { "type": "string" } },
+        "ship": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "preferred_entry_files": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "risk_globs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

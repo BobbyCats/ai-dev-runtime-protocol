@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycats.github.io/ai-dev-runtime-protocol/schemas/decision-trace.schema.json",
+  "title": "DecisionTrace",
+  "type": "object",
+  "required": ["schema_version", "trace_id", "task_id", "title", "events"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "trace_id": { "type": "string" },
+    "task_id": { "type": "string" },
+    "title": { "type": "string" },
+    "started_at": { "type": "string" },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["timestamp", "stage", "summary"],
+        "properties": {
+          "timestamp": { "type": "string" },
+          "stage": { "type": "string" },
+          "summary": { "type": "string" },
+          "files": { "type": "array", "items": { "type": "string" } },
+          "commands": { "type": "array", "items": { "type": "string" } },
+          "outcome": { "type": "string" }
+        }
+      }
+    }
+  }
+}

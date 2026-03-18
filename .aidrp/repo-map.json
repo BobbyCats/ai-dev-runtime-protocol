@@ -1,0 +1,849 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-03-18T05:08:03+00:00",
+  "project_root": "F:\\开发思路\\ai-dev-runtime-protocol",
+  "git": {
+    "branch": "main",
+    "head": "283dc53aabac11847526d0ab3ad78bc9cb228e45",
+    "dirty": true
+  },
+  "summary": {
+    "file_count": 44,
+    "language_counts": {
+      "json": 8,
+      "text": 9,
+      "yaml": 1,
+      "markdown": 14,
+      "toml": 1,
+      "python": 11
+    },
+    "role_counts": {
+      "configuration": 3,
+      "source": 25,
+      "infrastructure": 1,
+      "documentation": 8,
+      "schema": 6,
+      "test": 1
+    },
+    "seed_files": [
+      "AGENTS.md",
+      "ONBOARDING.md",
+      "README.md",
+      "pyproject.toml",
+      "src/aidrp/cli.py",
+      "src/aidrp/debug_pack.py",
+      "src/aidrp/repo_map.py",
+      "src/aidrp/utils.py",
+      "src/aidrp/workspace.py",
+      "src/aidrp/eval_case.py",
+      "src/aidrp/task_packet.py",
+      "examples/README.md"
+    ],
+    "risk_files": [],
+    "commands": {
+      "npm": [],
+      "python": [
+        "aidrp"
+      ],
+      "make": []
+    },
+    "context_budget": {
+      "seed_file_limit": 12,
+      "candidate_file_limit": 10,
+      "hard_file_cap": 24,
+      "max_file_chars": 18000,
+      "max_snippet_chars": 1200
+    }
+  },
+  "files": [
+    {
+      "path": ".aidrp/config.json",
+      "language": "json",
+      "role": "configuration",
+      "lines": 36,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "71aeba148b77",
+      "score": 0
+    },
+    {
+      "path": ".aidrpignore",
+      "language": "text",
+      "role": "source",
+      "lines": 12,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "504912b2a34b",
+      "score": 2
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "language": "yaml",
+      "role": "infrastructure",
+      "lines": 21,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "b2a922b8d58c",
+      "score": 0
+    },
+    {
+      "path": ".gitignore",
+      "language": "text",
+      "role": "source",
+      "lines": 14,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "8d92609a17be",
+      "score": 2
+    },
+    {
+      "path": "adapters/python-fastapi.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 27,
+      "symbols": [
+        "Adapter: Python + FastAPI",
+        "Recommended `.aidrp/config.json` Adjustments",
+        "Common Read Order",
+        "Common Risk Areas"
+      ],
+      "imports": [],
+      "headings": [
+        "Adapter: Python + FastAPI",
+        "Recommended `.aidrp/config.json` Adjustments",
+        "Common Read Order",
+        "Common Risk Areas"
+      ],
+      "hash": "aa8e2e8de8e8",
+      "score": 6
+    },
+    {
+      "path": "adapters/react-node-monorepo.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 27,
+      "symbols": [
+        "Adapter: React + Node Monorepo",
+        "Recommended `.aidrp/config.json` Adjustments",
+        "Common Read Order",
+        "Common Risk Areas"
+      ],
+      "imports": [],
+      "headings": [
+        "Adapter: React + Node Monorepo",
+        "Recommended `.aidrp/config.json` Adjustments",
+        "Common Read Order",
+        "Common Risk Areas"
+      ],
+      "hash": "5b8214d0e32b",
+      "score": 6
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 24,
+      "symbols": [
+        "AGENTS",
+        "Working Rules",
+        "Validation",
+        "Editing Scope"
+      ],
+      "imports": [],
+      "headings": [
+        "AGENTS",
+        "Working Rules",
+        "Validation",
+        "Editing Scope"
+      ],
+      "hash": "55e204cffb2c",
+      "score": 10
+    },
+    {
+      "path": "docs/architecture.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 74,
+      "symbols": [
+        "Architecture",
+        "Layers",
+        "1. Protocol layer",
+        "2. Artifact layer",
+        "3. Runtime layer",
+        "Why Not Just More Prompts?",
+        "Why JSON First?",
+        "Why A Thin CLI?",
+        "Future Directions"
+      ],
+      "imports": [],
+      "headings": [
+        "Architecture",
+        "Layers",
+        "1. Protocol layer",
+        "2. Artifact layer",
+        "3. Runtime layer",
+        "Why Not Just More Prompts?",
+        "Why JSON First?",
+        "Why A Thin CLI?",
+        "Future Directions"
+      ],
+      "hash": "52e14d081b10",
+      "score": 4
+    },
+    {
+      "path": "docs/playbooks/bugfix.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 29,
+      "symbols": [
+        "Bugfix Playbook",
+        "Sequence",
+        "Rules",
+        "Minimum Artifacts"
+      ],
+      "imports": [],
+      "headings": [
+        "Bugfix Playbook",
+        "Sequence",
+        "Rules",
+        "Minimum Artifacts"
+      ],
+      "hash": "66d22e1faf3c",
+      "score": 4
+    },
+    {
+      "path": "docs/playbooks/feature.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 21,
+      "symbols": [
+        "Feature Playbook",
+        "Sequence",
+        "Rules"
+      ],
+      "imports": [],
+      "headings": [
+        "Feature Playbook",
+        "Sequence",
+        "Rules"
+      ],
+      "hash": "bb12d888208f",
+      "score": 3
+    },
+    {
+      "path": "docs/reference/open-source-inspiration.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 60,
+      "symbols": [
+        "Open-Source Inspiration",
+        "Aider",
+        "OpenHands",
+        "HyperAgent",
+        "OpenTelemetry"
+      ],
+      "imports": [],
+      "headings": [
+        "Open-Source Inspiration",
+        "Aider",
+        "OpenHands",
+        "HyperAgent",
+        "OpenTelemetry"
+      ],
+      "hash": "116d21d68ff3",
+      "score": 4
+    },
+    {
+      "path": "examples/README.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 11,
+      "symbols": [
+        "Examples"
+      ],
+      "imports": [],
+      "headings": [
+        "Examples"
+      ],
+      "hash": "3ea86d303377",
+      "score": 7
+    },
+    {
+      "path": "LICENSE",
+      "language": "text",
+      "role": "source",
+      "lines": 22,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "79d25a3d9086",
+      "score": 2
+    },
+    {
+      "path": "ONBOARDING.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 54,
+      "symbols": [
+        "Onboarding",
+        "The Core Shift",
+        "Default Operating Model",
+        "Red Flags This Toolkit Is Meant To Prevent",
+        "Required Artifacts",
+        "How To Roll This Into Another Project",
+        "If You Only Adopt Three Things"
+      ],
+      "imports": [],
+      "headings": [
+        "Onboarding",
+        "The Core Shift",
+        "Default Operating Model",
+        "Red Flags This Toolkit Is Meant To Prevent",
+        "Required Artifacts",
+        "How To Roll This Into Another Project",
+        "If You Only Adopt Three Things"
+      ],
+      "hash": "70354ef44fbf",
+      "score": 10
+    },
+    {
+      "path": "pyproject.toml",
+      "language": "toml",
+      "role": "configuration",
+      "lines": 38,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "ae7be5b57501",
+      "score": 6
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 180,
+      "symbols": [
+        "AI Dev Runtime Protocol",
+        "Why This Exists",
+        "What You Get",
+        "Install",
+        "Quick Start",
+        "Intended Workflow",
+        "Repository Layout",
+        "Design Principles",
+        "References",
+        "Status",
+        "License"
+      ],
+      "imports": [],
+      "headings": [
+        "AI Dev Runtime Protocol",
+        "Why This Exists",
+        "What You Get",
+        "Install",
+        "Quick Start",
+        "Intended Workflow",
+        "Repository Layout",
+        "Design Principles",
+        "References",
+        "Status"
+      ],
+      "hash": "2ed5274e165a",
+      "score": 10
+    },
+    {
+      "path": "schemas/debug-pack.schema.json",
+      "language": "json",
+      "role": "schema",
+      "lines": 37,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "96a6510165a5",
+      "score": 0
+    },
+    {
+      "path": "schemas/decision-trace.schema.json",
+      "language": "json",
+      "role": "schema",
+      "lines": 30,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "e764b303abe4",
+      "score": 0
+    },
+    {
+      "path": "schemas/eval-case.schema.json",
+      "language": "json",
+      "role": "schema",
+      "lines": 19,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "a84361daca0e",
+      "score": 0
+    },
+    {
+      "path": "schemas/repo-map.schema.json",
+      "language": "json",
+      "role": "schema",
+      "lines": 45,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "ae258ff2132f",
+      "score": 0
+    },
+    {
+      "path": "schemas/task-packet.schema.json",
+      "language": "json",
+      "role": "schema",
+      "lines": 39,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "41d0378583a5",
+      "score": 0
+    },
+    {
+      "path": "schemas/workspace-config.schema.json",
+      "language": "json",
+      "role": "schema",
+      "lines": 43,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "f25ff39ea7a7",
+      "score": 0
+    },
+    {
+      "path": "src/ai_dev_runtime_protocol.egg-info/dependency_links.txt",
+      "language": "text",
+      "role": "source",
+      "lines": 2,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "adc83b19e793",
+      "score": 2
+    },
+    {
+      "path": "src/ai_dev_runtime_protocol.egg-info/entry_points.txt",
+      "language": "text",
+      "role": "source",
+      "lines": 3,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "4055a753ac0c",
+      "score": 2
+    },
+    {
+      "path": "src/ai_dev_runtime_protocol.egg-info/PKG-INFO",
+      "language": "text",
+      "role": "source",
+      "lines": 223,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "30b07cfba9c3",
+      "score": 2
+    },
+    {
+      "path": "src/ai_dev_runtime_protocol.egg-info/SOURCES.txt",
+      "language": "text",
+      "role": "source",
+      "lines": 19,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "8cc22db8c70a",
+      "score": 2
+    },
+    {
+      "path": "src/ai_dev_runtime_protocol.egg-info/top_level.txt",
+      "language": "text",
+      "role": "source",
+      "lines": 2,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "7b2e5295f2ba",
+      "score": 2
+    },
+    {
+      "path": "src/aidrp/__init__.py",
+      "language": "python",
+      "role": "source",
+      "lines": 5,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "0780dcb1c461",
+      "score": 2
+    },
+    {
+      "path": "src/aidrp/__main__.py",
+      "language": "python",
+      "role": "source",
+      "lines": 6,
+      "symbols": [],
+      "imports": [
+        "aidrp.cli"
+      ],
+      "headings": [],
+      "hash": "831245752959",
+      "score": 3
+    },
+    {
+      "path": "src/aidrp/cli.py",
+      "language": "python",
+      "role": "source",
+      "lines": 201,
+      "symbols": [
+        "_path",
+        "_list",
+        "build_parser",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "pathlib",
+        "aidrp.debug_pack",
+        "aidrp.eval_case",
+        "aidrp.repo_map",
+        "aidrp.task_packet",
+        "aidrp.trace",
+        "aidrp.utils",
+        "aidrp.workspace"
+      ],
+      "headings": [],
+      "hash": "f262245c0acf",
+      "score": 9
+    },
+    {
+      "path": "src/aidrp/debug_pack.py",
+      "language": "python",
+      "role": "source",
+      "lines": 168,
+      "symbols": [
+        "_collect_recent_commits",
+        "_collect_search_hits",
+        "build_debug_pack",
+        "debug_pack_to_markdown",
+        "write_debug_pack"
+      ],
+      "imports": [
+        "__future__",
+        "pathlib",
+        "typing",
+        "aidrp.repo_map",
+        "aidrp.utils",
+        "aidrp.workspace"
+      ],
+      "headings": [],
+      "hash": "68d6d8abfc05",
+      "score": 9
+    },
+    {
+      "path": "src/aidrp/eval_case.py",
+      "language": "python",
+      "role": "source",
+      "lines": 56,
+      "symbols": [
+        "build_eval_case",
+        "eval_case_to_markdown",
+        "write_eval_case"
+      ],
+      "imports": [
+        "__future__",
+        "pathlib",
+        "aidrp.utils"
+      ],
+      "headings": [],
+      "hash": "cfe7beac1cca",
+      "score": 8
+    },
+    {
+      "path": "src/aidrp/repo_map.py",
+      "language": "python",
+      "role": "source",
+      "lines": 261,
+      "symbols": [
+        "_classify_role",
+        "_parse_python_symbols",
+        "_parse_ts_like",
+        "_parse_headings",
+        "_extract_commands",
+        "_summarize_file",
+        "build_repo_map",
+        "repo_map_to_markdown",
+        "write_repo_map",
+        "rank_candidate_files",
+        "_candidate_reason"
+      ],
+      "imports": [
+        "__future__",
+        "ast",
+        "json",
+        "re",
+        "tomllib",
+        "collections",
+        "pathlib",
+        "typing",
+        "aidrp.utils",
+        "aidrp.workspace"
+      ],
+      "headings": [],
+      "hash": "cfd8b0ce156e",
+      "score": 9
+    },
+    {
+      "path": "src/aidrp/task_packet.py",
+      "language": "python",
+      "role": "source",
+      "lines": 115,
+      "symbols": [
+        "build_task_packet",
+        "task_packet_to_markdown",
+        "write_task_packet"
+      ],
+      "imports": [
+        "__future__",
+        "pathlib",
+        "typing",
+        "aidrp.repo_map",
+        "aidrp.utils",
+        "aidrp.workspace"
+      ],
+      "headings": [],
+      "hash": "c55277194768",
+      "score": 8
+    },
+    {
+      "path": "src/aidrp/trace.py",
+      "language": "python",
+      "role": "source",
+      "lines": 44,
+      "symbols": [
+        "start_trace",
+        "append_trace_event"
+      ],
+      "imports": [
+        "__future__",
+        "pathlib",
+        "typing",
+        "aidrp.utils"
+      ],
+      "headings": [],
+      "hash": "8d944050daf3",
+      "score": 7
+    },
+    {
+      "path": "src/aidrp/utils.py",
+      "language": "python",
+      "role": "source",
+      "lines": 256,
+      "symbols": [
+        "now_iso",
+        "slugify",
+        "sha1_text",
+        "ensure_parent",
+        "write_json",
+        "load_json",
+        "write_text",
+        "read_text",
+        "is_text_file",
+        "detect_language",
+        "relative_path",
+        "count_lines"
+      ],
+      "imports": [
+        "__future__",
+        "fnmatch",
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "collections.abc",
+        "datetime",
+        "pathlib",
+        "typing"
+      ],
+      "headings": [],
+      "hash": "cb2338c204a2",
+      "score": 9
+    },
+    {
+      "path": "src/aidrp/workspace.py",
+      "language": "python",
+      "role": "source",
+      "lines": 112,
+      "symbols": [
+        "workspace_dir",
+        "config_path",
+        "load_workspace_config",
+        "init_workspace"
+      ],
+      "imports": [
+        "__future__",
+        "pathlib",
+        "typing",
+        "aidrp.utils"
+      ],
+      "headings": [],
+      "hash": "2f16062390cb",
+      "score": 9
+    },
+    {
+      "path": "templates/AGENTS.md.template",
+      "language": "text",
+      "role": "source",
+      "lines": 21,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "7cb1a5faee70",
+      "score": 2
+    },
+    {
+      "path": "templates/debug-pack.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 31,
+      "symbols": [
+        "Debug Pack Template",
+        "Reproduction Steps",
+        "Triage Read Order",
+        "Suspected Files",
+        "Evidence",
+        "Recent Commits"
+      ],
+      "imports": [],
+      "headings": [
+        "Debug Pack Template",
+        "Reproduction Steps",
+        "Triage Read Order",
+        "Suspected Files",
+        "Evidence",
+        "Recent Commits"
+      ],
+      "hash": "9077c9ab92b0",
+      "score": 6
+    },
+    {
+      "path": "templates/eval-case.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 19,
+      "symbols": [
+        "Eval Case Template",
+        "Reproduction Steps",
+        "Assertions",
+        "Tags"
+      ],
+      "imports": [],
+      "headings": [
+        "Eval Case Template",
+        "Reproduction Steps",
+        "Assertions",
+        "Tags"
+      ],
+      "hash": "a1bcf211cb80",
+      "score": 6
+    },
+    {
+      "path": "templates/prompts.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 18,
+      "symbols": [
+        "Prompt Starters",
+        "Task Packet First",
+        "Debug Pack First",
+        "Trace Discipline",
+        "Eval Discipline"
+      ],
+      "imports": [],
+      "headings": [
+        "Prompt Starters",
+        "Task Packet First",
+        "Debug Pack First",
+        "Trace Discipline",
+        "Eval Discipline"
+      ],
+      "hash": "cbcf6f125132",
+      "score": 6
+    },
+    {
+      "path": "templates/task-packet.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 38,
+      "symbols": [
+        "Task Packet Template",
+        "Scope",
+        "Non-Goals",
+        "Acceptance Criteria",
+        "Constraints",
+        "Read Order",
+        "Candidate Files",
+        "Validation Commands"
+      ],
+      "imports": [],
+      "headings": [
+        "Task Packet Template",
+        "Scope",
+        "Non-Goals",
+        "Acceptance Criteria",
+        "Constraints",
+        "Read Order",
+        "Candidate Files",
+        "Validation Commands"
+      ],
+      "hash": "3130a8a66820",
+      "score": 6
+    },
+    {
+      "path": "templates/workspace-config.json",
+      "language": "json",
+      "role": "configuration",
+      "lines": 33,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "d0e71dac6259",
+      "score": 0
+    },
+    {
+      "path": "tests/test_runtime_protocol.py",
+      "language": "python",
+      "role": "test",
+      "lines": 94,
+      "symbols": [
+        "RuntimeProtocolTests"
+      ],
+      "imports": [
+        "__future__",
+        "tempfile",
+        "unittest",
+        "pathlib",
+        "aidrp.debug_pack",
+        "aidrp.eval_case",
+        "aidrp.repo_map",
+        "aidrp.task_packet",
+        "aidrp.trace",
+        "aidrp.workspace"
+      ],
+      "headings": [],
+      "hash": "b1632d6fc6f5",
+      "score": 6
+    }
+  ]
+}

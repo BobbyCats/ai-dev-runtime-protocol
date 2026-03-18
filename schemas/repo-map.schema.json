@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycats.github.io/ai-dev-runtime-protocol/schemas/repo-map.schema.json",
+  "title": "RepoMap",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "project_root", "summary", "files"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "project_root": { "type": "string" },
+    "git": { "type": "object" },
+    "summary": {
+      "type": "object",
+      "required": ["file_count", "seed_files", "commands", "context_budget"],
+      "properties": {
+        "file_count": { "type": "integer", "minimum": 0 },
+        "language_counts": { "type": "object" },
+        "role_counts": { "type": "object" },
+        "seed_files": { "type": "array", "items": { "type": "string" } },
+        "risk_files": { "type": "array", "items": { "type": "string" } },
+        "commands": { "type": "object" },
+        "context_budget": { "type": "object" }
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "language", "role", "lines", "score"],
+        "properties": {
+          "path": { "type": "string" },
+          "language": { "type": "string" },
+          "role": { "type": "string" },
+          "lines": { "type": "integer", "minimum": 0 },
+          "symbols": { "type": "array", "items": { "type": "string" } },
+          "imports": { "type": "array", "items": { "type": "string" } },
+          "headings": { "type": "array", "items": { "type": "string" } },
+          "hash": { "type": "string" },
+          "score": { "type": "integer" }
+        }
+      }
+    }
+  }
+}

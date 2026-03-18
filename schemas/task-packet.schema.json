@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycats.github.io/ai-dev-runtime-protocol/schemas/task-packet.schema.json",
+  "title": "TaskPacket",
+  "type": "object",
+  "required": ["schema_version", "task_id", "title", "objective", "candidate_files"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "task_id": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "title": { "type": "string" },
+    "type": { "type": "string" },
+    "objective": { "type": "string" },
+    "scope": { "type": "array", "items": { "type": "string" } },
+    "non_goals": { "type": "array", "items": { "type": "string" } },
+    "acceptance_criteria": { "type": "array", "items": { "type": "string" } },
+    "constraints": { "type": "array", "items": { "type": "string" } },
+    "search_terms": { "type": "array", "items": { "type": "string" } },
+    "context_budget": { "type": "object" },
+    "read_order": { "type": "array", "items": { "type": "string" } },
+    "candidate_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "reason"],
+        "properties": {
+          "path": { "type": "string" },
+          "language": { "type": "string" },
+          "role": { "type": "string" },
+          "score": { "type": "integer" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "validation_commands": { "type": "object" },
+    "deliverables": { "type": "array", "items": { "type": "string" } }
+  }
+}

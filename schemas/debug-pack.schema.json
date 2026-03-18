@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycats.github.io/ai-dev-runtime-protocol/schemas/debug-pack.schema.json",
+  "title": "DebugPack",
+  "type": "object",
+  "required": ["schema_version", "debug_id", "title", "symptom", "suspected_files"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "debug_id": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "title": { "type": "string" },
+    "symptom": { "type": "string" },
+    "observed": { "type": "string" },
+    "expected": { "type": "string" },
+    "impact": { "type": "string" },
+    "trace_id": { "type": "string" },
+    "reproduction_steps": { "type": "array", "items": { "type": "string" } },
+    "triage_read_order": { "type": "array", "items": { "type": "string" } },
+    "suspected_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "reason"],
+        "properties": {
+          "path": { "type": "string" },
+          "reason": { "type": "string" },
+          "score": { "type": "integer" }
+        }
+      }
+    },
+    "evidence": { "type": "array", "items": { "type": "object" } },
+    "log_snippets": { "type": "array", "items": { "type": "object" } },
+    "recent_commits": { "type": "array", "items": { "type": "string" } },
+    "recommended_next_actions": { "type": "array", "items": { "type": "string" } }
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "schema_version": "0.1.0",
+  "debug_id": "cli-import-failure-on-fresh-setup",
+  "generated_at": "2026-03-18T05:09:03+00:00",
+  "title": "CLI import failure on fresh setup",
+  "symptom": "Tests cannot import the package in a cold environment",
+  "observed": "unittest fails with ModuleNotFoundError before install completes",
+  "expected": "tests import the package after installation or with a clear documented invocation order",
+  "impact": "bootstrap workflow becomes misleading",
+  "trace_id": "demo-trace-001",
+  "reproduction_steps": [
+    "Run install and tests in parallel.",
+    "Observe the import error from unittest."
+  ],
+  "triage_read_order": [
+    "AGENTS.md",
+    ".aidrp/repo-map.md",
+    "tests/test_runtime_protocol.py",
+    ".github/workflows/ci.yml",
+    "README.md",
+    "src/aidrp/cli.py",
+    "AGENTS.md",
+    "ONBOARDING.md",
+    "adapters/python-fastapi.md",
+    "adapters/react-node-monorepo.md"
+  ],
+  "suspected_files": [
+    {
+      "path": "tests/test_runtime_protocol.py",
+      "reason": "Provided explicitly by the reporter",
+      "score": 999
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "reason": "Provided explicitly by the reporter",
+      "score": 999
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 16,
+      "reason": "Matched tokens: install, workflow"
+    },
+    {
+      "path": "src/aidrp/cli.py",
+      "language": "python",
+      "role": "source",
+      "score": 12,
+      "reason": "Matched tokens: cli"
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 10,
+      "reason": "High-signal documentation file"
+    },
+    {
+      "path": "ONBOARDING.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 10,
+      "reason": "High-signal documentation file"
+    },
+    {
+      "path": "adapters/python-fastapi.md",
+      "language": "markdown",
+      "role": "source",
+      "score": 9,
+      "reason": "Matched tokens: order"
+    },
+    {
+      "path": "adapters/react-node-monorepo.md",
+      "language": "markdown",
+      "role": "source",
+      "score": 9,
+      "reason": "Matched tokens: order"
+    },
+    {
+      "path": "src/aidrp/debug_pack.py",
+      "language": "python",
+      "role": "source",
+      "score": 9,
+      "reason": "High-signal source file"
+    },
+    {
+      "path": "src/aidrp/repo_map.py",
+      "language": "python",
+      "role": "source",
+      "score": 9,
+      "reason": "High-signal source file"
+    }
+  ],
+  "evidence": [
+    {
+      "path": ".aidrp/repo-map.json",
+      "query": "import",
+      "excerpt": "rs\": 1200 } }, \"files\": [ { \"path\": \".aidrp/config.json\", \"language\": \"json\", \"role\": \"configuration\", \"lines\": 36, \"symbols\": [], \"imports\": [], \"headings\": [], \"hash\": \"71aeba148b77\", \"score\": 0 }, { \"path\": \".aidrpignore\", \"language\": \"text\", \"role\": \"source\", \"lin"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "query": "unittest",
+      "excerpt": "-python@v5 with: python-version: \"3.12\" - name: Install package run: python -m pip install -e . - name: Run unit tests run: python -m unittest discover -s tests -v - name: Smoke test repo map run: python -m aidrp repo-map --project-root . --output-dir .aidrp"
+    },
+    {
+      "path": "adapters/python-fastapi.md",
+      "query": "unittest",
+      "excerpt": "web stack. ## Recommended `.aidrp/config.json` Adjustments - Add `src/main.py`, `app/main.py`, and `tests/` to preferred entry files. - Set validation commands around `python -m unittest`, `pytest`, or both. - Add migration and settings files to risk globs. ## Common Read Order 1. `README.md` 2. `AGENTS.md` 3. `pyproject.toml` 4. `src/main.py` or `app/main.py` 5"
+    },
+    {
+      "path": "AGENTS.md",
+      "query": "unittest",
+      "excerpt": "k before proposing a fix. - When reasoning changes direction, record it in a decision trace. - When a bug is fixed, create or update an eval case. ## Validation - Run `python -m unittest discover -s tests -v` - Run `python -m aidrp repo-map --project-root . --output-dir .aidrp` ## Editing Scope - Keep the toolkit dependency-free at runtime. - Favor JSON artifact"
+    },
+    {
+      "path": "README.md",
+      "query": "import",
+      "excerpt": "─ AGENTS.md ├── ONBOARDING.md ├── adapters/ ├── docs/ ├── examples/ ├── schemas/ ├── src/aidrp/ ├── templates/ └── tests/ ``` ## Design Principles - Artifacts over chat history: important state should survive the session. - Read less, decide better: agents should start from packets and repo maps, not whole-repo scans. - Logs need trace IDs: debugging should be e"
+    },
+    {
+      "path": "schemas/repo-map.schema.json",
+      "query": "import",
+      "excerpt": "\"role\": { \"type\": \"string\" }, \"lines\": { \"type\": \"integer\", \"minimum\": 0 }, \"symbols\": { \"type\": \"array\", \"items\": { \"type\": \"string\" } }, \"imports\": { \"type\": \"array\", \"items\": { \"type\": \"string\" } }, \"headings\": { \"type\": \"array\", \"items\": { \"type\": \"string\" } }, \"hash\": { \"type\": \"string\" },"
+    },
+    {
+      "path": "src/ai_dev_runtime_protocol.egg-info/PKG-INFO",
+      "query": "import",
+      "excerpt": "─ AGENTS.md ├── ONBOARDING.md ├── adapters/ ├── docs/ ├── examples/ ├── schemas/ ├── src/aidrp/ ├── templates/ └── tests/ ``` ## Design Principles - Artifacts over chat history: important state should survive the session. - Read less, decide better: agents should start from packets and repo maps, not whole-repo scans. - Logs need trace IDs: debugging should be e"
+    },
+    {
+      "path": "src/aidrp/__main__.py",
+      "query": "import",
+      "excerpt": "from aidrp.cli import main if __name__ == \"__main__\": raise SystemExit(main())"
+    },
+    {
+      "path": "src/aidrp/cli.py",
+      "query": "import",
+      "excerpt": "from __future__ import annotations import argparse from pathlib import Path from aidrp.debug_pack import build_debug_pack, write_debug_pack from aidrp.eval_case import build_eval_case, write_eval_case"
+    },
+    {
+      "path": "src/aidrp/debug_pack.py",
+      "query": "import",
+      "excerpt": "from __future__ import annotations from pathlib import Path from typing import Any from aidrp.repo_map import rank_candidate_files from aidrp.utils import compact_excerpt, git_output, now_iso, read_te"
+    },
+    {
+      "path": "src/aidrp/eval_case.py",
+      "query": "import",
+      "excerpt": "from __future__ import annotations from pathlib import Path from aidrp.utils import now_iso, slugify, write_json, write_text def build_eval_case( *, title: str, origin: str, command:"
+    },
+    {
+      "path": "src/aidrp/repo_map.py",
+      "query": "import",
+      "excerpt": "from __future__ import annotations import ast import json import re import tomllib from collections import Counter from pathlib import Path from typing import Any from aidrp.utils import ( count_l"
+    }
+  ],
+  "log_snippets": [],
+  "recent_commits": [
+    "283dc53 Initial commit"
+  ],
+  "recommended_next_actions": [
+    "Reproduce the bug before editing code.",
+    "Read only the triage set first; do not expand to broad scans unless evidence is insufficient.",
+    "Capture a decision trace for every hypothesis change.",
+    "Convert the confirmed bug into an eval case before closing the task."
+  ]
+}

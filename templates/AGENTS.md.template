@@ -1,0 +1,20 @@
+# AGENTS
+
+Read `.aidrp/repo-map.md` and the active packet before broad codebase scans.
+
+## Required Runtime Artifacts
+
+- `.aidrp/repo-map.json`
+- `.aidrp/repo-map.md`
+- `.aidrp/tasks/*.json`
+- `.aidrp/debug/*.json`
+- `.aidrp/traces/*.json`
+- `.aidrp/evals/*.json`
+
+## Rules
+
+- For non-trivial work, generate a task packet first.
+- For bugs, generate a debug pack before proposing changes.
+- Expand context only when the current packet cannot explain the problem.
+- Record major reasoning pivots in a decision trace.
+- Convert confirmed bugs into eval cases.

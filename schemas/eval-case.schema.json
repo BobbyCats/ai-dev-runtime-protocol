@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycats.github.io/ai-dev-runtime-protocol/schemas/eval-case.schema.json",
+  "title": "EvalCase",
+  "type": "object",
+  "required": ["schema_version", "eval_id", "title", "origin", "assertions"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "eval_id": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "title": { "type": "string" },
+    "origin": { "type": "string" },
+    "command": { "type": "string" },
+    "reproduction_steps": { "type": "array", "items": { "type": "string" } },
+    "assertions": { "type": "array", "items": { "type": "string" } },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  }
+}

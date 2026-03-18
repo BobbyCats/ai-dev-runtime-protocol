@@ -1,0 +1,35 @@
+{
+  "schema_version": "0.1.0",
+  "ignore_globs": [],
+  "max_file_size_kb": 256,
+  "context_budget": {
+    "seed_file_limit": 12,
+    "candidate_file_limit": 10,
+    "hard_file_cap": 24,
+    "max_file_chars": 18000,
+    "max_snippet_chars": 1200
+  },
+  "validation_commands": {
+    "quick": [],
+    "precommit": [],
+    "ship": []
+  },
+  "preferred_entry_files": [
+    "README.md",
+    "AGENTS.md",
+    "ONBOARDING.md",
+    "package.json",
+    "pyproject.toml",
+    "apps/web/src/main.tsx",
+    "apps/api/src/index.ts",
+    "src/main.py"
+  ],
+  "risk_globs": [
+    "migrations/*",
+    "infra/*",
+    "deploy/*",
+    "security/*",
+    "auth/*",
+    "payments/*"
+  ]
+}
