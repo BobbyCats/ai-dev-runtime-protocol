@@ -1,53 +1,55 @@
-# Onboarding
+# Onboarding | 入门说明
 
-This repository is for teams and solo builders who already know how to prompt an AI agent, but need the agent to behave like a disciplined runtime.
+这个仓库不是教你“怎么写更花哨的 Prompt”，而是教你：
 
-## The Core Shift
+怎么把 AI 开发从聊天模式，升级成可控的运行模式。
 
-Move from:
+## 核心转变
 
-- "read the repo and help me"
+从：
 
-to:
+- “你先读一下仓库，然后帮我改”
 
-- "work from explicit runtime artifacts and only expand context when evidence requires it"
+转成：
 
-## Default Operating Model
+- “你先根据工件工作，只有证据不足时才扩大上下文”
 
-1. Initialize `.aidrp/`
-2. Generate a repo map
-3. Generate a task packet or debug pack
-4. Limit reading to the packet shortlist first
-5. Log major decisions in a trace
-6. Convert proven failures into eval cases
+## 默认工作模型
 
-## Red Flags This Toolkit Is Meant To Prevent
+1. 初始化 `.aidrp/`
+2. 生成 `repo-map | 仓库地图`
+3. 任务生成 `task-packet | 任务包`，bug 生成 `debug-pack | 排障包`
+4. 优先阅读短名单，不要一上来全仓扫描
+5. 关键推理变化写入 `decision-trace | 决策轨迹`
+6. 被确认的 bug 变成 `eval-case | 回归用例`
 
-- the agent scans the entire repo for a local bug
-- the same architecture explanation is repeated every session
-- logs are present but not correlated to a task or trace
-- a production bug is fixed once but never becomes a reusable test asset
-- validation commands are unclear or too slow to be run consistently
+## 这套系统试图防止的坏味道
 
-## Required Artifacts
+- 一个本地 bug 却要扫整个仓库
+- 每次新会话都重新讲架构
+- 有日志但没有 trace id，串不起来
+- 线上问题修一次，后面还会回来
+- 验证命令太慢或者根本没人知道该跑什么
+
+## 必备工件
 
 - `.aidrp/repo-map.json`
 - `.aidrp/repo-map.md`
-- `.aidrp/tasks/*.json` and `*.md` for scoped work
-- `.aidrp/debug/*.json` and `*.md` for bugs
-- `.aidrp/traces/*.json` for decision history
-- `.aidrp/evals/*.json` and `*.md` for regression hardening
+- `.aidrp/tasks/*.json` 与 `*.md`
+- `.aidrp/debug/*.json` 与 `*.md`
+- `.aidrp/traces/*.json`
+- `.aidrp/evals/*.json` 与 `*.md`
 
-## How To Roll This Into Another Project
+## 集成到其他项目的步骤
 
-1. Install this package or copy the relevant files.
-2. Run `python -m aidrp init-workspace --project-root /path/to/project`.
-3. Customize `.aidrp/config.json`.
-4. Commit `.aidrpignore`, config, and the generated `AGENTS.md`.
-5. Add packet and debug generation to your normal workflow.
+1. 安装这个包，或者把核心文件复制过去
+2. 运行 `python -m aidrp init-workspace --project-root /path/to/project`
+3. 修改 `.aidrp/config.json`
+4. 提交 `.aidrpignore`、配置文件和生成后的 `AGENTS.md`
+5. 把任务包 / 排障包 生成加入你的日常流程
 
-## If You Only Adopt Three Things
+## 如果你现在只能落三件事
 
-- Commit a repo map.
-- Require a debug pack before broad bugfix work.
-- Turn confirmed production bugs into eval cases.
+- 固定提交 `repo-map | 仓库地图`
+- 修 bug 前必须先写 `debug-pack | 排障包`
+- 真实 bug 修完后必须补 `eval-case | 回归用例`

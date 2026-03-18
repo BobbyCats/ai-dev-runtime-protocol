@@ -188,32 +188,32 @@ def build_repo_map(project_root: Path) -> dict[str, Any]:
 def repo_map_to_markdown(repo_map: dict[str, Any]) -> str:
     summary = repo_map["summary"]
     lines = [
-        "# Repo Map",
+        "# Repo Map | 仓库地图",
         "",
-        f"- Generated: `{repo_map['generated_at']}`",
-        f"- Root: `{repo_map['project_root']}`",
-        f"- Branch: `{repo_map['git'].get('branch') or 'unknown'}`",
-        f"- Dirty: `{repo_map['git'].get('dirty')}`",
+        f"- Generated | 生成时间: `{repo_map['generated_at']}`",
+        f"- Root | 根目录: `{repo_map['project_root']}`",
+        f"- Branch | 分支: `{repo_map['git'].get('branch') or 'unknown'}`",
+        f"- Dirty | 有未提交改动: `{repo_map['git'].get('dirty')}`",
         "",
-        "## Summary",
+        "## Summary | 概览",
         "",
-        f"- Files scanned: `{summary['file_count']}`",
-        f"- Languages: `{', '.join(f'{k}:{v}' for k, v in sorted(summary['language_counts'].items())) or 'none'}`",
-        f"- Roles: `{', '.join(f'{k}:{v}' for k, v in sorted(summary['role_counts'].items())) or 'none'}`",
+        f"- Files scanned | 扫描文件数: `{summary['file_count']}`",
+        f"- Languages | 语言分布: `{', '.join(f'{k}:{v}' for k, v in sorted(summary['language_counts'].items())) or 'none'}`",
+        f"- Roles | 文件角色: `{', '.join(f'{k}:{v}' for k, v in sorted(summary['role_counts'].items())) or 'none'}`",
         "",
-        "## Seed Files",
+        "## Seed Files | 起始文件",
         "",
     ]
     for path in summary["seed_files"]:
         lines.append(f"- `{path}`")
 
-    lines.extend(["", "## Commands", ""])
+    lines.extend(["", "## Commands | 常用命令", ""])
     for group, values in summary["commands"].items():
         if not values:
             continue
         lines.append(f"- `{group}`: {', '.join(f'`{value}`' for value in values[:8])}")
 
-    lines.extend(["", "## Top Modules", ""])
+    lines.extend(["", "## Top Modules | 高信号模块", ""])
     top_files = sorted(repo_map["files"], key=lambda item: (-item["score"], item["path"]))[:20]
     for entry in top_files:
         details = ", ".join(entry["symbols"][:4]) or entry["role"]

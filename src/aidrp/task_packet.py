@@ -63,45 +63,45 @@ def build_task_packet(
 
 def task_packet_to_markdown(packet: dict[str, Any]) -> str:
     lines = [
-        f"# Task Packet: {packet['title']}",
+        f"# Task Packet | 任务包: {packet['title']}",
         "",
-        f"- Task ID: `{packet['task_id']}`",
-        f"- Type: `{packet['type']}`",
-        f"- Generated: `{packet['generated_at']}`",
+        f"- Task ID | 任务 ID: `{packet['task_id']}`",
+        f"- Type | 类型: `{packet['type']}`",
+        f"- Generated | 生成时间: `{packet['generated_at']}`",
         "",
-        "## Objective",
+        "## Objective | 目标",
         "",
         packet["objective"],
         "",
-        "## Scope",
+        "## Scope | 范围",
         "",
     ]
     for item in packet["scope"]:
         lines.append(f"- {item}")
 
     if packet["non_goals"]:
-        lines.extend(["", "## Non-Goals", ""])
+        lines.extend(["", "## Non-Goals | 不做什么", ""])
         for item in packet["non_goals"]:
             lines.append(f"- {item}")
 
-    lines.extend(["", "## Acceptance Criteria", ""])
+    lines.extend(["", "## Acceptance Criteria | 验收标准", ""])
     for item in packet["acceptance_criteria"]:
         lines.append(f"- {item}")
 
     if packet["constraints"]:
-        lines.extend(["", "## Constraints", ""])
+        lines.extend(["", "## Constraints | 约束", ""])
         for item in packet["constraints"]:
             lines.append(f"- {item}")
 
-    lines.extend(["", "## Read Order", ""])
+    lines.extend(["", "## Read Order | 阅读顺序", ""])
     for item in packet["read_order"]:
         lines.append(f"- `{item}`")
 
-    lines.extend(["", "## Candidate Files", ""])
+    lines.extend(["", "## Candidate Files | 候选文件", ""])
     for item in packet["candidate_files"]:
         lines.append(f"- `{item['path']}`: {item['reason']}")
 
-    lines.extend(["", "## Validation Commands", ""])
+    lines.extend(["", "## Validation Commands | 验证命令", ""])
     for group, values in packet["validation_commands"].items():
         if not values:
             continue

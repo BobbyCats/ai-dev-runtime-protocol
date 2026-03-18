@@ -28,18 +28,18 @@ def _list(values: list[str] | None) -> list[str]:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="aidrp", description="AI Dev Runtime Protocol toolkit")
+    parser = argparse.ArgumentParser(prog="aidrp", description="AI Dev Runtime Protocol toolkit | AI 开发运行协议工具集")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    init_cmd = subparsers.add_parser("init-workspace", help="Create .aidrp workspace scaffolding")
+    init_cmd = subparsers.add_parser("init-workspace", help="Create .aidrp workspace scaffolding | 初始化工作区")
     init_cmd.add_argument("--project-root", default=".")
     init_cmd.add_argument("--write-agents-template", action="store_true")
 
-    repo_cmd = subparsers.add_parser("repo-map", help="Generate repo map JSON and Markdown")
+    repo_cmd = subparsers.add_parser("repo-map", help="Generate repo map JSON and Markdown | 生成仓库地图")
     repo_cmd.add_argument("--project-root", default=".")
     repo_cmd.add_argument("--output-dir", default=".aidrp")
 
-    task_cmd = subparsers.add_parser("task-packet", help="Generate a task packet from a repo map")
+    task_cmd = subparsers.add_parser("task-packet", help="Generate a task packet from a repo map | 生成任务包")
     task_cmd.add_argument("--project-root", default=".")
     task_cmd.add_argument("--repo-map", default=".aidrp/repo-map.json")
     task_cmd.add_argument("--title", required=True)
@@ -52,7 +52,7 @@ def build_parser() -> argparse.ArgumentParser:
     task_cmd.add_argument("--search-term", action="append", default=[])
     task_cmd.add_argument("--output-dir", default=".aidrp/tasks")
 
-    debug_cmd = subparsers.add_parser("debug-pack", help="Generate a bug triage pack")
+    debug_cmd = subparsers.add_parser("debug-pack", help="Generate a bug triage pack | 生成排障包")
     debug_cmd.add_argument("--project-root", default=".")
     debug_cmd.add_argument("--repo-map", default=".aidrp/repo-map.json")
     debug_cmd.add_argument("--title", required=True)
@@ -67,7 +67,7 @@ def build_parser() -> argparse.ArgumentParser:
     debug_cmd.add_argument("--search-term", action="append", default=[])
     debug_cmd.add_argument("--output-dir", default=".aidrp/debug")
 
-    eval_cmd = subparsers.add_parser("eval-case", help="Generate an eval case artifact")
+    eval_cmd = subparsers.add_parser("eval-case", help="Generate an eval case artifact | 生成回归用例")
     eval_cmd.add_argument("--title", required=True)
     eval_cmd.add_argument("--origin", required=True)
     eval_cmd.add_argument("--command", dest="runner_command", default="")
@@ -76,13 +76,13 @@ def build_parser() -> argparse.ArgumentParser:
     eval_cmd.add_argument("--tag", action="append", default=[])
     eval_cmd.add_argument("--output-dir", default=".aidrp/evals")
 
-    trace_start_cmd = subparsers.add_parser("trace-start", help="Create a new decision trace file")
+    trace_start_cmd = subparsers.add_parser("trace-start", help="Create a new decision trace file | 创建决策轨迹")
     trace_start_cmd.add_argument("--title", required=True)
     trace_start_cmd.add_argument("--task-id", required=True)
     trace_start_cmd.add_argument("--trace-id", default="")
     trace_start_cmd.add_argument("--output-dir", default=".aidrp/traces")
 
-    trace_event_cmd = subparsers.add_parser("trace-event", help="Append an event to a decision trace")
+    trace_event_cmd = subparsers.add_parser("trace-event", help="Append an event to a decision trace | 追加决策事件")
     trace_event_cmd.add_argument("--trace-file", required=True)
     trace_event_cmd.add_argument("--stage", required=True)
     trace_event_cmd.add_argument("--summary", required=True)

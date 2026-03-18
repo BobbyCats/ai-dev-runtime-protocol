@@ -1,20 +1,20 @@
 {
   "schema_version": "0.1.0",
-  "task_id": "harden-repo-map-ranking",
-  "generated_at": "2026-03-18T05:09:03+00:00",
-  "title": "Harden repo map ranking",
+  "task_id": "harden-repo-map-ranking-仓库地图排序加固",
+  "generated_at": "2026-03-18T05:29:38+00:00",
+  "title": "Harden repo map ranking 仓库地图排序加固",
   "type": "refactor",
-  "objective": "Improve candidate file ranking without expanding scope beyond repo-map logic.",
+  "objective": "Improve candidate file ranking without expanding scope beyond repo-map logic. 在不扩大范围的前提下改进候选文件排序。",
   "scope": [
-    "Touch repo-map and ranking logic only."
+    "Touch repo-map and ranking logic only. 只改仓库地图与排序逻辑。"
   ],
   "non_goals": [],
   "acceptance_criteria": [
-    "Repo map still generates JSON and Markdown.",
-    "Candidate ranking remains deterministic."
+    "Repo map still generates JSON and Markdown. 仓库地图仍能生成 JSON 和 Markdown。",
+    "Candidate ranking remains deterministic. 候选排序必须保持确定性。"
   ],
   "constraints": [
-    "Do not add third-party dependencies."
+    "Do not add third-party dependencies. 不要引入第三方依赖。"
   ],
   "search_terms": [
     "ranking",
@@ -31,15 +31,15 @@
     "AGENTS.md",
     ".aidrp/repo-map.md",
     "src/aidrp/repo_map.py",
-    ".aidrp/repo-map.md",
+    "README.md",
     "src/aidrp/cli.py",
     "src/aidrp/debug_pack.py",
-    "templates/task-packet.md",
+    "templates/task-packet-任务包.md",
     "src/aidrp/task_packet.py",
+    "tests/test_runtime_protocol.py",
     "AGENTS.md",
     "ONBOARDING.md",
-    "README.md",
-    "tests/test_runtime_protocol.py"
+    "adapters/react-node-monorepo-适配器.md"
   ],
   "candidate_files": [
     {
@@ -50,11 +50,11 @@
       "reason": "Matched tokens: and, candidate, map, repo"
     },
     {
-      "path": ".aidrp/repo-map.md",
+      "path": "README.md",
       "language": "markdown",
-      "role": "source",
-      "score": 15,
-      "reason": "Matched tokens: and, map, repo"
+      "role": "documentation",
+      "score": 16,
+      "reason": "Matched tokens: map, repo"
     },
     {
       "path": "src/aidrp/cli.py",
@@ -71,7 +71,7 @@
       "reason": "Matched tokens: map, repo"
     },
     {
-      "path": "templates/task-packet.md",
+      "path": "templates/task-packet-任务包.md",
       "language": "markdown",
       "role": "source",
       "score": 15,
@@ -85,32 +85,32 @@
       "reason": "Matched tokens: map, repo"
     },
     {
-      "path": "AGENTS.md",
-      "language": "markdown",
-      "role": "documentation",
-      "score": 13,
-      "reason": "Matched tokens: scope"
-    },
-    {
-      "path": "ONBOARDING.md",
-      "language": "markdown",
-      "role": "documentation",
-      "score": 13,
-      "reason": "Matched tokens: only"
-    },
-    {
-      "path": "README.md",
-      "language": "markdown",
-      "role": "documentation",
-      "score": 13,
-      "reason": "Matched tokens: repo"
-    },
-    {
       "path": "tests/test_runtime_protocol.py",
       "language": "python",
       "role": "test",
       "score": 12,
       "reason": "Matched tokens: map, repo"
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 10,
+      "reason": "High-signal documentation file"
+    },
+    {
+      "path": "ONBOARDING.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 10,
+      "reason": "High-signal documentation file"
+    },
+    {
+      "path": "adapters/react-node-monorepo-适配器.md",
+      "language": "markdown",
+      "role": "source",
+      "score": 9,
+      "reason": "Matched tokens: repo"
     }
   ],
   "validation_commands": {

@@ -1,28 +1,28 @@
 {
   "schema_version": "0.1.0",
-  "debug_id": "cli-import-failure-on-fresh-setup",
-  "generated_at": "2026-03-18T05:09:03+00:00",
-  "title": "CLI import failure on fresh setup",
-  "symptom": "Tests cannot import the package in a cold environment",
-  "observed": "unittest fails with ModuleNotFoundError before install completes",
-  "expected": "tests import the package after installation or with a clear documented invocation order",
-  "impact": "bootstrap workflow becomes misleading",
-  "trace_id": "demo-trace-001",
+  "debug_id": "cli-import-failure-首次安装导入失败",
+  "generated_at": "2026-03-18T05:29:38+00:00",
+  "title": "CLI import failure 首次安装导入失败",
+  "symptom": "Tests cannot import the package in a cold environment 首次环境中测试无法导入包",
+  "observed": "unittest fails with ModuleNotFoundError before install completes 安装流程不当时 unittest 会报导入错误",
+  "expected": "tests import the package successfully after the documented install flow 按文档流程安装后测试应能正常导入",
+  "impact": "bootstrap workflow becomes misleading 首次接入体验会被误导",
+  "trace_id": "demo-trace-001-示例追踪",
   "reproduction_steps": [
-    "Run install and tests in parallel.",
-    "Observe the import error from unittest."
+    "Run install and tests out of order 打乱安装和测试顺序执行",
+    "Observe the import error from unittest 观察导入错误"
   ],
   "triage_read_order": [
     "AGENTS.md",
     ".aidrp/repo-map.md",
     "tests/test_runtime_protocol.py",
     ".github/workflows/ci.yml",
-    "README.md",
     "src/aidrp/cli.py",
     "AGENTS.md",
     "ONBOARDING.md",
-    "adapters/python-fastapi.md",
-    "adapters/react-node-monorepo.md"
+    "README.md",
+    "src/aidrp/debug_pack.py",
+    "src/aidrp/repo_map.py"
   ],
   "suspected_files": [
     {
@@ -34,13 +34,6 @@
       "path": ".github/workflows/ci.yml",
       "reason": "Provided explicitly by the reporter",
       "score": 999
-    },
-    {
-      "path": "README.md",
-      "language": "markdown",
-      "role": "documentation",
-      "score": 16,
-      "reason": "Matched tokens: install, workflow"
     },
     {
       "path": "src/aidrp/cli.py",
@@ -64,18 +57,11 @@
       "reason": "High-signal documentation file"
     },
     {
-      "path": "adapters/python-fastapi.md",
+      "path": "README.md",
       "language": "markdown",
-      "role": "source",
-      "score": 9,
-      "reason": "Matched tokens: order"
-    },
-    {
-      "path": "adapters/react-node-monorepo.md",
-      "language": "markdown",
-      "role": "source",
-      "score": 9,
-      "reason": "Matched tokens: order"
+      "role": "documentation",
+      "score": 10,
+      "reason": "High-signal documentation file"
     },
     {
       "path": "src/aidrp/debug_pack.py",
@@ -90,43 +76,47 @@
       "role": "source",
       "score": 9,
       "reason": "High-signal source file"
+    },
+    {
+      "path": "src/aidrp/utils.py",
+      "language": "python",
+      "role": "source",
+      "score": 9,
+      "reason": "High-signal source file"
+    },
+    {
+      "path": "src/aidrp/workspace.py",
+      "language": "python",
+      "role": "source",
+      "score": 9,
+      "reason": "High-signal source file"
     }
   ],
   "evidence": [
-    {
-      "path": ".aidrp/repo-map.json",
-      "query": "import",
-      "excerpt": "rs\": 1200 } }, \"files\": [ { \"path\": \".aidrp/config.json\", \"language\": \"json\", \"role\": \"configuration\", \"lines\": 36, \"symbols\": [], \"imports\": [], \"headings\": [], \"hash\": \"71aeba148b77\", \"score\": 0 }, { \"path\": \".aidrpignore\", \"language\": \"text\", \"role\": \"source\", \"lin"
-    },
     {
       "path": ".github/workflows/ci.yml",
       "query": "unittest",
       "excerpt": "-python@v5 with: python-version: \"3.12\" - name: Install package run: python -m pip install -e . - name: Run unit tests run: python -m unittest discover -s tests -v - name: Smoke test repo map run: python -m aidrp repo-map --project-root . --output-dir .aidrp"
     },
     {
-      "path": "adapters/python-fastapi.md",
+      "path": "adapters/python-fastapi-适配器.md",
       "query": "unittest",
-      "excerpt": "web stack. ## Recommended `.aidrp/config.json` Adjustments - Add `src/main.py`, `app/main.py`, and `tests/` to preferred entry files. - Set validation commands around `python -m unittest`, `pytest`, or both. - Add migration and settings files to risk globs. ## Common Read Order 1. `README.md` 2. `AGENTS.md` 3. `pyproject.toml` 4. `src/main.py` or `app/main.py` 5"
+      "excerpt": "n + FastAPI 适用于： - Python 服务 - FastAPI 或类似的 Web 框架 ## 推荐的 `.aidrp/config.json` 调整 - 把 `src/main.py`、`app/main.py`、`tests/` 放进 `preferred_entry_files` - 把 `pytest` 或 `python -m unittest` 写进验证命令 - 把 migration、settings、auth 相关路径放进风险区域 ## 常见阅读顺序 1. `README.md` 2. `AGENTS.md` 3. `pyproject.toml` 4. `src/main.py` 或 `app/main.py` 5. 路由层 6. 服务层 7. 当前任务包里的候选文件 ## 常见风险"
     },
     {
       "path": "AGENTS.md",
       "query": "unittest",
-      "excerpt": "k before proposing a fix. - When reasoning changes direction, record it in a decision trace. - When a bug is fixed, create or update an eval case. ## Validation - Run `python -m unittest discover -s tests -v` - Run `python -m aidrp repo-map --project-root . --output-dir .aidrp` ## Editing Scope - Keep the toolkit dependency-free at runtime. - Favor JSON artifact"
+      "excerpt": "idrp/` 工件，而不是直接大范围扫仓库 - 非 trivial 任务先生成 `task-packet | 任务包` - bug 先生成 `debug-pack | 排障包` - 判断方向变了，就写 `decision-trace | 决策轨迹` - 真实 bug 修完后，补 `eval-case | 回归用例` ## 验证 - `python -m unittest discover -s tests -v` - `python -m aidrp repo-map --project-root . --output-dir .aidrp` ## 编辑边界 - 运行时保持无第三方依赖 - 优先 JSON 工件和确定性输出 - 核心逻辑避免绑定特定模型平台"
     },
     {
       "path": "README.md",
-      "query": "import",
-      "excerpt": "─ AGENTS.md ├── ONBOARDING.md ├── adapters/ ├── docs/ ├── examples/ ├── schemas/ ├── src/aidrp/ ├── templates/ └── tests/ ``` ## Design Principles - Artifacts over chat history: important state should survive the session. - Read less, decide better: agents should start from packets and repo maps, not whole-repo scans. - Logs need trace IDs: debugging should be e"
+      "query": "unittest",
+      "excerpt": "t-修复日程删除漂移.json \\ --stage investigate \\ --summary \"Confirmed identity mismatch in delete handler. 已确认删除处理器存在身份标识错配。\" \\ --file src/schedule/delete.py \\ --command \"python -m unittest\" \\ --outcome \"Need targeted patch 需要定点修复\" ``` ### 6. 修完后生成 `eval-case | 回归用例` ```bash python -m aidrp eval-case \\ --title \"Regression for schedule deletion drift 日程删除漂移回归用例\""
     },
     {
       "path": "schemas/repo-map.schema.json",
       "query": "import",
       "excerpt": "\"role\": { \"type\": \"string\" }, \"lines\": { \"type\": \"integer\", \"minimum\": 0 }, \"symbols\": { \"type\": \"array\", \"items\": { \"type\": \"string\" } }, \"imports\": { \"type\": \"array\", \"items\": { \"type\": \"string\" } }, \"headings\": { \"type\": \"array\", \"items\": { \"type\": \"string\" } }, \"hash\": { \"type\": \"string\" },"
-    },
-    {
-      "path": "src/ai_dev_runtime_protocol.egg-info/PKG-INFO",
-      "query": "import",
-      "excerpt": "─ AGENTS.md ├── ONBOARDING.md ├── adapters/ ├── docs/ ├── examples/ ├── schemas/ ├── src/aidrp/ ├── templates/ └── tests/ ``` ## Design Principles - Artifacts over chat history: important state should survive the session. - Read less, decide better: agents should start from packets and repo maps, not whole-repo scans. - Logs need trace IDs: debugging should be e"
     },
     {
       "path": "src/aidrp/__main__.py",
@@ -152,10 +142,21 @@
       "path": "src/aidrp/repo_map.py",
       "query": "import",
       "excerpt": "from __future__ import annotations import ast import json import re import tomllib from collections import Counter from pathlib import Path from typing import Any from aidrp.utils import ( count_l"
+    },
+    {
+      "path": "src/aidrp/task_packet.py",
+      "query": "import",
+      "excerpt": "from __future__ import annotations from pathlib import Path from typing import Any from aidrp.repo_map import rank_candidate_files from aidrp.utils import now_iso, slugify, tokenize, write_json, write"
+    },
+    {
+      "path": "src/aidrp/trace.py",
+      "query": "import",
+      "excerpt": "from __future__ import annotations from pathlib import Path from typing import Any from aidrp.utils import load_json, now_iso, write_json def start_trace(trace_file: Path, *, trace_id: str, task_id:"
     }
   ],
   "log_snippets": [],
   "recent_commits": [
+    "d986126 Bootstrap runtime-oriented AI dev protocol",
     "283dc53 Initial commit"
   ],
   "recommended_next_actions": [

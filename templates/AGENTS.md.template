@@ -1,8 +1,8 @@
 # AGENTS
 
-Read `.aidrp/repo-map.md` and the active packet before broad codebase scans.
+先读 `.aidrp/repo-map.md` 和当前激活的工件，再决定是否扩大上下文。
 
-## Required Runtime Artifacts
+## 必要工件
 
 - `.aidrp/repo-map.json`
 - `.aidrp/repo-map.md`
@@ -11,10 +11,10 @@ Read `.aidrp/repo-map.md` and the active packet before broad codebase scans.
 - `.aidrp/traces/*.json`
 - `.aidrp/evals/*.json`
 
-## Rules
+## 规则
 
-- For non-trivial work, generate a task packet first.
-- For bugs, generate a debug pack before proposing changes.
-- Expand context only when the current packet cannot explain the problem.
-- Record major reasoning pivots in a decision trace.
-- Convert confirmed bugs into eval cases.
+- 非 trivial 任务先生成 `task-packet | 任务包`
+- bug 先生成 `debug-pack | 排障包`
+- 当前工件解释不了问题时，才能扩大阅读范围
+- 推理明显转向时，要写 `decision-trace | 决策轨迹`
+- 确认修好的 bug，要生成 `eval-case | 回归用例`

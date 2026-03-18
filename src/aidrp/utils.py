@@ -85,6 +85,7 @@ DEFAULT_IGNORE_GLOBS = [
     ".venv/*",
     "venv/*",
     "__pycache__/*",
+    "*.egg-info/*",
     ".pytest_cache/*",
     ".mypy_cache/*",
     "node_modules/*",
@@ -95,7 +96,9 @@ DEFAULT_IGNORE_GLOBS = [
     ".turbo/*",
     ".idea/*",
     ".vscode/*",
+    ".aidrp/*",
     ".aidrp/cache/*",
+    "examples/outputs/*",
 ]
 
 
@@ -104,8 +107,11 @@ def now_iso() -> str:
 
 
 def slugify(value: str) -> str:
-    slug = re.sub(r"[^a-zA-Z0-9]+", "-", value.strip().lower()).strip("-")
-    return slug or "task"
+    cleaned = value.strip().lower()
+    cleaned = re.sub(r"\s+", "-", cleaned)
+    cleaned = re.sub(r"[^0-9a-z\u4e00-\u9fff_-]+", "-", cleaned)
+    cleaned = re.sub(r"-{2,}", "-", cleaned).strip("-_")
+    return cleaned or "task"
 
 
 def sha1_text(text: str) -> str:

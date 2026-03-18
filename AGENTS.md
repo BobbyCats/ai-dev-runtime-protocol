@@ -1,23 +1,23 @@
 # AGENTS
 
-This repository exists to reduce wasted context and improve debugging discipline in AI-assisted development.
+这个仓库是中文主导、双语术语的 AI 开发运行协议。
 
-## Working Rules
+## 工作规则
 
-- Read [ONBOARDING.md](ONBOARDING.md) before major edits.
-- Prefer generating `.aidrp/` artifacts over broad repository scans.
-- For any non-trivial code change, create a task packet first.
-- For any bug, create a debug pack before proposing a fix.
-- When reasoning changes direction, record it in a decision trace.
-- When a bug is fixed, create or update an eval case.
+- 大改之前先读 [ONBOARDING.md](ONBOARDING.md)
+- 优先生成 `.aidrp/` 工件，而不是直接大范围扫仓库
+- 非 trivial 任务先生成 `task-packet | 任务包`
+- bug 先生成 `debug-pack | 排障包`
+- 判断方向变了，就写 `decision-trace | 决策轨迹`
+- 真实 bug 修完后，补 `eval-case | 回归用例`
 
-## Validation
+## 验证
 
-- Run `python -m unittest discover -s tests -v`
-- Run `python -m aidrp repo-map --project-root . --output-dir .aidrp`
+- `python -m unittest discover -s tests -v`
+- `python -m aidrp repo-map --project-root . --output-dir .aidrp`
 
-## Editing Scope
+## 编辑边界
 
-- Keep the toolkit dependency-free at runtime.
-- Favor JSON artifacts and deterministic outputs.
-- Avoid model-specific assumptions in core logic.
+- 运行时保持无第三方依赖
+- 优先 JSON 工件和确定性输出
+- 核心逻辑避免绑定特定模型平台

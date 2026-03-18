@@ -1,27 +1,27 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-03-18T05:08:03+00:00",
+  "generated_at": "2026-03-18T05:29:27+00:00",
   "project_root": "F:\\开发思路\\ai-dev-runtime-protocol",
   "git": {
     "branch": "main",
-    "head": "283dc53aabac11847526d0ab3ad78bc9cb228e45",
+    "head": "d986126999e20945e73d8f49d1e9125db68004da",
     "dirty": true
   },
   "summary": {
-    "file_count": 44,
+    "file_count": 39,
     "language_counts": {
-      "json": 8,
-      "text": 9,
+      "text": 4,
       "yaml": 1,
-      "markdown": 14,
+      "markdown": 15,
       "toml": 1,
+      "json": 7,
       "python": 11
     },
     "role_counts": {
-      "configuration": 3,
-      "source": 25,
+      "source": 20,
       "infrastructure": 1,
-      "documentation": 8,
+      "documentation": 9,
+      "configuration": 2,
       "schema": 6,
       "test": 1
     },
@@ -57,25 +57,14 @@
   },
   "files": [
     {
-      "path": ".aidrp/config.json",
-      "language": "json",
-      "role": "configuration",
-      "lines": 36,
-      "symbols": [],
-      "imports": [],
-      "headings": [],
-      "hash": "71aeba148b77",
-      "score": 0
-    },
-    {
       "path": ".aidrpignore",
       "language": "text",
       "role": "source",
-      "lines": 12,
+      "lines": 15,
       "symbols": [],
       "imports": [],
       "headings": [],
-      "hash": "504912b2a34b",
+      "hash": "d58378af86bf",
       "score": 2
     },
     {
@@ -101,45 +90,45 @@
       "score": 2
     },
     {
-      "path": "adapters/python-fastapi.md",
+      "path": "adapters/python-fastapi-适配器.md",
       "language": "markdown",
       "role": "source",
-      "lines": 27,
+      "lines": 30,
       "symbols": [
-        "Adapter: Python + FastAPI",
-        "Recommended `.aidrp/config.json` Adjustments",
-        "Common Read Order",
-        "Common Risk Areas"
+        "Adapter | 适配器: Python + FastAPI",
+        "推荐的 `.aidrp/config.json` 调整",
+        "常见阅读顺序",
+        "常见风险点"
       ],
       "imports": [],
       "headings": [
-        "Adapter: Python + FastAPI",
-        "Recommended `.aidrp/config.json` Adjustments",
-        "Common Read Order",
-        "Common Risk Areas"
+        "Adapter | 适配器: Python + FastAPI",
+        "推荐的 `.aidrp/config.json` 调整",
+        "常见阅读顺序",
+        "常见风险点"
       ],
-      "hash": "aa8e2e8de8e8",
+      "hash": "e2934d9cf206",
       "score": 6
     },
     {
-      "path": "adapters/react-node-monorepo.md",
+      "path": "adapters/react-node-monorepo-适配器.md",
       "language": "markdown",
       "role": "source",
-      "lines": 27,
+      "lines": 31,
       "symbols": [
-        "Adapter: React + Node Monorepo",
-        "Recommended `.aidrp/config.json` Adjustments",
-        "Common Read Order",
-        "Common Risk Areas"
+        "Adapter | 适配器: React + Node Monorepo",
+        "推荐的 `.aidrp/config.json` 调整",
+        "常见阅读顺序",
+        "常见风险点"
       ],
       "imports": [],
       "headings": [
-        "Adapter: React + Node Monorepo",
-        "Recommended `.aidrp/config.json` Adjustments",
-        "Common Read Order",
-        "Common Risk Areas"
+        "Adapter | 适配器: React + Node Monorepo",
+        "推荐的 `.aidrp/config.json` 调整",
+        "常见阅读顺序",
+        "常见风险点"
       ],
-      "hash": "5b8214d0e32b",
+      "hash": "b8a21e9730bd",
       "score": 6
     },
     {
@@ -149,98 +138,98 @@
       "lines": 24,
       "symbols": [
         "AGENTS",
-        "Working Rules",
-        "Validation",
-        "Editing Scope"
+        "工作规则",
+        "验证",
+        "编辑边界"
       ],
       "imports": [],
       "headings": [
         "AGENTS",
-        "Working Rules",
-        "Validation",
-        "Editing Scope"
+        "工作规则",
+        "验证",
+        "编辑边界"
       ],
-      "hash": "55e204cffb2c",
+      "hash": "db0b32302f53",
       "score": 10
     },
     {
-      "path": "docs/architecture.md",
+      "path": "docs/architecture-架构说明.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 74,
+      "lines": 88,
       "symbols": [
-        "Architecture",
-        "Layers",
-        "1. Protocol layer",
-        "2. Artifact layer",
-        "3. Runtime layer",
-        "Why Not Just More Prompts?",
-        "Why JSON First?",
-        "Why A Thin CLI?",
-        "Future Directions"
+        "Architecture | 架构说明",
+        "三层结构",
+        "1. Protocol Layer | 协议层",
+        "2. Artifact Layer | 工件层",
+        "3. Runtime Layer | 运行层",
+        "为什么不是只写 Prompt？",
+        "为什么坚持 JSON First？",
+        "为什么 CLI 要保持很薄？",
+        "未来可以继续补的方向"
       ],
       "imports": [],
       "headings": [
-        "Architecture",
-        "Layers",
-        "1. Protocol layer",
-        "2. Artifact layer",
-        "3. Runtime layer",
-        "Why Not Just More Prompts?",
-        "Why JSON First?",
-        "Why A Thin CLI?",
-        "Future Directions"
+        "Architecture | 架构说明",
+        "三层结构",
+        "1. Protocol Layer | 协议层",
+        "2. Artifact Layer | 工件层",
+        "3. Runtime Layer | 运行层",
+        "为什么不是只写 Prompt？",
+        "为什么坚持 JSON First？",
+        "为什么 CLI 要保持很薄？",
+        "未来可以继续补的方向"
       ],
-      "hash": "52e14d081b10",
+      "hash": "3f60e81d714b",
       "score": 4
     },
     {
-      "path": "docs/playbooks/bugfix.md",
+      "path": "docs/playbooks/bugfix-缺陷修复.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 29,
+      "lines": 33,
       "symbols": [
-        "Bugfix Playbook",
-        "Sequence",
-        "Rules",
-        "Minimum Artifacts"
+        "Bugfix Playbook | 缺陷修复手册",
+        "标准顺序",
+        "硬规则",
+        "最少需要的工件"
       ],
       "imports": [],
       "headings": [
-        "Bugfix Playbook",
-        "Sequence",
-        "Rules",
-        "Minimum Artifacts"
+        "Bugfix Playbook | 缺陷修复手册",
+        "标准顺序",
+        "硬规则",
+        "最少需要的工件"
       ],
-      "hash": "66d22e1faf3c",
+      "hash": "e22e3f29f2e5",
       "score": 4
     },
     {
-      "path": "docs/playbooks/feature.md",
+      "path": "docs/playbooks/feature-功能开发.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 21,
+      "lines": 25,
       "symbols": [
-        "Feature Playbook",
-        "Sequence",
-        "Rules"
+        "Feature Playbook | 功能开发手册",
+        "标准顺序",
+        "硬规则"
       ],
       "imports": [],
       "headings": [
-        "Feature Playbook",
-        "Sequence",
-        "Rules"
+        "Feature Playbook | 功能开发手册",
+        "标准顺序",
+        "硬规则"
       ],
-      "hash": "bb12d888208f",
+      "hash": "c5db2c972810",
       "score": 3
     },
     {
-      "path": "docs/reference/open-source-inspiration.md",
+      "path": "docs/reference/open-source-inspiration-开源灵感.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 60,
+      "lines": 69,
       "symbols": [
-        "Open-Source Inspiration",
+        "Open-Source Inspiration | 开源灵感",
         "Aider",
         "OpenHands",
         "HyperAgent",
@@ -248,14 +237,31 @@
       ],
       "imports": [],
       "headings": [
-        "Open-Source Inspiration",
+        "Open-Source Inspiration | 开源灵感",
         "Aider",
         "OpenHands",
         "HyperAgent",
         "OpenTelemetry"
       ],
-      "hash": "116d21d68ff3",
+      "hash": "4686adc3597e",
       "score": 4
+    },
+    {
+      "path": "docs/reference/terminology-glossary-术语对照.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 34,
+      "symbols": [
+        "Terminology Glossary | 术语对照",
+        "记忆方式"
+      ],
+      "imports": [],
+      "headings": [
+        "Terminology Glossary | 术语对照",
+        "记忆方式"
+      ],
+      "hash": "0bac96bb0ec2",
+      "score": 2
     },
     {
       "path": "examples/README.md",
@@ -263,13 +269,13 @@
       "role": "documentation",
       "lines": 11,
       "symbols": [
-        "Examples"
+        "Examples | 示例"
       ],
       "imports": [],
       "headings": [
-        "Examples"
+        "Examples | 示例"
       ],
-      "hash": "3ea86d303377",
+      "hash": "71d8df33f727",
       "score": 7
     },
     {
@@ -287,27 +293,27 @@
       "path": "ONBOARDING.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 54,
+      "lines": 56,
       "symbols": [
-        "Onboarding",
-        "The Core Shift",
-        "Default Operating Model",
-        "Red Flags This Toolkit Is Meant To Prevent",
-        "Required Artifacts",
-        "How To Roll This Into Another Project",
-        "If You Only Adopt Three Things"
+        "Onboarding | 入门说明",
+        "核心转变",
+        "默认工作模型",
+        "这套系统试图防止的坏味道",
+        "必备工件",
+        "集成到其他项目的步骤",
+        "如果你现在只能落三件事"
       ],
       "imports": [],
       "headings": [
-        "Onboarding",
-        "The Core Shift",
-        "Default Operating Model",
-        "Red Flags This Toolkit Is Meant To Prevent",
-        "Required Artifacts",
-        "How To Roll This Into Another Project",
-        "If You Only Adopt Three Things"
+        "Onboarding | 入门说明",
+        "核心转变",
+        "默认工作模型",
+        "这套系统试图防止的坏味道",
+        "必备工件",
+        "集成到其他项目的步骤",
+        "如果你现在只能落三件事"
       ],
-      "hash": "70354ef44fbf",
+      "hash": "cf3eb8c44d09",
       "score": 10
     },
     {
@@ -325,34 +331,35 @@
       "path": "README.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 180,
+      "lines": 215,
       "symbols": [
-        "AI Dev Runtime Protocol",
-        "Why This Exists",
-        "What You Get",
-        "Install",
-        "Quick Start",
-        "Intended Workflow",
-        "Repository Layout",
-        "Design Principles",
-        "References",
-        "Status",
-        "License"
+        "AI Dev Runtime Protocol（AI 开发运行协议）",
+        "这是什么",
+        "解决什么问题",
+        "你会得到什么",
+        "核心术语",
+        "安装",
+        "快速开始",
+        "1. 初始化工作区",
+        "2. 生成 `repo-map | 仓库地图`",
+        "3. 开工前先生成 `task-packet | 任务包`",
+        "4. 修 bug 前先生成 `debug-pack | 排障包`",
+        "5. 记录 `decision-trace | 决策轨迹`"
       ],
       "imports": [],
       "headings": [
-        "AI Dev Runtime Protocol",
-        "Why This Exists",
-        "What You Get",
-        "Install",
-        "Quick Start",
-        "Intended Workflow",
-        "Repository Layout",
-        "Design Principles",
-        "References",
-        "Status"
+        "AI Dev Runtime Protocol（AI 开发运行协议）",
+        "这是什么",
+        "解决什么问题",
+        "你会得到什么",
+        "核心术语",
+        "安装",
+        "快速开始",
+        "1. 初始化工作区",
+        "2. 生成 `repo-map | 仓库地图`",
+        "3. 开工前先生成 `task-packet | 任务包`"
       ],
-      "hash": "2ed5274e165a",
+      "hash": "9f7f57bcacce",
       "score": 10
     },
     {
@@ -422,61 +429,6 @@
       "score": 0
     },
     {
-      "path": "src/ai_dev_runtime_protocol.egg-info/dependency_links.txt",
-      "language": "text",
-      "role": "source",
-      "lines": 2,
-      "symbols": [],
-      "imports": [],
-      "headings": [],
-      "hash": "adc83b19e793",
-      "score": 2
-    },
-    {
-      "path": "src/ai_dev_runtime_protocol.egg-info/entry_points.txt",
-      "language": "text",
-      "role": "source",
-      "lines": 3,
-      "symbols": [],
-      "imports": [],
-      "headings": [],
-      "hash": "4055a753ac0c",
-      "score": 2
-    },
-    {
-      "path": "src/ai_dev_runtime_protocol.egg-info/PKG-INFO",
-      "language": "text",
-      "role": "source",
-      "lines": 223,
-      "symbols": [],
-      "imports": [],
-      "headings": [],
-      "hash": "30b07cfba9c3",
-      "score": 2
-    },
-    {
-      "path": "src/ai_dev_runtime_protocol.egg-info/SOURCES.txt",
-      "language": "text",
-      "role": "source",
-      "lines": 19,
-      "symbols": [],
-      "imports": [],
-      "headings": [],
-      "hash": "8cc22db8c70a",
-      "score": 2
-    },
-    {
-      "path": "src/ai_dev_runtime_protocol.egg-info/top_level.txt",
-      "language": "text",
-      "role": "source",
-      "lines": 2,
-      "symbols": [],
-      "imports": [],
-      "headings": [],
-      "hash": "7b2e5295f2ba",
-      "score": 2
-    },
-    {
       "path": "src/aidrp/__init__.py",
       "language": "python",
       "role": "source",
@@ -504,9 +456,10 @@
       "path": "src/aidrp/cli.py",
       "language": "python",
       "role": "source",
-      "lines": 201,
+      "lines": 208,
       "symbols": [
         "_path",
+        "_project_path",
         "_list",
         "build_parser",
         "main"
@@ -524,7 +477,7 @@
         "aidrp.workspace"
       ],
       "headings": [],
-      "hash": "f262245c0acf",
+      "hash": "925c31817783",
       "score": 9
     },
     {
@@ -548,7 +501,7 @@
         "aidrp.workspace"
       ],
       "headings": [],
-      "hash": "68d6d8abfc05",
+      "hash": "1254ad42b352",
       "score": 9
     },
     {
@@ -567,7 +520,7 @@
         "aidrp.utils"
       ],
       "headings": [],
-      "hash": "cfe7beac1cca",
+      "hash": "1d62b7194e2a",
       "score": 8
     },
     {
@@ -601,7 +554,7 @@
         "aidrp.workspace"
       ],
       "headings": [],
-      "hash": "cfd8b0ce156e",
+      "hash": "5dac05e59dda",
       "score": 9
     },
     {
@@ -623,7 +576,7 @@
         "aidrp.workspace"
       ],
       "headings": [],
-      "hash": "c55277194768",
+      "hash": "473cdef11e6f",
       "score": 8
     },
     {
@@ -649,7 +602,7 @@
       "path": "src/aidrp/utils.py",
       "language": "python",
       "role": "source",
-      "lines": 256,
+      "lines": 262,
       "symbols": [
         "now_iso",
         "slugify",
@@ -677,14 +630,14 @@
         "typing"
       ],
       "headings": [],
-      "hash": "cb2338c204a2",
+      "hash": "0763918491e7",
       "score": 9
     },
     {
       "path": "src/aidrp/workspace.py",
       "language": "python",
       "role": "source",
-      "lines": 112,
+      "lines": 114,
       "symbols": [
         "workspace_dir",
         "config_path",
@@ -698,7 +651,7 @@
         "aidrp.utils"
       ],
       "headings": [],
-      "hash": "2f16062390cb",
+      "hash": "7db4d58eb086",
       "score": 9
     },
     {
@@ -709,109 +662,109 @@
       "symbols": [],
       "imports": [],
       "headings": [],
-      "hash": "7cb1a5faee70",
+      "hash": "636e27b6a6b0",
       "score": 2
     },
     {
-      "path": "templates/debug-pack.md",
+      "path": "templates/debug-pack-排障包.md",
       "language": "markdown",
       "role": "source",
       "lines": 31,
       "symbols": [
-        "Debug Pack Template",
-        "Reproduction Steps",
-        "Triage Read Order",
-        "Suspected Files",
-        "Evidence",
-        "Recent Commits"
+        "Debug Pack | 排障包模板",
+        "Reproduction Steps | 复现步骤",
+        "Triage Read Order | 初步排查阅读顺序",
+        "Suspected Files | 疑似文件",
+        "Evidence | 证据",
+        "Recent Commits | 最近提交"
       ],
       "imports": [],
       "headings": [
-        "Debug Pack Template",
-        "Reproduction Steps",
-        "Triage Read Order",
-        "Suspected Files",
-        "Evidence",
-        "Recent Commits"
+        "Debug Pack | 排障包模板",
+        "Reproduction Steps | 复现步骤",
+        "Triage Read Order | 初步排查阅读顺序",
+        "Suspected Files | 疑似文件",
+        "Evidence | 证据",
+        "Recent Commits | 最近提交"
       ],
-      "hash": "9077c9ab92b0",
+      "hash": "e6933b437ece",
       "score": 6
     },
     {
-      "path": "templates/eval-case.md",
+      "path": "templates/eval-case-回归用例.md",
       "language": "markdown",
       "role": "source",
       "lines": 19,
       "symbols": [
-        "Eval Case Template",
-        "Reproduction Steps",
-        "Assertions",
-        "Tags"
+        "Eval Case | 回归用例模板",
+        "Reproduction Steps | 复现步骤",
+        "Assertions | 断言",
+        "Tags | 标签"
       ],
       "imports": [],
       "headings": [
-        "Eval Case Template",
-        "Reproduction Steps",
-        "Assertions",
-        "Tags"
+        "Eval Case | 回归用例模板",
+        "Reproduction Steps | 复现步骤",
+        "Assertions | 断言",
+        "Tags | 标签"
       ],
-      "hash": "a1bcf211cb80",
+      "hash": "22b1c679c206",
       "score": 6
     },
     {
-      "path": "templates/prompts.md",
+      "path": "templates/prompts-提示词.md",
       "language": "markdown",
       "role": "source",
       "lines": 18,
       "symbols": [
-        "Prompt Starters",
-        "Task Packet First",
-        "Debug Pack First",
-        "Trace Discipline",
-        "Eval Discipline"
+        "Prompt Starters | 提示词起手式",
+        "Task Packet First | 先任务包",
+        "Debug Pack First | 先排障包",
+        "Trace Discipline | 轨迹纪律",
+        "Eval Discipline | 回归纪律"
       ],
       "imports": [],
       "headings": [
-        "Prompt Starters",
-        "Task Packet First",
-        "Debug Pack First",
-        "Trace Discipline",
-        "Eval Discipline"
+        "Prompt Starters | 提示词起手式",
+        "Task Packet First | 先任务包",
+        "Debug Pack First | 先排障包",
+        "Trace Discipline | 轨迹纪律",
+        "Eval Discipline | 回归纪律"
       ],
-      "hash": "cbcf6f125132",
+      "hash": "a39df914f291",
       "score": 6
     },
     {
-      "path": "templates/task-packet.md",
+      "path": "templates/task-packet-任务包.md",
       "language": "markdown",
       "role": "source",
       "lines": 38,
       "symbols": [
-        "Task Packet Template",
-        "Scope",
-        "Non-Goals",
-        "Acceptance Criteria",
-        "Constraints",
-        "Read Order",
-        "Candidate Files",
-        "Validation Commands"
+        "Task Packet | 任务包模板",
+        "Scope | 范围",
+        "Non-Goals | 不做什么",
+        "Acceptance Criteria | 验收标准",
+        "Constraints | 约束",
+        "Read Order | 阅读顺序",
+        "Candidate Files | 候选文件",
+        "Validation Commands | 验证命令"
       ],
       "imports": [],
       "headings": [
-        "Task Packet Template",
-        "Scope",
-        "Non-Goals",
-        "Acceptance Criteria",
-        "Constraints",
-        "Read Order",
-        "Candidate Files",
-        "Validation Commands"
+        "Task Packet | 任务包模板",
+        "Scope | 范围",
+        "Non-Goals | 不做什么",
+        "Acceptance Criteria | 验收标准",
+        "Constraints | 约束",
+        "Read Order | 阅读顺序",
+        "Candidate Files | 候选文件",
+        "Validation Commands | 验证命令"
       ],
-      "hash": "3130a8a66820",
+      "hash": "48589f1af481",
       "score": 6
     },
     {
-      "path": "templates/workspace-config.json",
+      "path": "templates/workspace-config-工作区配置.json",
       "language": "json",
       "role": "configuration",
       "lines": 33,

@@ -123,40 +123,40 @@ def build_debug_pack(
 
 def debug_pack_to_markdown(pack: dict[str, Any]) -> str:
     lines = [
-        f"# Debug Pack: {pack['title']}",
+        f"# Debug Pack | 排障包: {pack['title']}",
         "",
-        f"- Debug ID: `{pack['debug_id']}`",
-        f"- Trace ID: `{pack['trace_id'] or 'n/a'}`",
-        f"- Generated: `{pack['generated_at']}`",
+        f"- Debug ID | 排障 ID: `{pack['debug_id']}`",
+        f"- Trace ID | 追踪 ID: `{pack['trace_id'] or 'n/a'}`",
+        f"- Generated | 生成时间: `{pack['generated_at']}`",
         "",
-        "## Failure Summary",
+        "## Failure Summary | 问题摘要",
         "",
-        f"- Symptom: {pack['symptom']}",
-        f"- Observed: {pack['observed']}",
-        f"- Expected: {pack['expected']}",
-        f"- Impact: {pack['impact']}",
+        f"- Symptom | 症状: {pack['symptom']}",
+        f"- Observed | 实际表现: {pack['observed']}",
+        f"- Expected | 期望表现: {pack['expected']}",
+        f"- Impact | 影响: {pack['impact']}",
         "",
-        "## Reproduction Steps",
+        "## Reproduction Steps | 复现步骤",
         "",
     ]
     for step in pack["reproduction_steps"]:
         lines.append(f"- {step}")
 
-    lines.extend(["", "## Triage Read Order", ""])
+    lines.extend(["", "## Triage Read Order | 初步排查阅读顺序", ""])
     for item in pack["triage_read_order"]:
         lines.append(f"- `{item}`")
 
-    lines.extend(["", "## Suspected Files", ""])
+    lines.extend(["", "## Suspected Files | 疑似文件", ""])
     for item in pack["suspected_files"]:
         lines.append(f"- `{item['path']}`: {item['reason']}")
 
     if pack["evidence"]:
-        lines.extend(["", "## Evidence", ""])
+        lines.extend(["", "## Evidence | 证据", ""])
         for item in pack["evidence"]:
             lines.append(f"- `{item['path']}` matched `{item['query']}`: {item['excerpt']}")
 
     if pack["recent_commits"]:
-        lines.extend(["", "## Recent Commits", ""])
+        lines.extend(["", "## Recent Commits | 最近提交", ""])
         for item in pack["recent_commits"]:
             lines.append(f"- `{item}`")
     return "\n".join(lines) + "\n"

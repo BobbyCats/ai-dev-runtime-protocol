@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1.0",
+  "eval_id": "regression-for-bootstrap-import-order-首次安装导入顺序回归用例",
+  "generated_at": "2026-03-18T05:29:38+00:00",
+  "title": "Regression for bootstrap import order 首次安装导入顺序回归用例",
+  "origin": "debug-pack:cli-import-failure-首次安装导入失败",
+  "command": "python -m unittest discover -s tests -v",
+  "reproduction_steps": [
+    "Install the package before running tests 先安装再运行测试"
+  ],
+  "assertions": [
+    "The test suite imports aidrp successfully 测试套件可以正确导入 aidrp"
+  ],
+  "tags": [
+    "bootstrap",
+    "unittest"
+  ]
+}

@@ -1,8 +1,8 @@
-# Examples
+# Examples | 示例
 
-This directory holds generated artifacts from the repository itself.
+这个目录存放的是仓库自身生成出来的示例工件。
 
-After installation, regenerate them with:
+你可以在安装后重新生成：
 
 ```bash
 python -m aidrp init-workspace --project-root . --write-agents-template

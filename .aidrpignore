@@ -5,7 +5,10 @@ dist/*
 build/*
 .next/*
 .turbo/*
+.aidrp/*
 .venv/*
 venv/*
 __pycache__/*
+*.egg-info/*
 .aidrp/cache/*
+examples/outputs/*

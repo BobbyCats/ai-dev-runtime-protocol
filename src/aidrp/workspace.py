@@ -85,16 +85,18 @@ def init_workspace(project_root: Path, write_agents_template: bool = False) -> l
     if not ignore_file.exists():
         write_text(
             ignore_file,
-            "# Paths excluded from repo-map scanning and runtime searches.\n"
+            "# Paths excluded from repo-map scanning and runtime searches. | 仓库地图扫描与运行时检索时忽略这些路径。\n"
             ".git/*\n"
             "node_modules/*\n"
             "dist/*\n"
             "build/*\n"
             ".next/*\n"
             ".turbo/*\n"
+            ".aidrp/*\n"
             ".venv/*\n"
             "venv/*\n"
             "__pycache__/*\n"
+            "*.egg-info/*\n"
             ".aidrp/cache/*\n",
         )
         created.append(ignore_file)
@@ -105,7 +107,7 @@ def init_workspace(project_root: Path, write_agents_template: bool = False) -> l
             write_text(
                 agents,
                 "# AGENTS\n"
-                "Read `.aidrp/repo-map.md`, the active task packet in `.aidrp/tasks/`, and the current debug/eval artifacts before broad codebase scans.\n",
+                "先读 `.aidrp/repo-map.md`、当前 `.aidrp/tasks/` 下的任务包，以及当前排障/回归工件，再决定是否扩大仓库扫描范围。\n",
             )
             created.append(agents)
     return created

@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.1.0",
+  "trace_id": "demo-trace-ranking-示例轨迹",
+  "task_id": "harden-repo-map-ranking-仓库地图排序加固",
+  "title": "Harden repo map ranking 仓库地图排序加固",
+  "started_at": "2026-03-18T05:27:36+00:00",
+  "events": [
+    {
+      "timestamp": "2026-03-18T05:27:36+00:00",
+      "stage": "investigate",
+      "summary": "Verified that ranking remains deterministic and dependency-free. 已确认排序仍然保持确定性且无额外依赖。",
+      "files": [
+        "src/aidrp/repo_map.py"
+      ],
+      "commands": [
+        "python -m unittest discover -s tests -v"
+      ],
+      "outcome": "Keep the current heuristic strategy 保持当前启发式策略"
+    }
+  ]
+}

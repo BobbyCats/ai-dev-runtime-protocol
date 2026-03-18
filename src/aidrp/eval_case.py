@@ -29,22 +29,22 @@ def build_eval_case(
 
 def eval_case_to_markdown(case: dict[str, object]) -> str:
     lines = [
-        f"# Eval Case: {case['title']}",
+        f"# Eval Case | 回归用例: {case['title']}",
         "",
-        f"- Eval ID: `{case['eval_id']}`",
-        f"- Origin: `{case['origin']}`",
-        f"- Command: `{case['command']}`",
+        f"- Eval ID | 用例 ID: `{case['eval_id']}`",
+        f"- Origin | 来源: `{case['origin']}`",
+        f"- Command | 命令: `{case['command']}`",
         "",
-        "## Reproduction Steps",
+        "## Reproduction Steps | 复现步骤",
         "",
     ]
     for step in case["reproduction_steps"]:
         lines.append(f"- {step}")
-    lines.extend(["", "## Assertions", ""])
+    lines.extend(["", "## Assertions | 断言", ""])
     for item in case["assertions"]:
         lines.append(f"- {item}")
     if case["tags"]:
-        lines.extend(["", "## Tags", ""])
+        lines.extend(["", "## Tags | 标签", ""])
         for tag in case["tags"]:
             lines.append(f"- `{tag}`")
     return "\n".join(lines) + "\n"
