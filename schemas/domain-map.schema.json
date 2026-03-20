@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycats.github.io/ai-dev-runtime-protocol/schemas/domain-map.schema.json",
+  "title": "DomainMap",
+  "type": "object",
+  "required": ["schema_version", "product", "domains"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "product": { "type": "string" },
+    "orchestrator": { "type": "string" },
+    "domains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "owned_state", "capabilities"],
+        "properties": {
+          "name": { "type": "string" },
+          "owned_state": { "type": "array", "items": { "type": "string" } },
+          "capabilities": { "type": "array", "items": { "type": "string" } },
+          "non_goals": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "shared_infrastructure": { "type": "array", "items": { "type": "string" } },
+    "cross_domain_flows": { "type": "array", "items": { "type": "object" } }
+  }
+}

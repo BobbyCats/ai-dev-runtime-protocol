@@ -12,6 +12,11 @@
 | decision-trace | 决策轨迹 | 为什么这么改的记录 |
 | eval-case | 回归用例 | 为了防止 bug 再犯的检查项 |
 | doc-sync | 文档同步包 | 判断 README 和核心文档该怎么同步 |
+| domain-map | 领域地图 | 哪些业务域存在、谁拥有状态 |
+| tool-contract | 工具契约 | 工具到底能做什么、失败时怎么返回 |
+| execution-plan | 执行计划 | 一次任务内部的步骤计划 |
+| observability-correlation | 可观测性关联 | 用编号把日志、计划、故障串起来 |
+| cost-privacy-budget | 成本权限预算 | 这条工作流能花多少上下文、推理和权限 |
 | discovery interview | 需求访谈 | 用提问把真实需求聊清楚 |
 | product review | 产品评审 | 先决定第一版该做什么、不该做什么 |
 | engineering review | 工程评审 | 先决定边界、风险、验证与最小改动面 |
@@ -27,6 +32,10 @@
 | artifact | 工件 | 存下来的结构化结果 |
 | observability | 可观测性 | 出问题后能不能快速定位 |
 | trace id | 追踪 ID | 把日志、任务、问题串起来的编号 |
+| decision id | 决策 ID | 一次关键判断或分支切换的编号 |
+| request id | 请求 ID | 一次请求进入系统时的编号 |
+| plan id | 计划 ID | 一次执行计划的编号 |
+| tool call id | 工具调用 ID | 某一次工具执行的编号 |
 | regression | 回归 | 修好的东西又坏回去 |
 | runtime | 运行时 | 这套系统真正执行任务时的状态 |
 

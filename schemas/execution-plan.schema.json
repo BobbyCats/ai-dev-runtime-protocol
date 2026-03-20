@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycats.github.io/ai-dev-runtime-protocol/schemas/execution-plan.schema.json",
+  "title": "ExecutionPlan",
+  "type": "object",
+  "required": ["schema_version", "plan_id", "goal", "steps"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "plan_id": { "type": "string" },
+    "goal": { "type": "string" },
+    "trigger": { "type": "string" },
+    "preconditions": { "type": "array", "items": { "type": "string" } },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "inputs": { "type": "array", "items": { "type": "string" } },
+          "tools": { "type": "array", "items": { "type": "string" } },
+          "outputs": { "type": "array", "items": { "type": "string" } },
+          "requires_confirmation": { "type": "boolean" }
+        }
+      }
+    },
+    "success_exit": { "type": "string" },
+    "failure_exit": { "type": "string" },
+    "fallbacks": { "type": "array", "items": { "type": "string" } }
+  }
+}

@@ -12,11 +12,14 @@
 - 前端或多端 UI 任务先补 `设计令牌包（design-token-pack）`
 - 非 trivial 任务先生成 `任务包（task-packet）`
 - bug 先生成 `排障包（debug-pack）`，再做 `根因调查（investigate）`
+- 排障优先按 `trace_id / decision_id / request_id / plan_id / tool_call_id` 聚焦日志，不要先大范围扫代码
 - 判断方向变了，就写 `决策轨迹（decision-trace）`
 - 影响用户路径、CLI、API、文件输出的改动，必须做 `真实验收（live QA）`
 - 真实 bug 修完后，补 `回归用例（eval-case）`
 - 非 trivial 改动收尾前，必须补 `文档同步包（doc-sync）`
 - 如果命令表面、阶段顺序或系统定位变了，不允许只往 README 追加一段，必须按章节或整篇重写
+- 提交信息默认使用中文，并按 [docs/playbooks/git-commit-提交规范.md](docs/playbooks/git-commit-提交规范.md) 编写
+- 吸收开源项目思路时，按 [docs/reference/open-source-citation-开源引用规范.md](docs/reference/open-source-citation-开源引用规范.md) 明确写清引用和落地位置
 
 ## 验证
 

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycats.github.io/ai-dev-runtime-protocol/schemas/observability-correlation.schema.json",
+  "title": "ObservabilityCorrelation",
+  "type": "object",
+  "required": ["schema_version", "trace_id"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "trace_id": { "type": "string" },
+    "request_id": { "type": "string" },
+    "decision_id": { "type": "string" },
+    "plan_id": { "type": "string" },
+    "tool_call_id": { "type": "string" },
+    "entrypoint": { "type": "string" },
+    "failure_stage": { "type": "string" },
+    "grep_queries": { "type": "array", "items": { "type": "string" } },
+    "timeline": { "type": "array", "items": { "type": "string" } },
+    "failure_signature": { "type": "array", "items": { "type": "string" } }
+  }
+}

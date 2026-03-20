@@ -41,6 +41,11 @@
 - `decision-trace` | 决策轨迹
 - `eval-case` | 回归用例
 - `doc-sync` | 文档同步包
+- `domain-map` | 领域地图
+- `tool-contract` | 工具契约
+- `execution-plan` | 执行计划
+- `observability-correlation` | 可观测性关联
+- `cost-privacy-budget` | 成本权限预算
 
 这些工件默认存在 JSON 和 Markdown 两种形态：
 
@@ -61,6 +66,18 @@
 - 写入决策轨迹
 - 把 bug 固化成回归用例
 - 判断文档该补丁更新还是整篇重写
+
+## 为什么要补“高级运行时工件”
+
+因为只解决开发侧上下文压缩，还不够逼近 AI 原生产品的运行底座。
+
+这几类工件对应的是更靠近产品 runtime 的问题：
+
+- `domain-map`：业务域怎么拆
+- `tool-contract`：工具边界和失败语义怎么定
+- `execution-plan`：任务内部怎么先计划再执行
+- `observability-correlation`：怎么不用盲扫就快速定位故障
+- `cost-privacy-budget`：怎么把 demo 做成可持续运行的系统
 
 ## 为什么不是只写 Prompt？
 

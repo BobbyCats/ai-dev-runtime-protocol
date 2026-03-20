@@ -26,6 +26,11 @@
 - `decision-trace` | 决策轨迹
 - `eval-case` | 回归用例
 - `doc-sync` | 文档同步包
+- `domain-map` | 领域地图
+- `tool-contract` | 工具契约
+- `execution-plan` | 执行计划
+- `observability-correlation` | 可观测性关联
+- `cost-privacy-budget` | 成本权限预算
 
 核心目标只有一句话：
 
@@ -42,6 +47,8 @@
 - 引入 `根因调查（investigate）`
 - 引入 `真实验收（live QA）`
 - 引入 `文档同步包（doc-sync）`
+- 引入 `高级运行时工件（advanced runtime artifacts）`
+- 引入 `中文提交规范与开源引用规范`
 
 也就是说，这套协议现在不只管“怎么执行”，还开始管：
 
@@ -102,6 +109,26 @@
 完整术语对照见：
 
 - [docs/reference/terminology-glossary-术语对照.md](docs/reference/terminology-glossary-术语对照.md)
+
+## 高级运行时工件
+
+这几类工件更接近王自如那种“AI 原生产品底座”侧的思路，重点解决领域边界、计划执行、编号化定位和上线经济性：
+
+| English | 中文主叫法 | 用途 |
+| --- | --- | --- |
+| domain-map | 领域地图 | 画清楚业务域、状态归属和跨域编排关系 |
+| tool-contract | 工具契约 | 把工具输入、输出、幂等、失败语义和权限边界写清楚 |
+| execution-plan | 执行计划 | 把一次任务内部的 plan-then-execute 流水线结构化 |
+| observability-correlation | 可观测性关联 | 用 trace/request/decision 等编号把日志、计划和故障串起来 |
+| cost-privacy-budget | 成本权限预算 | 控制上下文、推理、权限和敏感数据暴露范围 |
+
+对应手册与模板：
+
+- [docs/playbooks/domain-map-领域地图.md](docs/playbooks/domain-map-领域地图.md)
+- [docs/playbooks/tool-contract-工具契约.md](docs/playbooks/tool-contract-工具契约.md)
+- [docs/playbooks/execution-plan-执行计划.md](docs/playbooks/execution-plan-执行计划.md)
+- [docs/playbooks/observability-correlation-可观测性关联.md](docs/playbooks/observability-correlation-可观测性关联.md)
+- [docs/playbooks/cost-privacy-budget-成本权限预算.md](docs/playbooks/cost-privacy-budget-成本权限预算.md)
 
 ## 文档同步原则
 
@@ -207,8 +234,14 @@ python -m aidrp debug-pack \
   --title "Schedule deletion bug 日程删除错误" \
   --symptom "删一个事件，结果被删掉的是另一个条目 | Deleting one event removes the wrong item" \
   --observed "界面显示删除成功，但消失的是错误那一行 | UI reports success but the wrong row disappears" \
-  --expected "只能删除用户点中的那条事件 | Only the targeted event should be deleted"
+  --expected "只能删除用户点中的那条事件 | Only the targeted event should be deleted" \
+  --trace-id "trace-123" \
+  --decision-id "decision-456" \
+  --entrypoint "calendar.delete" \
+  --failure-stage "executor"
 ```
+
+`debug-pack` 现在默认强调“编号优先”的排查顺序：先按 `trace_id / decision_id / request_id / plan_id / tool_call_id` 聚焦日志，再决定是否扩大到代码阅读。
 
 ### 6. 记录 `决策轨迹（decision-trace）`
 
@@ -295,7 +328,9 @@ Bug 修复默认走这条：
 - [docs/playbooks/investigate-根因调查.md](docs/playbooks/investigate-根因调查.md)
 - [docs/playbooks/qa-live-真实验收.md](docs/playbooks/qa-live-真实验收.md)
 - [docs/playbooks/documentation-sync-文档同步.md](docs/playbooks/documentation-sync-文档同步.md)
+- [docs/playbooks/git-commit-提交规范.md](docs/playbooks/git-commit-提交规范.md)
 - [docs/reference/open-source-inspiration-开源灵感.md](docs/reference/open-source-inspiration-开源灵感.md)
+- [docs/reference/open-source-citation-开源引用规范.md](docs/reference/open-source-citation-开源引用规范.md)
 
 ## 吸收了哪些项目的优点
 
@@ -308,6 +343,7 @@ Bug 修复默认走这条：
 对应关系见：
 
 - [docs/reference/open-source-inspiration-开源灵感.md](docs/reference/open-source-inspiration-开源灵感.md)
+- [docs/reference/open-source-citation-开源引用规范.md](docs/reference/open-source-citation-开源引用规范.md)
 
 ## 这套系统的定位
 

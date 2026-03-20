@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycats.github.io/ai-dev-runtime-protocol/schemas/tool-contract.schema.json",
+  "title": "ToolContract",
+  "type": "object",
+  "required": ["schema_version", "tool_name", "purpose", "inputs", "outputs"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "tool_name": { "type": "string" },
+    "domain": { "type": "string" },
+    "purpose": { "type": "string" },
+    "inputs": { "type": "array", "items": { "type": "object" } },
+    "outputs": { "type": "array", "items": { "type": "object" } },
+    "idempotency": { "type": "string" },
+    "permission_boundary": { "type": "string" },
+    "retry_policy": { "type": "string" },
+    "rollback_policy": { "type": "string" },
+    "failure_codes": { "type": "array", "items": { "type": "object" } }
+  }
+}

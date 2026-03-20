@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycats.github.io/ai-dev-runtime-protocol/schemas/cost-privacy-budget.schema.json",
+  "title": "CostPrivacyBudget",
+  "type": "object",
+  "required": ["schema_version", "workflow"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "workflow": { "type": "string" },
+    "scope": { "type": "string" },
+    "context_budget": { "type": "object" },
+    "reasoning_budget": { "type": "object" },
+    "permission_budget": { "type": "object" },
+    "data_budget": { "type": "object" }
+  }
+}

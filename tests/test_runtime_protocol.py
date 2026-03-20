@@ -65,12 +65,21 @@ class RuntimeProtocolTests(unittest.TestCase):
                 expected="candidate files list should be populated",
                 impact="developer loses context",
                 trace_id="trace-123",
+                request_id="req-456",
+                decision_id="dec-789",
+                plan_id="plan-101",
+                tool_call_id="tool-202",
+                entrypoint="task_packet.build",
+                failure_stage="planner",
                 reproduction_steps=["Run the packet builder."],
                 suspected_files=["src/app.py"],
                 log_files=[],
                 search_terms=["candidate", "packet"],
             )
             self.assertEqual(debug["trace_id"], "trace-123")
+            self.assertEqual(debug["correlation_ids"]["decision_id"], "dec-789")
+            self.assertIn("trace_id:trace-123", debug["log_focus"]["grep_queries"])
+            self.assertEqual(debug["failure_stage"], "planner")
             self.assertTrue(debug["suspected_files"])
 
             doc_sync = build_doc_sync(

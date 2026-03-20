@@ -74,6 +74,7 @@ Bug 修复默认顺序：
 4. 提交 `.aidrpignore`、配置文件和生成后的 `AGENTS.md`
 5. 把 `任务包 / 排障包 / 文档同步包` 加入你的日常流程
 6. 把真实验收和回归用例纳入默认收尾
+7. 把中文提交规范与开源引用规范纳入日常协作
 
 ## 如果你现在只能先落四件事
 
@@ -82,3 +83,9 @@ Bug 修复默认顺序：
 - 前端或多端任务先补 `设计令牌包（design-token-pack）`
 - 修 bug 前必须先写 `排障包（debug-pack）`，并先做根因调查
 - 非 trivial 变更收尾前必须补 `文档同步包（doc-sync）`
+
+## 协作补充规则
+
+- bug 排查先按 `trace_id / decision_id / request_id / plan_id / tool_call_id` 查日志和证据，再决定是否扩大代码扫描
+- 提交信息默认使用中文，并按 [docs/playbooks/git-commit-提交规范.md](docs/playbooks/git-commit-提交规范.md) 编写
+- 吸收外部开源项目思路时，按 [docs/reference/open-source-citation-开源引用规范.md](docs/reference/open-source-citation-开源引用规范.md) 记录来源、吸收点与落地位置

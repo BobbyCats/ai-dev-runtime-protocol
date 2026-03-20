@@ -78,6 +78,12 @@ def build_parser() -> argparse.ArgumentParser:
     debug_cmd.add_argument("--expected", required=True)
     debug_cmd.add_argument("--impact", default="Unknown")
     debug_cmd.add_argument("--trace-id", default="")
+    debug_cmd.add_argument("--request-id", default="")
+    debug_cmd.add_argument("--decision-id", default="")
+    debug_cmd.add_argument("--plan-id", default="")
+    debug_cmd.add_argument("--tool-call-id", default="")
+    debug_cmd.add_argument("--entrypoint", default="")
+    debug_cmd.add_argument("--failure-stage", default="")
     debug_cmd.add_argument("--repro-step", action="append", default=[])
     debug_cmd.add_argument("--suspected-file", action="append", default=[])
     debug_cmd.add_argument("--log-file", action="append", default=[])
@@ -214,6 +220,12 @@ def main(argv: list[str] | None = None) -> int:
             expected=args.expected,
             impact=args.impact,
             trace_id=args.trace_id,
+            request_id=args.request_id,
+            decision_id=args.decision_id,
+            plan_id=args.plan_id,
+            tool_call_id=args.tool_call_id,
+            entrypoint=args.entrypoint,
+            failure_stage=args.failure_stage,
             reproduction_steps=_list(args.repro_step),
             suspected_files=_list(args.suspected_file),
             log_files=_list(args.log_file),

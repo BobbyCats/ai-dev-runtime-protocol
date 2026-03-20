@@ -13,7 +13,29 @@
     "observed": { "type": "string" },
     "expected": { "type": "string" },
     "impact": { "type": "string" },
+    "entrypoint": { "type": "string" },
+    "failure_stage": { "type": "string" },
     "trace_id": { "type": "string" },
+    "correlation_ids": {
+      "type": "object",
+      "properties": {
+        "request_id": { "type": "string" },
+        "decision_id": { "type": "string" },
+        "plan_id": { "type": "string" },
+        "tool_call_id": { "type": "string" }
+      }
+    },
+    "log_focus": {
+      "type": "object",
+      "properties": {
+        "primary_keys": { "type": "array", "items": { "type": "string" } },
+        "entrypoint": { "type": "string" },
+        "failure_stage": { "type": "string" },
+        "grep_queries": { "type": "array", "items": { "type": "string" } },
+        "log_files": { "type": "array", "items": { "type": "string" } },
+        "review_order": { "type": "array", "items": { "type": "string" } }
+      }
+    },
     "reproduction_steps": { "type": "array", "items": { "type": "string" } },
     "triage_read_order": { "type": "array", "items": { "type": "string" } },
     "suspected_files": {

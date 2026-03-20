@@ -2,6 +2,10 @@
 
 这个仓库不是照抄任何一个项目，而是吸收了几个强项目里最有价值的部分。
 
+引用方式统一遵循：
+
+- [docs/reference/open-source-citation-开源引用规范.md](open-source-citation-开源引用规范.md)
+
 ## Aider
 
 参考：
