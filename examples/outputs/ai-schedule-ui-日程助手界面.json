@@ -1,0 +1,250 @@
+{
+  "schema_version": "0.1.0",
+  "token_pack_id": "ai-schedule-ui-日程助手界面",
+  "generated_at": "2026-03-20T17:46:37+00:00",
+  "title": "AI schedule UI 日程助手界面",
+  "product_surface": "Conversation-first scheduling and expense assistant 对话优先的日程与费用助手",
+  "brand_direction": "Calm productivity with strong structure and low visual noise. 冷静、高效、结构感强、低噪音。",
+  "design_principles": [
+    "先定义语义令牌，再写组件，不要在组件里直接写死颜色。",
+    "同一套令牌要同时约束 Web、App 和设计稿。"
+  ],
+  "modes": [
+    "light"
+  ],
+  "primitives": {
+    "color": {
+      "brand": {
+        "50": "#E7F1F0",
+        "100": "#CAE1DF",
+        "200": "#A4CBC8",
+        "300": "#74B0AB",
+        "400": "#3A8F88",
+        "500": "#0F766E",
+        "600": "#0D6861",
+        "700": "#0B5A54",
+        "800": "#094944",
+        "900": "#073633"
+      },
+      "accent": {
+        "50": "#FEF5E7",
+        "100": "#FDEAC9",
+        "200": "#FBDAA2",
+        "300": "#F9C771",
+        "400": "#F7AF37",
+        "500": "#F59E0B",
+        "600": "#D88B0A",
+        "700": "#BA7808",
+        "800": "#986207",
+        "900": "#714905"
+      },
+      "neutral": {
+        "0": "#F8FAFC",
+        "50": "#F8FAFC",
+        "100": "#F1F5F9",
+        "200": "#E2E8F0",
+        "300": "#CBD5E1",
+        "400": "#94A3B8",
+        "500": "#64748B",
+        "600": "#475569",
+        "700": "#334155",
+        "800": "#1E293B",
+        "900": "#0F172A"
+      },
+      "success": {
+        "50": "#E8F6ED",
+        "100": "#CCEBD7",
+        "200": "#A6DCBA",
+        "300": "#78CA96",
+        "400": "#40B46B",
+        "500": "#16A34A",
+        "600": "#138F41",
+        "700": "#117C38",
+        "800": "#0E652E",
+        "900": "#0A4B22"
+      },
+      "warning": {
+        "50": "#FBF1E6",
+        "100": "#F7E1C8",
+        "200": "#F1CBA0",
+        "300": "#E9B06F",
+        "400": "#E08F33",
+        "500": "#D97706",
+        "600": "#BF6905",
+        "700": "#A55A05",
+        "800": "#874A04",
+        "900": "#643703"
+      },
+      "danger": {
+        "50": "#FCE9E9",
+        "100": "#F7CFCF",
+        "200": "#F2ADAD",
+        "300": "#EB8181",
+        "400": "#E24D4D",
+        "500": "#DC2626",
+        "600": "#C22121",
+        "700": "#A71D1D",
+        "800": "#881818",
+        "900": "#651111"
+      },
+      "info": {
+        "50": "#E9EFFD",
+        "100": "#CFDDFB",
+        "200": "#ACC4F7",
+        "300": "#81A5F3",
+        "400": "#4C7FEF",
+        "500": "#2563EB",
+        "600": "#2157CF",
+        "700": "#1C4BB3",
+        "800": "#173D92",
+        "900": "#112E6C"
+      }
+    },
+    "spacing": {
+      "0": "0px",
+      "1": "4px",
+      "2": "8px",
+      "3": "12px",
+      "4": "16px",
+      "5": "20px",
+      "6": "24px",
+      "8": "32px",
+      "10": "40px",
+      "12": "48px",
+      "16": "64px"
+    },
+    "radius": {
+      "xs": "6px",
+      "sm": "10px",
+      "md": "14px",
+      "lg": "20px",
+      "xl": "28px",
+      "pill": "999px"
+    },
+    "typography": {
+      "font": {
+        "sans": "IBM Plex Sans, PingFang SC, sans-serif",
+        "display": "IBM Plex Sans, PingFang SC, sans-serif",
+        "mono": "JetBrains Mono, SFMono-Regular, monospace"
+      },
+      "size": {
+        "xs": "12px",
+        "sm": "14px",
+        "md": "16px",
+        "lg": "18px",
+        "xl": "24px",
+        "2xl": "32px"
+      },
+      "line_height": {
+        "tight": "1.2",
+        "body": "1.5",
+        "relaxed": "1.7"
+      },
+      "weight": {
+        "regular": "400",
+        "medium": "500",
+        "semibold": "600",
+        "bold": "700"
+      }
+    },
+    "shadow": {
+      "sm": "0 1px 2px rgba(15, 23, 42, 0.08)",
+      "md": "0 10px 24px rgba(15, 23, 42, 0.12)",
+      "lg": "0 18px 48px rgba(15, 23, 42, 0.16)"
+    },
+    "motion": {
+      "duration": {
+        "fast": "120ms",
+        "normal": "220ms",
+        "slow": "320ms"
+      },
+      "easing": {
+        "standard": "cubic-bezier(0.2, 0, 0, 1)",
+        "emphasized": "cubic-bezier(0.2, 0.8, 0.2, 1)"
+      }
+    }
+  },
+  "semantics": {
+    "surface.canvas": "{color.neutral.0}",
+    "surface.panel": "{color.neutral.50}",
+    "surface.panel-elevated": "{color.neutral.0}",
+    "surface.inverse": "{color.neutral.900}",
+    "text.primary": "{color.neutral.900}",
+    "text.secondary": "{color.neutral.600}",
+    "text.tertiary": "{color.neutral.500}",
+    "text.inverse": "{color.neutral.0}",
+    "border.subtle": "{color.neutral.200}",
+    "border.default": "{color.neutral.300}",
+    "border.strong": "{color.neutral.500}",
+    "accent.primary": "{color.brand.500}",
+    "accent.primary-hover": "{color.brand.600}",
+    "accent.secondary": "{color.accent.500}",
+    "accent.on-primary": "{color.neutral.0}",
+    "feedback.success": "{color.success.500}",
+    "feedback.warning": "{color.warning.500}",
+    "feedback.danger": "{color.danger.500}",
+    "feedback.info": "{color.info.500}",
+    "focus.ring": "{color.brand.300}"
+  },
+  "component_guidance": [
+    {
+      "component": "page-shell",
+      "tokens": [
+        "surface.canvas",
+        "text.primary",
+        "spacing.6",
+        "spacing.8"
+      ],
+      "notes": "页面骨架保持透气，不要用过重阴影和过满填充。标题优先用 display 字体。"
+    },
+    {
+      "component": "conversation-bubble",
+      "tokens": [
+        "surface.panel",
+        "accent.primary",
+        "text.primary",
+        "radius.lg"
+      ],
+      "notes": "AI 产品的对话气质要明确，自己发出的消息和系统回复要有清楚层级，但不要靠花哨颜色取胜。"
+    },
+    {
+      "component": "timeline-card",
+      "tokens": [
+        "surface.panel-elevated",
+        "border.subtle",
+        "shadow.sm",
+        "radius.xl"
+      ],
+      "notes": "时间卡片优先解决扫描效率，状态强调用 semantic token，不直接写业务色。"
+    },
+    {
+      "component": "primary-action",
+      "tokens": [
+        "accent.primary",
+        "accent.on-primary",
+        "radius.pill",
+        "shadow.sm"
+      ],
+      "notes": "主操作按钮要稳定，不要在一个页面同时出现多个视觉上等权的主按钮。"
+    },
+    {
+      "component": "input-field",
+      "tokens": [
+        "surface.panel",
+        "border.default",
+        "focus.ring",
+        "text.primary"
+      ],
+      "notes": "输入框优先稳定和可读，不要靠复杂渐变制造存在感。"
+    }
+  ],
+  "guardrails": [
+    "组件代码里不要直接写十六进制颜色。"
+  ],
+  "export_targets": [
+    "CSS variables: `:root { --color-accent-primary: ... }`",
+    "Tailwind theme extension or design-tokens.js export",
+    "Native app bridge map for iOS / Android style constants",
+    "Design tool reference table for Figma or Sketch"
+  ]
+}

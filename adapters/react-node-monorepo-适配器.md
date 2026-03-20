@@ -11,6 +11,7 @@
 - 把 `apps/web/src/main.tsx` 和 `apps/api/src/index.ts` 放进 `preferred_entry_files`
 - 为 `quick / precommit / ship` 配好命令
 - 把 `packages/shared/` 视为高信号区域
+- 如果前端长期迭代，补一份 `design-system/*.json` 和 CSS variables 作为视觉单一事实源
 
 ## 常见阅读顺序
 
@@ -20,11 +21,13 @@
 4. `apps/web/package.json`
 5. `apps/api/package.json`
 6. `packages/shared/*`
-7. 当前任务包里的候选文件
+7. `design-system/*.json` 或 tokens 导出文件
+8. 当前任务包里的候选文件
 
 ## 常见风险点
 
 - 前后端类型漂移
+- 设计稿、Tailwind、组件代码各用各的颜色和间距
 - 生成代码过期
 - 环境变量读法不一致
 - API 改了但前端缓存没失效

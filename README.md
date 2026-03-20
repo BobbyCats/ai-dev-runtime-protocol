@@ -2,11 +2,12 @@
 
 这不是一个“多写几条 Prompt”的仓库，而是一套把 AI 开发从聊天模式拉回工程模式的协议。
 
-它重点解决 6 个高频问题：
+它重点解决 7 个高频问题：
 
 - 为了改一个 bug 反复全仓扫描
 - 上下文和 token 成本失控
 - 任务做到一半不断偏航
+- UI 越写越漂，不同页面像不同产品拼在一起
 - 修 bug 没有根因调查，越修越像猜
 - 单元测试过了，但真实流程根本没验收
 - 代码已经变了，README 还停在过去时
@@ -19,6 +20,7 @@
 
 - `repo-map` | 仓库地图
 - `requirement-brief` | 需求简报
+- `design-token-pack` | 设计令牌包
 - `task-packet` | 任务包
 - `debug-pack` | 排障包
 - `decision-trace` | 决策轨迹
@@ -35,6 +37,7 @@
 
 - 引入 `阶段路由（stage router）`
 - 引入 `产品评审（product review）`
+- 引入 `设计令牌体系（design token system）`
 - 引入 `工程评审（engineering review）`
 - 引入 `根因调查（investigate）`
 - 引入 `真实验收（live QA）`
@@ -44,6 +47,7 @@
 
 - 什么时候该收需求
 - 什么时候该砍 scope
+- 什么时候该先把视觉语言结构化，而不是让 AI 凭感觉生成新界面
 - 什么时候先查根因，不能直接修
 - 什么时候必须去真实环境验收
 - 什么时候 README 应该整篇重写，而不是只补一条
@@ -69,6 +73,7 @@
 | --- | --- | --- |
 | 需求访谈 | 你到底想解决什么问题 | `requirement-brief` |
 | 产品评审 | 第一版该做什么，不该做什么 | 产品评审结论 |
+| 设计令牌包（可选） | UI 任务先统一视觉语言，避免 AI 随机出风格 | `design-token-pack` |
 | 工程评审 | 最小改动面、边界、风险、验证怎么定 | 工程评审结论 |
 | 仓库地图 | 先压缩项目上下文 | `repo-map` |
 | 任务包 / 排障包 | 把一次工作限制在清晰范围内 | `task-packet` / `debug-pack` |
@@ -87,6 +92,7 @@
 | --- | --- | --- |
 | repo-map | 仓库地图 | 项目结构摘要与高信号入口 |
 | requirement-brief | 需求简报 | 把模糊想法压成可以继续推进的简报 |
+| design-token-pack | 设计令牌包 | 把品牌方向、语义色、尺寸、字体系成前端可执行约束 |
 | task-packet | 任务包 | 一次功能任务的工作单、范围和验证清单 |
 | debug-pack | 排障包 | 一次 bug 的证据包和排查短名单 |
 | decision-trace | 决策轨迹 | 推理转向、关键判断和权衡记录 |
@@ -155,7 +161,21 @@ python -m aidrp requirement-brief \
 ### 4. 进入评审层
 
 - 产品评审手册：[docs/playbooks/plan-product-review-产品评审.md](docs/playbooks/plan-product-review-产品评审.md)
+- 设计令牌手册：[docs/playbooks/design-token-system-设计令牌体系.md](docs/playbooks/design-token-system-设计令牌体系.md)
 - 工程评审手册：[docs/playbooks/plan-engineering-review-工程评审.md](docs/playbooks/plan-engineering-review-工程评审.md)
+
+如果这次任务包含新界面、主题系统、组件库或多端 UI，先补 `设计令牌包（design-token-pack）`：
+
+```bash
+python -m aidrp design-token-pack \
+  --title "AI schedule UI 日程助手界面" \
+  --surface "Conversation-first scheduling and expense assistant 对话优先的日程与费用助手" \
+  --brand-direction "Calm productivity with strong structure and low visual noise. 冷静、高效、结构感强、低噪音。" \
+  --brand-color "#0F766E" \
+  --accent-color "#F59E0B" \
+  --design-principle "先定义语义令牌，再写组件，不要在组件里直接写死颜色。" \
+  --guardrail "组件代码里不要直接写十六进制颜色。"
+```
 
 ### 5. 进入执行层
 
@@ -222,12 +242,13 @@ python -m aidrp doc-sync \
 1. 需求访谈
 2. 需求简报
 3. 产品评审
-4. 工程评审
-5. 仓库地图
-6. 任务包
-7. 实现
-8. 真实验收
-9. 文档同步
+4. UI 任务先补设计令牌包
+5. 工程评审
+6. 仓库地图
+7. 任务包
+8. 实现
+9. 真实验收
+10. 文档同步
 
 Bug 修复默认走这条：
 
@@ -261,6 +282,7 @@ Bug 修复默认走这条：
 - [docs/architecture-架构说明.md](docs/architecture-架构说明.md)
 - [docs/playbooks/stage-router-阶段路由.md](docs/playbooks/stage-router-阶段路由.md)
 - [docs/playbooks/plan-product-review-产品评审.md](docs/playbooks/plan-product-review-产品评审.md)
+- [docs/playbooks/design-token-system-设计令牌体系.md](docs/playbooks/design-token-system-设计令牌体系.md)
 - [docs/playbooks/plan-engineering-review-工程评审.md](docs/playbooks/plan-engineering-review-工程评审.md)
 - [docs/playbooks/investigate-根因调查.md](docs/playbooks/investigate-根因调查.md)
 - [docs/playbooks/qa-live-真实验收.md](docs/playbooks/qa-live-真实验收.md)

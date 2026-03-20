@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycats.github.io/ai-dev-runtime-protocol/schemas/design-token-pack.schema.json",
+  "title": "DesignTokenPack",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "token_pack_id",
+    "generated_at",
+    "title",
+    "product_surface",
+    "brand_direction",
+    "design_principles",
+    "modes",
+    "primitives",
+    "semantics",
+    "component_guidance",
+    "guardrails",
+    "export_targets"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "token_pack_id": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "title": { "type": "string" },
+    "product_surface": { "type": "string" },
+    "brand_direction": { "type": "string" },
+    "design_principles": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "modes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "primitives": { "type": "object" },
+    "semantics": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "component_guidance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["component", "tokens", "notes"],
+        "properties": {
+          "component": { "type": "string" },
+          "tokens": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "guardrails": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "export_targets": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

@@ -18,14 +18,15 @@
 1. `需求访谈（discovery interview）`
 2. `需求简报（requirement-brief）`
 3. `产品评审（product review）`
-4. `工程评审（engineering review）`
-5. `仓库地图（repo-map）`
-6. `任务包（task-packet）` 或 `排障包（debug-pack）`
-7. `根因调查（investigate）`，仅 bug 必过
-8. 实现
-9. `真实验收（live QA）`
-10. `回归用例（eval-case）`，真实 bug 必补
-11. `文档同步包（doc-sync）`
+4. `设计令牌包（design-token-pack）`，仅 UI / 多端任务推荐
+5. `工程评审（engineering review）`
+6. `仓库地图（repo-map）`
+7. `任务包（task-packet）` 或 `排障包（debug-pack）`
+8. `根因调查（investigate）`，仅 bug 必过
+9. 实现
+10. `真实验收（live QA）`
+11. `回归用例（eval-case）`，真实 bug 必补
+12. `文档同步包（doc-sync）`
 
 ## 功能开发路线
 
@@ -40,12 +41,13 @@
 1. 需求访谈
 2. 需求简报
 3. 产品评审
-4. 工程评审
-5. 仓库地图
-6. 任务包
-7. 实现
-8. 真实验收
-9. 文档同步
+4. UI 任务先补设计令牌包
+5. 工程评审
+6. 仓库地图
+7. 任务包
+8. 实现
+9. 真实验收
+10. 文档同步
 
 ## Bug 修复路线
 
@@ -71,6 +73,7 @@
 
 - 需求没收敛，不进产品评审
 - 产品评审没定 scope，不进工程评审
+- UI 任务如果视觉语言还没定，不要直接生成组件
 - 工程评审没定边界，不开任务包
 - 没有排障包和根因调查，不修 bug
 - 没有真实验收，不算完成

@@ -12,11 +12,14 @@
 - `.aidrp/traces/*.json`
 - `.aidrp/evals/*.json`
 - `.aidrp/docsync/*.json`
+- `design-system/*.json`
+- `design-system/*.md`
 
 ## 规则
 
 - 需求还模糊时，先做 `需求访谈（discovery interview）` 并产出 `需求简报（requirement-brief）`
 - 功能开发先过产品评审和工程评审，再生成 `任务包（task-packet）`
+- 前端或多端任务先读设计令牌包，再生成组件
 - bug 先生成 `排障包（debug-pack）`，再做根因调查
 - 当前工件解释不了问题时，才能扩大阅读范围
 - 推理明显转向时，要写 `决策轨迹（decision-trace）`

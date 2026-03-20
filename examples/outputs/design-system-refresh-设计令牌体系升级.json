@@ -1,0 +1,86 @@
+{
+  "schema_version": "0.1.0",
+  "sync_id": "design-system-refresh-设计令牌体系升级",
+  "generated_at": "2026-03-20T17:48:02+00:00",
+  "title": "Design system refresh 设计令牌体系升级",
+  "summary": "Added design token system guidance, starter pack generation, automatic visual read-order, and README updates.",
+  "changed_files": [
+    "src/aidrp/design_token_pack.py",
+    "src/aidrp/task_packet.py",
+    "docs/playbooks/design-token-system-设计令牌体系.md",
+    "README.md"
+  ],
+  "change_notes": [
+    "UI workflow now requires a design-token pass before component generation."
+  ],
+  "categories": [
+    "canonical-docs",
+    "runtime",
+    "stage-flow",
+    "workflow-surface"
+  ],
+  "readme_strategy": "full-rewrite",
+  "readme_sections": [
+    "这是什么",
+    "这版新增了什么",
+    "阶段路由",
+    "核心工件",
+    "文档同步原则",
+    "快速开始",
+    "默认工作流",
+    "仓库结构"
+  ],
+  "impacted_docs": [
+    {
+      "path": "README.md",
+      "action": "full-rewrite",
+      "reason": "命令表面、阶段顺序或系统定位发生了变化，README 应该按当前全貌重写。"
+    },
+    {
+      "path": "ONBOARDING.md",
+      "action": "section-rewrite",
+      "reason": "默认工作顺序已经变化，入门路径需要同步。"
+    },
+    {
+      "path": "AGENTS.md",
+      "action": "section-rewrite",
+      "reason": "Agent 规则、优先级或禁止项已经变化，需要同步执行纪律。"
+    },
+    {
+      "path": "docs/architecture-架构说明.md",
+      "action": "section-rewrite",
+      "reason": "系统层次、阶段分工或工件职责已经变化，架构说明需要重写相关部分。"
+    },
+    {
+      "path": "docs/playbooks/stage-router-阶段路由.md",
+      "action": "section-rewrite",
+      "reason": "阶段流转或阶段门发生变化时，阶段路由必须同步。"
+    },
+    {
+      "path": "docs/playbooks/qa-live-真实验收.md",
+      "action": "targeted-update",
+      "reason": "验收方式、真实测试路径或证据要求可能受影响。"
+    },
+    {
+      "path": "docs/playbooks/documentation-sync-文档同步.md",
+      "action": "targeted-update",
+      "reason": "确认这次同步策略是否仍符合最新实践。"
+    }
+  ],
+  "sync_order": [
+    "README.md",
+    "ONBOARDING.md",
+    "AGENTS.md",
+    "docs/architecture-架构说明.md",
+    "docs/playbooks/stage-router-阶段路由.md",
+    "docs/playbooks/documentation-sync-文档同步.md",
+    "相关 playbook / template / example"
+  ],
+  "definition_of_done": [
+    "README 反映当前系统全貌，而不是只追加变更说明。",
+    "默认工作顺序在 README、ONBOARDING、AGENTS 三处保持一致。",
+    "新增命令、目录、模板或阶段门已经出现在对应文档里。",
+    "如果系统形态变了，README 已按章节重写，必要时整篇重写。",
+    "示例、验证命令和术语对照没有停留在旧版本。"
+  ]
+}

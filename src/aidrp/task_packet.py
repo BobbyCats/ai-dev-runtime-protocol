@@ -8,6 +8,47 @@ from aidrp.utils import now_iso, slugify, tokenize, write_json, write_text
 from aidrp.workspace import load_workspace_config
 
 
+VISUAL_KEYWORDS = {
+    "ui",
+    "ux",
+    "design",
+    "theme",
+    "component",
+    "components",
+    "frontend",
+    "style",
+    "styles",
+    "layout",
+    "page",
+    "screen",
+    "token",
+    "tokens",
+    "tailwind",
+}
+
+VISUAL_HINTS_ZH = ("界面", "组件", "主题", "前端", "视觉", "样式", "颜色", "排版", "设计")
+
+
+def _is_visual_task(title: str, objective: str, scope: list[str], search_terms: list[str]) -> bool:
+    tokens = set(tokenize(title, objective, *scope, *search_terms))
+    if tokens & VISUAL_KEYWORDS:
+        return True
+    merged = " ".join([title, objective, *scope, *search_terms])
+    return any(keyword in merged for keyword in VISUAL_HINTS_ZH)
+
+
+def _design_token_files(project_root: Path) -> list[str]:
+    design_root = project_root / "design-system"
+    if not design_root.exists():
+        return []
+    candidates = sorted(
+        path.relative_to(project_root).as_posix()
+        for path in design_root.rglob("*")
+        if path.is_file() and path.suffix.lower() in {".json", ".md", ".css", ".ts", ".js"}
+    )
+    return candidates[:4]
+
+
 def build_task_packet(
     project_root: Path,
     repo_map: dict[str, Any],
@@ -31,7 +72,10 @@ def build_task_packet(
     )
 
     read_order = ["AGENTS.md", ".aidrp/repo-map.md"]
+    if _is_visual_task(title, objective, scope, search_terms):
+        read_order.extend(_design_token_files(project_root))
     read_order.extend(item["path"] for item in candidate_files[: config["context_budget"]["candidate_file_limit"]])
+    read_order = list(dict.fromkeys(read_order))
     validation = {key: value for key, value in config["validation_commands"].items() if value}
     if not validation:
         validation = repo_map["summary"]["commands"]

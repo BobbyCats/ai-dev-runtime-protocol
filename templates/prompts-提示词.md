@@ -8,6 +8,10 @@
 
 如果需求刚收敛，还没明确第一版范围，不要直接拆工程任务。先按 `docs/playbooks/plan-product-review-产品评审.md` 判断是扩 scope、保持 scope，还是缩 scope。
 
+## Design Token First | 先设计令牌
+
+如果这次任务要做新界面、组件库、主题系统、多端 UI，不要直接让 AI 生页面。先按 `docs/playbooks/design-token-system-设计令牌体系.md` 定义 `设计令牌包（design-token-pack）`，再生成组件。
+
 ## Engineering Review First | 先工程评审
 
 如果你已经知道要做什么，但还没确定最小改动面、验证方式和风险边界，不要直接开写。先按 `docs/playbooks/plan-engineering-review-工程评审.md` 做工程评审。

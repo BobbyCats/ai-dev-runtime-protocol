@@ -1,28 +1,28 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-03-20T17:05:23+00:00",
+  "generated_at": "2026-03-20T17:48:10+00:00",
   "project_root": "F:\\开发思路\\ai-dev-runtime-protocol",
   "git": {
     "branch": "main",
-    "head": "045ec4b51553ddd286a8954529185dc63343ddea",
+    "head": "9b91868a09e9a1440402f12ad5868a7c660e76ee",
     "dirty": true
   },
   "summary": {
-    "file_count": 57,
+    "file_count": 61,
     "language_counts": {
       "text": 4,
       "yaml": 1,
-      "markdown": 29,
+      "markdown": 31,
       "toml": 1,
-      "json": 9,
-      "python": 13
+      "json": 10,
+      "python": 14
     },
     "role_counts": {
-      "source": 28,
+      "source": 30,
       "infrastructure": 1,
-      "documentation": 17,
+      "documentation": 18,
       "configuration": 2,
-      "schema": 8,
+      "schema": 9,
       "test": 1
     },
     "seed_files": [
@@ -32,12 +32,12 @@
       "pyproject.toml",
       "src/aidrp/cli.py",
       "src/aidrp/debug_pack.py",
+      "src/aidrp/design_token_pack.py",
       "src/aidrp/doc_sync.py",
       "src/aidrp/repo_map.py",
+      "src/aidrp/task_packet.py",
       "src/aidrp/utils.py",
-      "src/aidrp/workspace.py",
-      "src/aidrp/eval_case.py",
-      "src/aidrp/requirement_brief.py"
+      "src/aidrp/workspace.py"
     ],
     "risk_files": [],
     "commands": {
@@ -114,7 +114,7 @@
       "path": "adapters/react-node-monorepo-适配器.md",
       "language": "markdown",
       "role": "source",
-      "lines": 31,
+      "lines": 34,
       "symbols": [
         "Adapter | 适配器: React + Node Monorepo",
         "推荐的 `.aidrp/config.json` 调整",
@@ -128,14 +128,14 @@
         "常见阅读顺序",
         "常见风险点"
       ],
-      "hash": "b8a21e9730bd",
+      "hash": "56b7c6393c68",
       "score": 6
     },
     {
       "path": "AGENTS.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 31,
+      "lines": 32,
       "symbols": [
         "AGENTS",
         "工作规则",
@@ -149,14 +149,14 @@
         "验证",
         "编辑边界"
       ],
-      "hash": "2456566e7a92",
+      "hash": "5a6e22dc0f93",
       "score": 10
     },
     {
       "path": "docs/architecture-架构说明.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 122,
+      "lines": 135,
       "symbols": [
         "Architecture | 架构说明",
         "四层结构",
@@ -167,6 +167,7 @@
         "为什么不是只写 Prompt？",
         "为什么坚持 JSON First？",
         "为什么 CLI 要保持很薄？",
+        "为什么 Design Token 也要进入协议？",
         "为什么要把文档同步做成独立工件？",
         "未来可以继续补的方向"
       ],
@@ -181,9 +182,9 @@
         "为什么不是只写 Prompt？",
         "为什么坚持 JSON First？",
         "为什么 CLI 要保持很薄？",
-        "为什么要把文档同步做成独立工件？"
+        "为什么 Design Token 也要进入协议？"
       ],
-      "hash": "3c2bb21b6315",
+      "hash": "3e2cab7a5338",
       "score": 4
     },
     {
@@ -205,6 +206,40 @@
         "最少需要的工件"
       ],
       "hash": "100f9d1ed066",
+      "score": 4
+    },
+    {
+      "path": "docs/playbooks/design-token-system-设计令牌体系.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 129,
+      "symbols": [
+        "设计令牌体系（Design Token System）",
+        "为什么这一步重要",
+        "令牌层次",
+        "1. 视觉方向",
+        "2. 基础令牌",
+        "3. 语义令牌",
+        "4. 组件指导",
+        "标准顺序",
+        "硬规则",
+        "CLI 用法",
+        "最终产物应该长什么样"
+      ],
+      "imports": [],
+      "headings": [
+        "设计令牌体系（Design Token System）",
+        "为什么这一步重要",
+        "令牌层次",
+        "1. 视觉方向",
+        "2. 基础令牌",
+        "3. 语义令牌",
+        "4. 组件指导",
+        "标准顺序",
+        "硬规则",
+        "CLI 用法"
+      ],
+      "hash": "095d04e6aefd",
       "score": 4
     },
     {
@@ -261,7 +296,7 @@
       "path": "docs/playbooks/feature-功能开发.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 33,
+      "lines": 35,
       "symbols": [
         "Feature Playbook | 功能开发手册",
         "标准顺序",
@@ -273,7 +308,7 @@
         "标准顺序",
         "硬规则"
       ],
-      "hash": "07a47fa3b93e",
+      "hash": "546e85829b86",
       "score": 3
     },
     {
@@ -372,7 +407,7 @@
       "path": "docs/playbooks/stage-router-阶段路由.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 95,
+      "lines": 98,
       "symbols": [
         "阶段路由（Stage Router）",
         "核心原则",
@@ -394,7 +429,7 @@
         "判断当前卡在哪一层",
         "路由的真正价值"
       ],
-      "hash": "5d4902e7c037",
+      "hash": "b80432aeb03f",
       "score": 4
     },
     {
@@ -453,7 +488,7 @@
       "path": "docs/reference/terminology-glossary-术语对照.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 50,
+      "lines": 53,
       "symbols": [
         "术语对照（Terminology Glossary）",
         "记忆方式"
@@ -463,14 +498,14 @@
         "术语对照（Terminology Glossary）",
         "记忆方式"
       ],
-      "hash": "a167a20fc1b5",
+      "hash": "90ad47375773",
       "score": 2
     },
     {
       "path": "examples/README.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 20,
+      "lines": 24,
       "symbols": [
         "Examples | 示例"
       ],
@@ -478,7 +513,7 @@
       "headings": [
         "Examples | 示例"
       ],
-      "hash": "281449d9d614",
+      "hash": "382042842508",
       "score": 7
     },
     {
@@ -496,7 +531,7 @@
       "path": "ONBOARDING.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 82,
+      "lines": 85,
       "symbols": [
         "Onboarding | 入门说明",
         "核心转变",
@@ -516,7 +551,7 @@
         "集成到其他项目的步骤",
         "如果你现在只能先落四件事"
       ],
-      "hash": "7608ed6c3db2",
+      "hash": "0a6d2ce9dedc",
       "score": 10
     },
     {
@@ -534,7 +569,7 @@
       "path": "README.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 302,
+      "lines": 323,
       "symbols": [
         "AI Dev Runtime Protocol（AI 开发运行协议）",
         "这是什么",
@@ -562,7 +597,7 @@
         "快速开始",
         "0. 需求还不清楚时，先做 `需求访谈（discovery interview）`"
       ],
-      "hash": "277b87f345e2",
+      "hash": "8cb1ee3d6f30",
       "score": 10
     },
     {
@@ -585,6 +620,17 @@
       "imports": [],
       "headings": [],
       "hash": "e764b303abe4",
+      "score": 0
+    },
+    {
+      "path": "schemas/design-token-pack.schema.json",
+      "language": "json",
+      "role": "schema",
+      "lines": 66,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "a6c7e0e93243",
       "score": 0
     },
     {
@@ -681,7 +727,7 @@
       "path": "src/aidrp/cli.py",
       "language": "python",
       "role": "source",
-      "lines": 271,
+      "lines": 312,
       "symbols": [
         "_path",
         "_project_path",
@@ -694,17 +740,17 @@
         "argparse",
         "pathlib",
         "aidrp.debug_pack",
+        "aidrp.design_token_pack",
         "aidrp.doc_sync",
         "aidrp.eval_case",
         "aidrp.requirement_brief",
         "aidrp.repo_map",
         "aidrp.task_packet",
         "aidrp.trace",
-        "aidrp.utils",
-        "aidrp.workspace"
+        "aidrp.utils"
       ],
       "headings": [],
-      "hash": "bf55438c4701",
+      "hash": "4e0753385a60",
       "score": 9
     },
     {
@@ -729,6 +775,31 @@
       ],
       "headings": [],
       "hash": "1254ad42b352",
+      "score": 9
+    },
+    {
+      "path": "src/aidrp/design_token_pack.py",
+      "language": "python",
+      "role": "source",
+      "lines": 295,
+      "symbols": [
+        "_normalize_hex",
+        "_hex_to_rgb",
+        "_rgb_to_hex",
+        "_mix",
+        "_scale",
+        "build_design_token_pack",
+        "design_token_pack_to_markdown",
+        "write_design_token_pack"
+      ],
+      "imports": [
+        "__future__",
+        "pathlib",
+        "typing",
+        "aidrp.utils"
+      ],
+      "headings": [],
+      "hash": "564ea05f1a29",
       "score": 9
     },
     {
@@ -832,8 +903,10 @@
       "path": "src/aidrp/task_packet.py",
       "language": "python",
       "role": "source",
-      "lines": 115,
+      "lines": 159,
       "symbols": [
+        "_is_visual_task",
+        "_design_token_files",
         "build_task_packet",
         "task_packet_to_markdown",
         "write_task_packet"
@@ -847,8 +920,8 @@
         "aidrp.workspace"
       ],
       "headings": [],
-      "hash": "473cdef11e6f",
-      "score": 8
+      "hash": "e2b69e919fbe",
+      "score": 9
     },
     {
       "path": "src/aidrp/trace.py",
@@ -929,11 +1002,11 @@
       "path": "templates/AGENTS.md.template",
       "language": "text",
       "role": "source",
-      "lines": 27,
+      "lines": 30,
       "symbols": [],
       "imports": [],
       "headings": [],
-      "hash": "bd77f76bfd7f",
+      "hash": "8ece4d8cb3a2",
       "score": 2
     },
     {
@@ -959,6 +1032,31 @@
         "Recent Commits | 最近提交"
       ],
       "hash": "e6933b437ece",
+      "score": 6
+    },
+    {
+      "path": "templates/design-token-pack-设计令牌包.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 41,
+      "symbols": [
+        "设计令牌包（Design Token Pack）",
+        "视觉方向",
+        "基础令牌",
+        "语义令牌",
+        "组件指导",
+        "护栏"
+      ],
+      "imports": [],
+      "headings": [
+        "设计令牌包（Design Token Pack）",
+        "视觉方向",
+        "基础令牌",
+        "语义令牌",
+        "组件指导",
+        "护栏"
+      ],
+      "hash": "54e2616c2739",
       "score": 6
     },
     {
@@ -1080,11 +1178,12 @@
       "path": "templates/prompts-提示词.md",
       "language": "markdown",
       "role": "source",
-      "lines": 42,
+      "lines": 46,
       "symbols": [
         "Prompt Starters | 提示词起手式",
         "Discovery Interview First | 先需求访谈",
         "Product Review First | 先产品评审",
+        "Design Token First | 先设计令牌",
         "Engineering Review First | 先工程评审",
         "Task Packet First | 先任务包",
         "Debug Pack First | 先排障包",
@@ -1099,15 +1198,15 @@
         "Prompt Starters | 提示词起手式",
         "Discovery Interview First | 先需求访谈",
         "Product Review First | 先产品评审",
+        "Design Token First | 先设计令牌",
         "Engineering Review First | 先工程评审",
         "Task Packet First | 先任务包",
         "Debug Pack First | 先排障包",
         "Investigate First | 先根因调查",
         "Live QA First | 先真实验收",
-        "Trace Discipline | 轨迹纪律",
-        "Eval Discipline | 回归纪律"
+        "Trace Discipline | 轨迹纪律"
       ],
-      "hash": "7f615470b73c",
+      "hash": "7a6b53c36e07",
       "score": 6
     },
     {
@@ -1212,7 +1311,7 @@
       "path": "tests/test_runtime_protocol.py",
       "language": "python",
       "role": "test",
-      "lines": 124,
+      "lines": 148,
       "symbols": [
         "RuntimeProtocolTests"
       ],
@@ -1222,16 +1321,16 @@
         "unittest",
         "pathlib",
         "aidrp.debug_pack",
+        "aidrp.design_token_pack",
         "aidrp.doc_sync",
         "aidrp.eval_case",
         "aidrp.requirement_brief",
         "aidrp.repo_map",
         "aidrp.task_packet",
-        "aidrp.trace",
-        "aidrp.workspace"
+        "aidrp.trace"
       ],
       "headings": [],
-      "hash": "6e73ce86324d",
+      "hash": "9153cf726df0",
       "score": 6
     }
   ]

@@ -26,12 +26,13 @@
 2. 想法不清楚时，先做 `需求访谈（discovery interview）`
 3. 落成 `需求简报（requirement-brief）`
 4. 过 `产品评审（product review）`
-5. 过 `工程评审（engineering review）`
-6. 生成 `仓库地图（repo-map）`
-7. 生成 `任务包（task-packet）`
-8. 按短名单实现，不要直接全仓扫描
-9. 做 `真实验收（live QA）`
-10. 用 `文档同步包（doc-sync）` 收尾
+5. UI / 多端任务先补 `设计令牌包（design-token-pack）`
+6. 过 `工程评审（engineering review）`
+7. 生成 `仓库地图（repo-map）`
+8. 生成 `任务包（task-packet）`
+9. 按短名单实现，不要直接全仓扫描
+10. 做 `真实验收（live QA）`
+11. 用 `文档同步包（doc-sync）` 收尾
 
 Bug 修复默认顺序：
 
@@ -49,6 +50,7 @@ Bug 修复默认顺序：
 - 一个本地 bug 却要扫整个仓库
 - 每次新会话都重新讲架构
 - 需求还没收敛就直接设计系统
+- 界面刚开始写就漂，越写越像几个产品拼在一起
 - 没有根因调查就开始修 bug
 - 只跑了单元测试，就宣布已经验证完成
 - 代码和 README 慢慢分叉，最后互相误导
@@ -77,5 +79,6 @@ Bug 修复默认顺序：
 
 - 固定提交 `仓库地图（repo-map）`
 - 想法没收敛前先写 `需求简报（requirement-brief）`
+- 前端或多端任务先补 `设计令牌包（design-token-pack）`
 - 修 bug 前必须先写 `排障包（debug-pack）`，并先做根因调查
 - 非 trivial 变更收尾前必须补 `文档同步包（doc-sync）`

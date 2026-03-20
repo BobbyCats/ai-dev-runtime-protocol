@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 from aidrp.debug_pack import build_debug_pack
+from aidrp.design_token_pack import build_design_token_pack
 from aidrp.doc_sync import build_doc_sync
 from aidrp.eval_case import build_eval_case
 from aidrp.requirement_brief import build_requirement_brief
@@ -20,6 +21,8 @@ class RuntimeProtocolTests(unittest.TestCase):
             root = Path(tmp)
             (root / "README.md").write_text("# Demo\n", encoding="utf-8")
             (root / "src").mkdir()
+            (root / "design-system").mkdir()
+            (root / "design-system" / "app-tokens.json").write_text("{\"ok\": true}\n", encoding="utf-8")
             (root / "src" / "app.py").write_text(
                 "import json\n\n"
                 "def create_task_packet():\n"
@@ -43,10 +46,11 @@ class RuntimeProtocolTests(unittest.TestCase):
                 non_goals=["Do not add network calls."],
                 acceptance_criteria=["Packet includes candidate files."],
                 constraints=["Keep it small."],
-                search_terms=["packet", "task"],
+                search_terms=["packet", "task", "ui"],
             )
             self.assertEqual(task["task_id"], "create-packet")
             self.assertTrue(task["candidate_files"])
+            self.assertIn("design-system/app-tokens.json", task["read_order"])
 
             debug = build_debug_pack(
                 root,
@@ -117,6 +121,26 @@ class RuntimeProtocolTests(unittest.TestCase):
         )
         self.assertEqual(brief["brief_id"], "ai-meeting-helper-ai-会议助手")
         self.assertIn("Turn chat into a brief", brief["desired_outcomes"][0])
+
+    def test_design_token_pack(self) -> None:
+        pack = build_design_token_pack(
+            title="AI schedule UI 日程助手界面",
+            product_surface="Conversation-first scheduling and expense assistant",
+            brand_direction="Calm productivity with strong structure and low visual noise.",
+            brand_color="#0F766E",
+            accent_color="#F59E0B",
+            canvas_color="#F8FAFC",
+            text_color="#0F172A",
+            font_sans="IBM Plex Sans, PingFang SC, sans-serif",
+            font_display="IBM Plex Sans, PingFang SC, sans-serif",
+            font_mono="JetBrains Mono, SFMono-Regular, monospace",
+            design_principles=["Use semantic tokens before component-level overrides."],
+            modes=["light"],
+            guardrails=["Do not hard-code hex colors inside components."],
+        )
+        self.assertEqual(pack["token_pack_id"], "ai-schedule-ui-日程助手界面")
+        self.assertEqual(pack["semantics"]["accent.primary"], "{color.brand.500}")
+        self.assertEqual(pack["component_guidance"][0]["component"], "page-shell")
 
 
 if __name__ == "__main__":

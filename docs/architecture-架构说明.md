@@ -21,6 +21,7 @@
 
 - [docs/playbooks/discovery-interview-需求访谈.md](playbooks/discovery-interview-需求访谈.md)
 - [docs/playbooks/plan-product-review-产品评审.md](playbooks/plan-product-review-产品评审.md)
+- [docs/playbooks/design-token-system-设计令牌体系.md](playbooks/design-token-system-设计令牌体系.md)
 - [docs/playbooks/plan-engineering-review-工程评审.md](playbooks/plan-engineering-review-工程评审.md)
 - [docs/playbooks/feature-功能开发.md](playbooks/feature-功能开发.md)
 - [docs/playbooks/bugfix-缺陷修复.md](playbooks/bugfix-缺陷修复.md)
@@ -34,6 +35,7 @@
 
 - `repo-map` | 仓库地图
 - `requirement-brief` | 需求简报
+- `design-token-pack` | 设计令牌包
 - `task-packet` | 任务包
 - `debug-pack` | 排障包
 - `decision-trace` | 决策轨迹
@@ -64,6 +66,7 @@ Prompt 能约束表达方式，但很难解决这些问题：
 
 - 需求还没收敛就提前开工
 - 范围没过评审就直接扩大
+- 前端没有设计令牌，AI 每次都重新发明一套视觉风格
 - 上下文重复读取
 - bug 排查没有根因调查和证据链
 - 推理中途转向没有留痕
@@ -95,6 +98,16 @@ Prompt 能约束表达方式，但很难解决这些问题：
 - 低依赖
 
 所以当前实现只用 Python 标准库，不强绑任何模型平台，不强绑任何云服务。
+
+## 为什么 Design Token 也要进入协议？
+
+因为 AI 写前端最容易出现的不是“写不出来”，而是：
+
+- 同一个产品里颜色、字号、间距不断漂移
+- 不同页面像不同产品拼在一起
+- 设计稿、Web、App 各用各的命名
+
+把 `design-token-pack` 做成正式工件之后，视觉系统就从“感觉”变成“约束”。
 
 ## 为什么要把文档同步做成独立工件？
 

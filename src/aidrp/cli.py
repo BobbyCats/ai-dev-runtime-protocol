@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 
 from aidrp.debug_pack import build_debug_pack, write_debug_pack
+from aidrp.design_token_pack import build_design_token_pack, write_design_token_pack
 from aidrp.doc_sync import build_doc_sync, write_doc_sync
 from aidrp.eval_case import build_eval_case, write_eval_case
 from aidrp.requirement_brief import build_requirement_brief, write_requirement_brief
@@ -91,6 +92,22 @@ def build_parser() -> argparse.ArgumentParser:
     eval_cmd.add_argument("--assertion", action="append", default=[])
     eval_cmd.add_argument("--tag", action="append", default=[])
     eval_cmd.add_argument("--output-dir", default=".aidrp/evals")
+
+    token_cmd = subparsers.add_parser("design-token-pack", help="Generate a design token starter pack | 生成设计令牌包")
+    token_cmd.add_argument("--title", required=True)
+    token_cmd.add_argument("--surface", required=True)
+    token_cmd.add_argument("--brand-direction", required=True)
+    token_cmd.add_argument("--brand-color", required=True)
+    token_cmd.add_argument("--accent-color", default="#F59E0B")
+    token_cmd.add_argument("--canvas-color", default="#F8FAFC")
+    token_cmd.add_argument("--text-color", default="#0F172A")
+    token_cmd.add_argument("--font-sans", default="IBM Plex Sans, PingFang SC, sans-serif")
+    token_cmd.add_argument("--font-display", default="IBM Plex Sans, PingFang SC, sans-serif")
+    token_cmd.add_argument("--font-mono", default="JetBrains Mono, SFMono-Regular, monospace")
+    token_cmd.add_argument("--design-principle", action="append", default=[])
+    token_cmd.add_argument("--mode", action="append", default=[])
+    token_cmd.add_argument("--guardrail", action="append", default=[])
+    token_cmd.add_argument("--output-dir", default="design-system")
 
     doc_sync_cmd = subparsers.add_parser("doc-sync", help="Generate a documentation sync pack | 生成文档同步包")
     doc_sync_cmd.add_argument("--project-root", default=".")
@@ -223,6 +240,30 @@ def main(argv: list[str] | None = None) -> int:
         output_dir.mkdir(parents=True, exist_ok=True)
         prefix = output_dir / case["eval_id"]
         write_eval_case(case, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
+        print(prefix.with_suffix(".json"))
+        print(prefix.with_suffix(".md"))
+        return 0
+
+    if args.command == "design-token-pack":
+        pack = build_design_token_pack(
+            title=args.title,
+            product_surface=args.surface,
+            brand_direction=args.brand_direction,
+            brand_color=args.brand_color,
+            accent_color=args.accent_color,
+            canvas_color=args.canvas_color,
+            text_color=args.text_color,
+            font_sans=args.font_sans,
+            font_display=args.font_display,
+            font_mono=args.font_mono,
+            design_principles=_list(args.design_principle),
+            modes=_list(args.mode),
+            guardrails=_list(args.guardrail),
+        )
+        output_dir = _path(args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        prefix = output_dir / pack["token_pack_id"]
+        write_design_token_pack(pack, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
         print(prefix.with_suffix(".json"))
         print(prefix.with_suffix(".md"))
         return 0

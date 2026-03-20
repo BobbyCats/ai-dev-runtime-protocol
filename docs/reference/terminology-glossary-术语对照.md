@@ -6,6 +6,7 @@
 | --- | --- | --- |
 | repo-map | 仓库地图 | 这个项目的结构摘要 |
 | requirement-brief | 需求简报 | 把模糊想法收敛后的简报 |
+| design-token-pack | 设计令牌包 | 把颜色、字号、间距、语义样式变成结构化约束 |
 | task-packet | 任务包 | 一次任务的工作单 |
 | debug-pack | 排障包 | 一次 bug 的排查资料包 |
 | decision-trace | 决策轨迹 | 为什么这么改的记录 |
@@ -17,6 +18,7 @@
 | investigate | 根因调查 | 修 bug 前先找到最能解释问题的原因 |
 | live QA | 真实验收 | 在真实入口、真实界面、真实流程里验证 |
 | stage router | 阶段路由 | 告诉你现在到底该走到哪一阶段 |
+| semantic tokens | 语义令牌 | 比如 text.primary、surface.panel 这种不直接绑颜色名的令牌 |
 | seed files | 起始文件 | 最先该读的文件 |
 | candidate files | 候选文件 | 本任务最相关的文件 |
 | context budget | 上下文预算 | 一次最多读多少文件/文本 |
@@ -47,3 +49,4 @@
 - 看到 `eval-case` 就知道要防回归
 - 看到 `requirement-brief` 就知道要先把想法落稳
 - 看到 `doc-sync` 就知道要检查 README 是否已经过期
+- 看到 `design-token-pack` 就知道 UI 不能再靠感觉往外长
