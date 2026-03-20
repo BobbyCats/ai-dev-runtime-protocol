@@ -12,7 +12,7 @@
 
 `ai-dev-runtime-protocol` 是一套 **中文主导、术语双语** 的 AI 开发运行协议。
 
-它把原来只存在于聊天窗口里的临时上下文，沉淀成一组可复用工件（artifacts）：
+它不是把英文工作流原样翻成中文，而是把原来只存在于聊天窗口里的临时上下文，沉淀成一组可复用工件（artifacts）：
 
 - `repo-map` | 仓库地图
 - `requirement-brief` | 需求简报
@@ -24,6 +24,19 @@
 核心目标只有一句话：
 
 **不要让 Agent 每次都重新认识你的项目。**
+
+## 中文化原则
+
+这套协议的中文化，不是术语逐字翻译，而是按下面几条原则重写：
+
+- 保留真正有用的机制，不照搬别人的语气和包装
+- 中文负责承载实际动作，英文负责帮你逐步熟悉行业术语
+- 优先写成你能直接拿来开工的话，不写翻译腔
+- 同一个概念在中文里尽量只保留一个主叫法，减少脑内切换
+
+详细说明见：
+
+- [docs/reference/adaptation-principles-本土化改写原则.md](docs/reference/adaptation-principles-本土化改写原则.md)
 
 ## 解决什么问题
 
@@ -72,13 +85,13 @@ python -m pip install -e .
 
 ## 快速开始
 
-### 0. 需求还不清楚时，先做 `discovery interview | 需求访谈`
+### 0. 需求还不清楚时，先做 `需求访谈（discovery interview）`
 
 直接使用这个模板：
 
 - [templates/discovery-interview-需求访谈.md](templates/discovery-interview-需求访谈.md)
 
-访谈的目标不是一直问，而是尽快收敛出 `requirement-brief | 需求简报`。
+访谈的目标不是一直追问，而是尽快收敛出 `需求简报（requirement-brief）`。
 
 ### 1. 初始化工作区
 
@@ -86,85 +99,85 @@ python -m pip install -e .
 python -m aidrp init-workspace --project-root . --write-agents-template
 ```
 
-### 2. 生成 `repo-map | 仓库地图`
+### 2. 生成 `仓库地图（repo-map）`
 
 ```bash
 python -m aidrp repo-map --project-root . --output-dir .aidrp
 ```
 
-### 3. 用 CLI 生成 `requirement-brief | 需求简报`
+### 3. 用 CLI 生成 `需求简报（requirement-brief）`
 
 ```bash
 python -m aidrp requirement-brief \
   --title "AI meeting helper AI 会议助手" \
-  --product-idea "Use a discovery interview before coding. 在编码前先通过需求访谈收敛需求。" \
-  --target-user "Builders with fuzzy first ideas 想法先行、需求还模糊的构建者" \
-  --pain-point "Ideas are too vague to code directly 想法太模糊，不能直接开写" \
-  --desired-outcome "Turn conversation into a structured brief 把对话变成结构化简报" \
-  --scenario "Clarify the first milestone 澄清第一阶段目标" \
-  --non-goal "Do not design the whole system yet 暂不设计完整系统" \
-  --constraint "Keep the first workflow lightweight 第一版流程保持轻量" \
-  --success-metric "The brief can be converted into a task packet 简报可以继续转成任务包" \
-  --open-question "How many interview rounds are enough 访谈问几轮算够" \
-  --assumption "Chinese-first wording is preferred 优先中文表达"
+  --product-idea "先通过需求访谈把问题聊清楚，再决定写不写代码 | Use a discovery interview before coding" \
+  --target-user "脑子里先有感觉、但暂时说不清需求的构建者 | Builders with fuzzy first ideas" \
+  --pain-point "想法太散，没法直接开写，也容易一上来做偏 | Ideas are too vague to code directly" \
+  --desired-outcome "把对话收敛成一份能继续执行的结构化简报 | Turn conversation into a structured brief" \
+  --scenario "先把第一阶段要不要做、做什么聊清楚 | Clarify the first milestone" \
+  --non-goal "暂时不设计全系统，也不提前扩 scope | Do not design the whole system yet" \
+  --constraint "第一版流程要轻，不要把前置访谈做成重文档流程 | Keep the first workflow lightweight" \
+  --success-metric "这份简报可以顺利转成任务包并指导开工 | The brief can be converted into a task packet" \
+  --open-question "访谈问到什么程度就该收口 | How many interview rounds are enough" \
+  --assumption "中文是主工作语言，英文术语作为辅助记忆 | Chinese-first wording is preferred"
 ```
 
-### 4. 开工前再生成 `task-packet | 任务包`
+### 4. 开工前再生成 `任务包（task-packet）`
 
 ```bash
 python -m aidrp task-packet \
   --project-root . \
   --title "Fix schedule deletion drift 修复日程删除漂移" \
-  --objective "Fix the deletion path without broadening scope. 修复删除路径，但不要扩大范围。" \
+  --objective "只修删除路径，不顺手扩成一次大重构 | Fix the deletion path without broadening scope" \
   --type bugfix \
-  --scope "Only touch deletion flow and its tests. 只改删除流程和相关测试。" \
-  --acceptance "Deletion uses the correct event identity. 删除必须命中正确事件。" \
-  --constraint "Do not rewrite unrelated scheduling logic. 不要改无关排程逻辑。" \
+  --scope "只改删除流程和相关测试，不碰无关调度逻辑 | Only touch deletion flow and its tests" \
+  --acceptance "删除动作必须命中正确事件，且不会误删其他记录 | Deletion uses the correct event identity" \
+  --constraint "不要借这个 bug 顺手重写整段日程逻辑 | Do not rewrite unrelated scheduling logic" \
   --search-term delete \
   --search-term schedule
 ```
 
-### 5. 修 bug 前先生成 `debug-pack | 排障包`
+### 5. 修 bug 前先生成 `排障包（debug-pack）`
 
 ```bash
 python -m aidrp debug-pack \
   --project-root . \
   --title "Schedule deletion bug 日程删除错误" \
-  --symptom "Deleting one event removes the wrong item 删除一个事件却删掉了错误条目" \
-  --observed "UI reports success but the wrong row disappears UI 显示成功，但删错了行" \
-  --expected "Only the targeted event should be deleted 只能删除目标事件" \
-  --impact "Users lose trust in scheduling data 用户会失去对日程数据的信任" \
+  --symptom "删一个事件，结果被删掉的是另一个条目 | Deleting one event removes the wrong item" \
+  --observed "界面显示删除成功，但消失的是错误那一行 | UI reports success but the wrong row disappears" \
+  --expected "只能删除用户点中的那条事件 | Only the targeted event should be deleted" \
+  --impact "这种错误会直接破坏用户对日程数据的信任 | Users lose trust in scheduling data" \
   --trace-id trace-2026-03-18-001 \
-  --repro-step "Open the schedule page 打开日程页" \
-  --repro-step "Delete the second item 删除第二条" \
-  --repro-step "Observe the wrong row disappears 观察删错对象" \
+  --repro-step "打开日程页 | Open the schedule page" \
+  --repro-step "删除第二条记录 | Delete the second item" \
+  --repro-step "观察消失的是否是错误对象 | Observe the wrong row disappears" \
   --suspected-file src/schedule/delete.py \
   --search-term delete \
   --search-term event
 ```
 
-### 6. 记录 `decision-trace | 决策轨迹`
+### 6. 记录 `决策轨迹（decision-trace）`
 
 ```bash
 python -m aidrp trace-start --title "Fix schedule deletion drift 修复日程删除漂移" --task-id fix-schedule-deletion-drift-修复日程删除漂移
 python -m aidrp trace-event \
   --trace-file .aidrp/traces/fix-schedule-deletion-drift-修复日程删除漂移.json \
   --stage investigate \
-  --summary "Confirmed identity mismatch in delete handler. 已确认删除处理器存在身份标识错配。" \
+  --summary "已确认删除处理器里用了错误的身份标识，对应不上目标事件 | Confirmed identity mismatch in delete handler" \
   --file src/schedule/delete.py \
   --command "python -m unittest" \
-  --outcome "Need targeted patch 需要定点修复"
+  --outcome "需要定点修复，不需要扩大改动面 | Need targeted patch"
 ```
 
-### 7. 修完后生成 `eval-case | 回归用例`
+### 7. 修完后生成 `回归用例（eval-case）`
 
 ```bash
 python -m aidrp eval-case \
   --title "Regression for schedule deletion drift 日程删除漂移回归用例" \
   --origin "debug-pack:schedule-deletion-bug-日程删除错误" \
   --command "python -m unittest" \
-  --repro-step "Delete the second item in the schedule list 删除列表第二项" \
-  --assertion "Only the targeted event is removed 只能删掉目标事件" \
+  --repro-step "删除日程列表里的第二项 | Delete the second item in the schedule list" \
+  --assertion "只能删掉目标事件，其他记录必须保持不变 | Only the targeted event is removed" \
   --tag bugfix \
   --tag schedule
 ```
