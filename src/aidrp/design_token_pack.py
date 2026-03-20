@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import html
 from pathlib import Path
 from typing import Any
 
@@ -289,6 +290,354 @@ def design_token_pack_to_markdown(pack: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def write_design_token_pack(pack: dict[str, Any], output_json: Path, output_markdown: Path) -> None:
+def design_token_pack_to_html(pack: dict[str, Any]) -> str:
+    color = pack["primitives"]["color"]
+    typography = pack["primitives"]["typography"]
+    radius = pack["primitives"]["radius"]
+    shadow = pack["primitives"]["shadow"]
+    spacing = pack["primitives"]["spacing"]
+    semantics = pack["semantics"]
+
+    swatches = []
+    for family in ("brand", "accent", "neutral"):
+        for scale, value in color[family].items():
+            swatches.append(
+                f"""
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:{html.escape(value)};"></div>
+                  <div class="swatch-label">{html.escape(f"{family}.{scale}")}</div>
+                  <div class="swatch-value">{html.escape(value)}</div>
+                </div>
+                """
+            )
+
+    semantics_rows = []
+    for key, value in semantics.items():
+        semantics_rows.append(
+            f"""
+            <tr>
+              <td>{html.escape(key)}</td>
+              <td><code>{html.escape(value)}</code></td>
+            </tr>
+            """
+        )
+
+    component_cards = []
+    for item in pack["component_guidance"]:
+        tokens = "".join(f"<li><code>{html.escape(token)}</code></li>" for token in item["tokens"])
+        component_cards.append(
+            f"""
+            <article class="component-card">
+              <h3>{html.escape(item['component'])}</h3>
+              <p>{html.escape(item['notes'])}</p>
+              <ul>{tokens}</ul>
+            </article>
+            """
+        )
+
+    principles = "".join(f"<li>{html.escape(item)}</li>" for item in pack["design_principles"])
+    guardrails = "".join(f"<li>{html.escape(item)}</li>" for item in pack["guardrails"])
+
+    return f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{html.escape(pack['title'])} | Design Token Preview</title>
+  <style>
+    :root {{
+      --surface-canvas: {color['neutral']['0']};
+      --surface-panel: {color['neutral']['50']};
+      --text-primary: {color['neutral']['900']};
+      --text-secondary: {color['neutral']['600']};
+      --accent-primary: {color['brand']['500']};
+      --accent-secondary: {color['accent']['500']};
+      --border-subtle: {color['neutral']['200']};
+      --radius-lg: {radius['lg']};
+      --radius-xl: {radius['xl']};
+      --shadow-md: {shadow['md']};
+      --spacing-4: {spacing['4']};
+      --spacing-6: {spacing['6']};
+      --spacing-8: {spacing['8']};
+      --font-sans: {typography['font']['sans']};
+      --font-display: {typography['font']['display']};
+      --font-mono: {typography['font']['mono']};
+    }}
+    * {{
+      box-sizing: border-box;
+    }}
+    body {{
+      margin: 0;
+      font-family: var(--font-sans);
+      background:
+        radial-gradient(circle at top left, {color['brand']['100']}, transparent 28%),
+        radial-gradient(circle at top right, {color['accent']['100']}, transparent 24%),
+        var(--surface-canvas);
+      color: var(--text-primary);
+    }}
+    .page {{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: {spacing['10']} {spacing['6']} {spacing['16']};
+    }}
+    .hero {{
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: {spacing['8']};
+      align-items: stretch;
+      margin-bottom: {spacing['10']};
+    }}
+    .hero-card, .preview-card, .section {{
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border-subtle);
+      border-radius: {radius['xl']};
+      box-shadow: var(--shadow-md);
+    }}
+    .hero-card {{
+      padding: {spacing['8']};
+    }}
+    .hero h1 {{
+      margin: 0 0 {spacing['3']};
+      font-family: var(--font-display);
+      font-size: {typography['size']['2xl']};
+      line-height: {typography['line_height']['tight']};
+    }}
+    .eyebrow {{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: {radius['pill']};
+      background: {color['brand']['100']};
+      color: {color['brand']['700']};
+      font-weight: {typography['weight']['semibold']};
+      margin-bottom: {spacing['4']};
+    }}
+    .muted {{
+      color: var(--text-secondary);
+    }}
+    .hero ul, .section ul {{
+      padding-left: 18px;
+      margin: {spacing['4']} 0 0;
+    }}
+    .preview-card {{
+      padding: {spacing['6']};
+      display: grid;
+      gap: {spacing['4']};
+    }}
+    .mock-page {{
+      padding: {spacing['6']};
+      border-radius: {radius['lg']};
+      background: {color['neutral']['0']};
+      border: 1px solid {color['neutral']['200']};
+    }}
+    .mock-header {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: {spacing['5']};
+    }}
+    .mock-badge {{
+      padding: 6px 12px;
+      border-radius: {radius['pill']};
+      background: {color['brand']['100']};
+      color: {color['brand']['700']};
+      font-size: {typography['size']['sm']};
+      font-weight: {typography['weight']['medium']};
+    }}
+    .bubble {{
+      max-width: 84%;
+      padding: {spacing['4']} {spacing['5']};
+      border-radius: {radius['lg']};
+      margin-bottom: {spacing['3']};
+      line-height: {typography['line_height']['body']};
+    }}
+    .bubble-user {{
+      margin-left: auto;
+      background: {color['brand']['500']};
+      color: {color['neutral']['0']};
+    }}
+    .bubble-agent {{
+      background: {color['neutral']['50']};
+      border: 1px solid {color['neutral']['200']};
+    }}
+    .timeline-card {{
+      border: 1px solid {color['neutral']['200']};
+      border-radius: {radius['xl']};
+      padding: {spacing['5']};
+      box-shadow: {shadow['sm']};
+      display: grid;
+      gap: {spacing['2']};
+      background: {color['neutral']['0']};
+    }}
+    .button-row {{
+      display: flex;
+      gap: {spacing['3']};
+      margin-top: {spacing['4']};
+    }}
+    .btn {{
+      padding: 12px 18px;
+      border-radius: {radius['pill']};
+      border: none;
+      font: inherit;
+      font-weight: {typography['weight']['semibold']};
+    }}
+    .btn-primary {{
+      background: {color['brand']['500']};
+      color: {color['neutral']['0']};
+      box-shadow: {shadow['sm']};
+    }}
+    .btn-secondary {{
+      background: {color['accent']['100']};
+      color: {color['accent']['700']};
+    }}
+    .section {{
+      padding: {spacing['6']};
+      margin-bottom: {spacing['6']};
+    }}
+    .section h2 {{
+      margin: 0 0 {spacing['4']};
+      font-size: {typography['size']['xl']};
+    }}
+    .swatch-grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: {spacing['4']};
+    }}
+    .swatch {{
+      padding: {spacing['3']};
+      border: 1px solid {color['neutral']['200']};
+      border-radius: {radius['lg']};
+      background: {color['neutral']['0']};
+    }}
+    .swatch-chip {{
+      height: 72px;
+      border-radius: {radius['md']};
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      margin-bottom: {spacing['3']};
+    }}
+    .swatch-label {{
+      font-weight: {typography['weight']['semibold']};
+      margin-bottom: 4px;
+    }}
+    .swatch-value, code {{
+      font-family: var(--font-mono);
+      font-size: {typography['size']['xs']};
+    }}
+    table {{
+      width: 100%;
+      border-collapse: collapse;
+    }}
+    th, td {{
+      padding: 12px;
+      border-bottom: 1px solid {color['neutral']['200']};
+      text-align: left;
+      vertical-align: top;
+    }}
+    .component-grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: {spacing['4']};
+    }}
+    .component-card {{
+      border: 1px solid {color['neutral']['200']};
+      border-radius: {radius['lg']};
+      padding: {spacing['4']};
+      background: {color['neutral']['0']};
+    }}
+    .component-card h3 {{
+      margin-top: 0;
+      margin-bottom: {spacing['3']};
+    }}
+    .component-card ul {{
+      margin: {spacing['3']} 0 0;
+      padding-left: 18px;
+    }}
+    @media (max-width: 900px) {{
+      .hero {{
+        grid-template-columns: 1fr;
+      }}
+    }}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">Design Token Preview / 设计令牌预览</div>
+        <h1>{html.escape(pack['title'])}</h1>
+        <p class="muted">{html.escape(pack['product_surface'])}</p>
+        <p>{html.escape(pack['brand_direction'])}</p>
+        <ul>{principles}</ul>
+      </div>
+      <div class="preview-card">
+        <div class="mock-page">
+          <div class="mock-header">
+            <div>
+              <strong>Today / 今天</strong>
+              <div class="muted">AI-native schedule assistant</div>
+            </div>
+            <div class="mock-badge">Live QA Ready</div>
+          </div>
+          <div class="bubble bubble-agent">你明天下午 3 点和产品团队有一个评审会。</div>
+          <div class="bubble bubble-user">把它改到下班以后，并且给我预留 30 分钟路程。</div>
+          <div class="timeline-card">
+            <strong>Product Review / 产品评审</strong>
+            <span class="muted">19:00 - 20:00 · 深圳</span>
+            <span>Tokens: <code>surface.panel-elevated</code>, <code>border.subtle</code>, <code>radius.xl</code></span>
+          </div>
+          <div class="button-row">
+            <button class="btn btn-primary">确认计划</button>
+            <button class="btn btn-secondary">稍后再说</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Color Scales / 色板刻度</h2>
+      <div class="swatch-grid">
+        {''.join(swatches)}
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Semantic Tokens / 语义令牌</h2>
+      <table>
+        <thead>
+          <tr><th>Token</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+          {''.join(semantics_rows)}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>Component Guidance / 组件指导</h2>
+      <div class="component-grid">
+        {''.join(component_cards)}
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Guardrails / 护栏</h2>
+      <ul>{guardrails}</ul>
+    </section>
+  </main>
+</body>
+</html>
+"""
+
+
+def write_design_token_pack(
+    pack: dict[str, Any],
+    output_json: Path,
+    output_markdown: Path,
+    output_html: Path | None = None,
+) -> None:
     write_json(output_json, pack)
     write_text(output_markdown, design_token_pack_to_markdown(pack))
+    if output_html is not None:
+        write_text(output_html, design_token_pack_to_html(pack))

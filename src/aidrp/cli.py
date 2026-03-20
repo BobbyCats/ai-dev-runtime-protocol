@@ -263,9 +263,15 @@ def main(argv: list[str] | None = None) -> int:
         output_dir = _path(args.output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
         prefix = output_dir / pack["token_pack_id"]
-        write_design_token_pack(pack, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
+        write_design_token_pack(
+            pack,
+            prefix.with_suffix(".json"),
+            prefix.with_suffix(".md"),
+            prefix.with_suffix(".html"),
+        )
         print(prefix.with_suffix(".json"))
         print(prefix.with_suffix(".md"))
+        print(prefix.with_suffix(".html"))
         return 0
 
     if args.command == "doc-sync":

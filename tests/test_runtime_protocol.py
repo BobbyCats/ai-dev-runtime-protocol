@@ -5,7 +5,11 @@ import unittest
 from pathlib import Path
 
 from aidrp.debug_pack import build_debug_pack
-from aidrp.design_token_pack import build_design_token_pack
+from aidrp.design_token_pack import (
+    build_design_token_pack,
+    design_token_pack_to_html,
+    write_design_token_pack,
+)
 from aidrp.doc_sync import build_doc_sync
 from aidrp.eval_case import build_eval_case
 from aidrp.requirement_brief import build_requirement_brief
@@ -123,24 +127,39 @@ class RuntimeProtocolTests(unittest.TestCase):
         self.assertIn("Turn chat into a brief", brief["desired_outcomes"][0])
 
     def test_design_token_pack(self) -> None:
-        pack = build_design_token_pack(
-            title="AI schedule UI 日程助手界面",
-            product_surface="Conversation-first scheduling and expense assistant",
-            brand_direction="Calm productivity with strong structure and low visual noise.",
-            brand_color="#0F766E",
-            accent_color="#F59E0B",
-            canvas_color="#F8FAFC",
-            text_color="#0F172A",
-            font_sans="IBM Plex Sans, PingFang SC, sans-serif",
-            font_display="IBM Plex Sans, PingFang SC, sans-serif",
-            font_mono="JetBrains Mono, SFMono-Regular, monospace",
-            design_principles=["Use semantic tokens before component-level overrides."],
-            modes=["light"],
-            guardrails=["Do not hard-code hex colors inside components."],
-        )
-        self.assertEqual(pack["token_pack_id"], "ai-schedule-ui-日程助手界面")
-        self.assertEqual(pack["semantics"]["accent.primary"], "{color.brand.500}")
-        self.assertEqual(pack["component_guidance"][0]["component"], "page-shell")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            pack = build_design_token_pack(
+                title="AI schedule UI 日程助手界面",
+                product_surface="Conversation-first scheduling and expense assistant",
+                brand_direction="Calm productivity with strong structure and low visual noise.",
+                brand_color="#0F766E",
+                accent_color="#F59E0B",
+                canvas_color="#F8FAFC",
+                text_color="#0F172A",
+                font_sans="IBM Plex Sans, PingFang SC, sans-serif",
+                font_display="IBM Plex Sans, PingFang SC, sans-serif",
+                font_mono="JetBrains Mono, SFMono-Regular, monospace",
+                design_principles=["Use semantic tokens before component-level overrides."],
+                modes=["light"],
+                guardrails=["Do not hard-code hex colors inside components."],
+            )
+            self.assertEqual(pack["token_pack_id"], "ai-schedule-ui-日程助手界面")
+            self.assertEqual(pack["semantics"]["accent.primary"], "{color.brand.500}")
+            self.assertEqual(pack["component_guidance"][0]["component"], "page-shell")
+
+            html_preview = design_token_pack_to_html(pack)
+            self.assertIn("Design Token Preview / 设计令牌预览", html_preview)
+            self.assertIn("Color Scales / 色板刻度", html_preview)
+
+            prefix = root / pack["token_pack_id"]
+            write_design_token_pack(
+                pack,
+                prefix.with_suffix(".json"),
+                prefix.with_suffix(".md"),
+                prefix.with_suffix(".html"),
+            )
+            self.assertTrue(prefix.with_suffix(".html").exists())
 
 
 if __name__ == "__main__":

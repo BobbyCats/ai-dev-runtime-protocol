@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI schedule UI 日程助手界面 | Design Token Preview</title>
+  <style>
+    :root {
+      --surface-canvas: #F8FAFC;
+      --surface-panel: #F8FAFC;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --accent-primary: #0F766E;
+      --accent-secondary: #F59E0B;
+      --border-subtle: #E2E8F0;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --shadow-md: 0 10px 24px rgba(15, 23, 42, 0.12);
+      --spacing-4: 16px;
+      --spacing-6: 24px;
+      --spacing-8: 32px;
+      --font-sans: IBM Plex Sans, PingFang SC, sans-serif;
+      --font-display: IBM Plex Sans, PingFang SC, sans-serif;
+      --font-mono: JetBrains Mono, SFMono-Regular, monospace;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background:
+        radial-gradient(circle at top left, #CAE1DF, transparent 28%),
+        radial-gradient(circle at top right, #FDEAC9, transparent 24%),
+        var(--surface-canvas);
+      color: var(--text-primary);
+    }
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: stretch;
+      margin-bottom: 40px;
+    }
+    .hero-card, .preview-card, .section {
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 28px;
+      box-shadow: var(--shadow-md);
+    }
+    .hero-card {
+      padding: 32px;
+    }
+    .hero h1 {
+      margin: 0 0 12px;
+      font-family: var(--font-display);
+      font-size: 32px;
+      line-height: 1.2;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #CAE1DF;
+      color: #0B5A54;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .muted {
+      color: var(--text-secondary);
+    }
+    .hero ul, .section ul {
+      padding-left: 18px;
+      margin: 16px 0 0;
+    }
+    .preview-card {
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+    }
+    .mock-page {
+      padding: 24px;
+      border-radius: 20px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+    }
+    .mock-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .mock-badge {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #CAE1DF;
+      color: #0B5A54;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .bubble {
+      max-width: 84%;
+      padding: 16px 20px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .bubble-user {
+      margin-left: auto;
+      background: #0F766E;
+      color: #F8FAFC;
+    }
+    .bubble-agent {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+    }
+    .timeline-card {
+      border: 1px solid #E2E8F0;
+      border-radius: 28px;
+      padding: 20px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+      display: grid;
+      gap: 8px;
+      background: #F8FAFC;
+    }
+    .button-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .btn {
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: none;
+      font: inherit;
+      font-weight: 600;
+    }
+    .btn-primary {
+      background: #0F766E;
+      color: #F8FAFC;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+    }
+    .btn-secondary {
+      background: #FDEAC9;
+      color: #BA7808;
+    }
+    .section {
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .section h2 {
+      margin: 0 0 16px;
+      font-size: 24px;
+    }
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+    }
+    .swatch {
+      padding: 12px;
+      border: 1px solid #E2E8F0;
+      border-radius: 20px;
+      background: #F8FAFC;
+    }
+    .swatch-chip {
+      height: 72px;
+      border-radius: 14px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      margin-bottom: 12px;
+    }
+    .swatch-label {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .swatch-value, code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #E2E8F0;
+      text-align: left;
+      vertical-align: top;
+    }
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .component-card {
+      border: 1px solid #E2E8F0;
+      border-radius: 20px;
+      padding: 16px;
+      background: #F8FAFC;
+    }
+    .component-card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+    .component-card ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+    }
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">Design Token Preview / 设计令牌预览</div>
+        <h1>AI schedule UI 日程助手界面</h1>
+        <p class="muted">Conversation-first scheduling and expense assistant 对话优先的日程与费用助手</p>
+        <p>Calm productivity with strong structure and low visual noise. 冷静、高效、结构感强、低噪音。</p>
+        <ul><li>先定义语义令牌，再写组件，不要在组件里直接写死颜色。</li><li>同一套令牌要同时约束 Web、App 和设计稿。</li></ul>
+      </div>
+      <div class="preview-card">
+        <div class="mock-page">
+          <div class="mock-header">
+            <div>
+              <strong>Today / 今天</strong>
+              <div class="muted">AI-native schedule assistant</div>
+            </div>
+            <div class="mock-badge">Live QA Ready</div>
+          </div>
+          <div class="bubble bubble-agent">你明天下午 3 点和产品团队有一个评审会。</div>
+          <div class="bubble bubble-user">把它改到下班以后，并且给我预留 30 分钟路程。</div>
+          <div class="timeline-card">
+            <strong>Product Review / 产品评审</strong>
+            <span class="muted">19:00 - 20:00 · 深圳</span>
+            <span>Tokens: <code>surface.panel-elevated</code>, <code>border.subtle</code>, <code>radius.xl</code></span>
+          </div>
+          <div class="button-row">
+            <button class="btn btn-primary">确认计划</button>
+            <button class="btn btn-secondary">稍后再说</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Color Scales / 色板刻度</h2>
+      <div class="swatch-grid">
+        
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#E7F1F0;"></div>
+                  <div class="swatch-label">brand.50</div>
+                  <div class="swatch-value">#E7F1F0</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#CAE1DF;"></div>
+                  <div class="swatch-label">brand.100</div>
+                  <div class="swatch-value">#CAE1DF</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#A4CBC8;"></div>
+                  <div class="swatch-label">brand.200</div>
+                  <div class="swatch-value">#A4CBC8</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#74B0AB;"></div>
+                  <div class="swatch-label">brand.300</div>
+                  <div class="swatch-value">#74B0AB</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#3A8F88;"></div>
+                  <div class="swatch-label">brand.400</div>
+                  <div class="swatch-value">#3A8F88</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#0F766E;"></div>
+                  <div class="swatch-label">brand.500</div>
+                  <div class="swatch-value">#0F766E</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#0D6861;"></div>
+                  <div class="swatch-label">brand.600</div>
+                  <div class="swatch-value">#0D6861</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#0B5A54;"></div>
+                  <div class="swatch-label">brand.700</div>
+                  <div class="swatch-value">#0B5A54</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#094944;"></div>
+                  <div class="swatch-label">brand.800</div>
+                  <div class="swatch-value">#094944</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#073633;"></div>
+                  <div class="swatch-label">brand.900</div>
+                  <div class="swatch-value">#073633</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#FEF5E7;"></div>
+                  <div class="swatch-label">accent.50</div>
+                  <div class="swatch-value">#FEF5E7</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#FDEAC9;"></div>
+                  <div class="swatch-label">accent.100</div>
+                  <div class="swatch-value">#FDEAC9</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#FBDAA2;"></div>
+                  <div class="swatch-label">accent.200</div>
+                  <div class="swatch-value">#FBDAA2</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#F9C771;"></div>
+                  <div class="swatch-label">accent.300</div>
+                  <div class="swatch-value">#F9C771</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#F7AF37;"></div>
+                  <div class="swatch-label">accent.400</div>
+                  <div class="swatch-value">#F7AF37</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#F59E0B;"></div>
+                  <div class="swatch-label">accent.500</div>
+                  <div class="swatch-value">#F59E0B</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#D88B0A;"></div>
+                  <div class="swatch-label">accent.600</div>
+                  <div class="swatch-value">#D88B0A</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#BA7808;"></div>
+                  <div class="swatch-label">accent.700</div>
+                  <div class="swatch-value">#BA7808</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#986207;"></div>
+                  <div class="swatch-label">accent.800</div>
+                  <div class="swatch-value">#986207</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#714905;"></div>
+                  <div class="swatch-label">accent.900</div>
+                  <div class="swatch-value">#714905</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#F8FAFC;"></div>
+                  <div class="swatch-label">neutral.0</div>
+                  <div class="swatch-value">#F8FAFC</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#F8FAFC;"></div>
+                  <div class="swatch-label">neutral.50</div>
+                  <div class="swatch-value">#F8FAFC</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#F1F5F9;"></div>
+                  <div class="swatch-label">neutral.100</div>
+                  <div class="swatch-value">#F1F5F9</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#E2E8F0;"></div>
+                  <div class="swatch-label">neutral.200</div>
+                  <div class="swatch-value">#E2E8F0</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#CBD5E1;"></div>
+                  <div class="swatch-label">neutral.300</div>
+                  <div class="swatch-value">#CBD5E1</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#94A3B8;"></div>
+                  <div class="swatch-label">neutral.400</div>
+                  <div class="swatch-value">#94A3B8</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#64748B;"></div>
+                  <div class="swatch-label">neutral.500</div>
+                  <div class="swatch-value">#64748B</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#475569;"></div>
+                  <div class="swatch-label">neutral.600</div>
+                  <div class="swatch-value">#475569</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#334155;"></div>
+                  <div class="swatch-label">neutral.700</div>
+                  <div class="swatch-value">#334155</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#1E293B;"></div>
+                  <div class="swatch-label">neutral.800</div>
+                  <div class="swatch-value">#1E293B</div>
+                </div>
+                
+                <div class="swatch">
+                  <div class="swatch-chip" style="background:#0F172A;"></div>
+                  <div class="swatch-label">neutral.900</div>
+                  <div class="swatch-value">#0F172A</div>
+                </div>
+                
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Semantic Tokens / 语义令牌</h2>
+      <table>
+        <thead>
+          <tr><th>Token</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td>surface.canvas</td>
+              <td><code>{color.neutral.0}</code></td>
+            </tr>
+            
+            <tr>
+              <td>surface.panel</td>
+              <td><code>{color.neutral.50}</code></td>
+            </tr>
+            
+            <tr>
+              <td>surface.panel-elevated</td>
+              <td><code>{color.neutral.0}</code></td>
+            </tr>
+            
+            <tr>
+              <td>surface.inverse</td>
+              <td><code>{color.neutral.900}</code></td>
+            </tr>
+            
+            <tr>
+              <td>text.primary</td>
+              <td><code>{color.neutral.900}</code></td>
+            </tr>
+            
+            <tr>
+              <td>text.secondary</td>
+              <td><code>{color.neutral.600}</code></td>
+            </tr>
+            
+            <tr>
+              <td>text.tertiary</td>
+              <td><code>{color.neutral.500}</code></td>
+            </tr>
+            
+            <tr>
+              <td>text.inverse</td>
+              <td><code>{color.neutral.0}</code></td>
+            </tr>
+            
+            <tr>
+              <td>border.subtle</td>
+              <td><code>{color.neutral.200}</code></td>
+            </tr>
+            
+            <tr>
+              <td>border.default</td>
+              <td><code>{color.neutral.300}</code></td>
+            </tr>
+            
+            <tr>
+              <td>border.strong</td>
+              <td><code>{color.neutral.500}</code></td>
+            </tr>
+            
+            <tr>
+              <td>accent.primary</td>
+              <td><code>{color.brand.500}</code></td>
+            </tr>
+            
+            <tr>
+              <td>accent.primary-hover</td>
+              <td><code>{color.brand.600}</code></td>
+            </tr>
+            
+            <tr>
+              <td>accent.secondary</td>
+              <td><code>{color.accent.500}</code></td>
+            </tr>
+            
+            <tr>
+              <td>accent.on-primary</td>
+              <td><code>{color.neutral.0}</code></td>
+            </tr>
+            
+            <tr>
+              <td>feedback.success</td>
+              <td><code>{color.success.500}</code></td>
+            </tr>
+            
+            <tr>
+              <td>feedback.warning</td>
+              <td><code>{color.warning.500}</code></td>
+            </tr>
+            
+            <tr>
+              <td>feedback.danger</td>
+              <td><code>{color.danger.500}</code></td>
+            </tr>
+            
+            <tr>
+              <td>feedback.info</td>
+              <td><code>{color.info.500}</code></td>
+            </tr>
+            
+            <tr>
+              <td>focus.ring</td>
+              <td><code>{color.brand.300}</code></td>
+            </tr>
+            
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>Component Guidance / 组件指导</h2>
+      <div class="component-grid">
+        
+            <article class="component-card">
+              <h3>page-shell</h3>
+              <p>页面骨架保持透气，不要用过重阴影和过满填充。标题优先用 display 字体。</p>
+              <ul><li><code>surface.canvas</code></li><li><code>text.primary</code></li><li><code>spacing.6</code></li><li><code>spacing.8</code></li></ul>
+            </article>
+            
+            <article class="component-card">
+              <h3>conversation-bubble</h3>
+              <p>AI 产品的对话气质要明确，自己发出的消息和系统回复要有清楚层级，但不要靠花哨颜色取胜。</p>
+              <ul><li><code>surface.panel</code></li><li><code>accent.primary</code></li><li><code>text.primary</code></li><li><code>radius.lg</code></li></ul>
+            </article>
+            
+            <article class="component-card">
+              <h3>timeline-card</h3>
+              <p>时间卡片优先解决扫描效率，状态强调用 semantic token，不直接写业务色。</p>
+              <ul><li><code>surface.panel-elevated</code></li><li><code>border.subtle</code></li><li><code>shadow.sm</code></li><li><code>radius.xl</code></li></ul>
+            </article>
+            
+            <article class="component-card">
+              <h3>primary-action</h3>
+              <p>主操作按钮要稳定，不要在一个页面同时出现多个视觉上等权的主按钮。</p>
+              <ul><li><code>accent.primary</code></li><li><code>accent.on-primary</code></li><li><code>radius.pill</code></li><li><code>shadow.sm</code></li></ul>
+            </article>
+            
+            <article class="component-card">
+              <h3>input-field</h3>
+              <p>输入框优先稳定和可读，不要靠复杂渐变制造存在感。</p>
+              <ul><li><code>surface.panel</code></li><li><code>border.default</code></li><li><code>focus.ring</code></li><li><code>text.primary</code></li></ul>
+            </article>
+            
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Guardrails / 护栏</h2>
+      <ul><li>组件代码里不要直接写十六进制颜色。</li></ul>
+    </section>
+  </main>
+</body>
+</html>

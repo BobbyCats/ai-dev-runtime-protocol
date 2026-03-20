@@ -1,7 +1,7 @@
 # Design Token Pack | 设计令牌包: AI schedule UI 日程助手界面
 
 - Token Pack ID | 令牌包 ID: `ai-schedule-ui-日程助手界面`
-- Generated | 生成时间: `2026-03-20T17:46:37+00:00`
+- Generated | 生成时间: `2026-03-20T18:01:25+00:00`
 - Product Surface | 产品界面: Conversation-first scheduling and expense assistant 对话优先的日程与费用助手
 
 ## Brand Direction | 视觉方向

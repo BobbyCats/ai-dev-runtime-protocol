@@ -42,10 +42,12 @@
 - `eval-case` | 回归用例
 - `doc-sync` | 文档同步包
 
-这些工件同时存在 JSON 和 Markdown 两种形态：
+这些工件默认存在 JSON 和 Markdown 两种形态：
 
 - JSON 给程序、Agent、自动化脚本使用
 - Markdown 给人快速阅读和 review 使用
+
+其中 `design-token-pack` 额外输出 HTML 预览页，因为视觉系统不能只靠文字和 JSON 判断，必须保留一个可直接打开、可肉眼验风格的界面样本。
 
 ### 4. Runtime Layer | 运行层
 

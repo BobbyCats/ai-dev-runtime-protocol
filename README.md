@@ -92,7 +92,7 @@
 | --- | --- | --- |
 | repo-map | 仓库地图 | 项目结构摘要与高信号入口 |
 | requirement-brief | 需求简报 | 把模糊想法压成可以继续推进的简报 |
-| design-token-pack | 设计令牌包 | 把品牌方向、语义色、尺寸、字体系成前端可执行约束 |
+| design-token-pack | 设计令牌包 | 把品牌方向、语义色、尺寸、字体系成前端可执行约束，并输出可视化 HTML 预览 |
 | task-packet | 任务包 | 一次功能任务的工作单、范围和验证清单 |
 | debug-pack | 排障包 | 一次 bug 的证据包和排查短名单 |
 | decision-trace | 决策轨迹 | 推理转向、关键判断和权衡记录 |
@@ -176,6 +176,14 @@ python -m aidrp design-token-pack \
   --design-principle "先定义语义令牌，再写组件，不要在组件里直接写死颜色。" \
   --guardrail "组件代码里不要直接写十六进制颜色。"
 ```
+
+默认会生成三份产物：
+
+- `design-system/ai-schedule-ui-日程助手界面.json`
+- `design-system/ai-schedule-ui-日程助手界面.md`
+- `design-system/ai-schedule-ui-日程助手界面.html`
+
+其中 `.html` 是可直接打开的视觉预览页，用来快速检查色板、语义令牌和示例界面气质有没有跑偏。
 
 ### 5. 进入执行层
 
