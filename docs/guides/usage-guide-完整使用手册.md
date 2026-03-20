@@ -11,6 +11,17 @@
 
 优先看这份文档。
 
+## 先选入口
+
+- 想跟着一个完整故事跑一遍：
+  [端到端教程](../tutorials/e2e-walkthrough-端到端教程.md)
+- 想按命令查：
+  [CLI 参考](../reference/cli-reference-CLI参考.md)
+- 想按场景选路线：
+  直接看本文的 [你到底该怎么用](#你到底该怎么用)
+- 想先拿一个最小样例仓库练手：
+  [meeting-assistant 场景](../../examples/scenarios/meeting-assistant/README.md)
+
 ## 一句话定位
 
 `ai-dev-runtime-protocol` 适合解决的不是“怎么让 AI 多写点代码”，而是：
@@ -336,6 +347,11 @@ flowchart TD
 5. 生成 `task-packet`
 6. 完成后跑真实验收，再同步文档
 
+如果你想直接照着一个最小样例仓库走一遍，直接看：
+
+- [端到端教程](../tutorials/e2e-walkthrough-端到端教程.md)
+- [meeting-assistant 场景](../../examples/scenarios/meeting-assistant/README.md)
+
 ### 场景 2：现有产品删除事件总是删错对象
 
 起点：
@@ -415,3 +431,9 @@ flowchart TD
 2. [docs/playbooks/investigate-根因调查.md](../playbooks/investigate-根因调查.md)
 3. [docs/playbooks/observability-correlation-可观测性关联.md](../playbooks/observability-correlation-可观测性关联.md)
 4. [docs/playbooks/documentation-sync-文档同步.md](../playbooks/documentation-sync-文档同步.md)
+
+如果你要教团队成员上手，建议把这三个入口打包发给他：
+
+1. [README.md](../../README.md)
+2. [端到端教程](../tutorials/e2e-walkthrough-端到端教程.md)
+3. [CLI 参考](../reference/cli-reference-CLI参考.md)

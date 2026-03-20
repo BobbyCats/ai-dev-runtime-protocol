@@ -1,6 +1,6 @@
 # AI Dev Runtime Protocol（AI 开发运行协议）
 
-这不是一个“多写几条 Prompt”的仓库，而是一套把 AI 开发从聊天模式拉回工程模式的协议。
+这不是一个“多写几条 Prompt”的仓库，而是一套让 AI Agent 按阶段工作、按工件交付、按证据排障的开发运行协议。
 
 它主要解决这些问题：
 
@@ -16,15 +16,38 @@
 
 **不要让 Agent 每次都重新认识你的项目，也不要让文档永远落后于代码。**
 
+## 一句话理解
+
+如果你经常遇到这些场景：
+
+- 新会话一开就要重新解释整个项目
+- 改一个 bug 要扫十几二十个文件
+- AI 明明写了代码，但 README、示例和测试还停在旧版本
+
+这个仓库就是拿来解决这些问题的。
+
 ## 先看哪里
 
 如果你第一次接触这个仓库，建议直接从这里开始：
 
 - [完整使用手册](docs/guides/usage-guide-完整使用手册.md)
+- [端到端教程](docs/tutorials/e2e-walkthrough-端到端教程.md)
+- [CLI 参考](docs/reference/cli-reference-CLI参考.md)
 - [架构说明](docs/architecture-架构说明.md)
 - [阶段路由](docs/playbooks/stage-router-阶段路由.md)
 - [Vercel AI SDK 理解与借鉴](docs/reference/vercel-ai-sdk-理解与借鉴.md)
 - [示例目录](examples/README.md)
+
+## 入口导航
+
+- 想完整跑一遍：
+  [端到端教程](docs/tutorials/e2e-walkthrough-端到端教程.md)
+- 想按命令查：
+  [CLI 参考](docs/reference/cli-reference-CLI参考.md)
+- 想按场景选流程：
+  [完整使用手册里的场景路线](docs/guides/usage-guide-完整使用手册.md#你到底该怎么用)
+- 想先看一个真实样例工作区：
+  [meeting-assistant 场景](examples/scenarios/meeting-assistant/README.md)
 
 ## 这套系统包含什么
 
@@ -83,6 +106,7 @@
 更详细的流程、场景、建议和示范，见：
 
 - [完整使用手册](docs/guides/usage-guide-完整使用手册.md)
+- [端到端教程](docs/tutorials/e2e-walkthrough-端到端教程.md)
 
 ## CLI 命令总览
 
@@ -108,6 +132,10 @@ python -m aidrp --help
 - `trace-start`
 - `trace-event`
 
+按阶段组织的命令说明见：
+
+- [CLI 参考](docs/reference/cli-reference-CLI参考.md)
+
 ## 安装
 
 ```bash
@@ -132,6 +160,11 @@ python -m aidrp requirement-brief \
 - [需求访谈](templates/discovery-interview-需求访谈.md)
 - [需求简报](templates/requirement-brief-需求简报.md)
 
+如果你想直接拿一个样例仓库练手：
+
+- [端到端教程](docs/tutorials/e2e-walkthrough-端到端教程.md)
+- [meeting-assistant 场景目录](examples/scenarios/meeting-assistant/README.md)
+
 ## 推荐文档地图
 
 ### 入门
@@ -139,6 +172,8 @@ python -m aidrp requirement-brief \
 - [ONBOARDING.md](ONBOARDING.md)
 - [AGENTS.md](AGENTS.md)
 - [完整使用手册](docs/guides/usage-guide-完整使用手册.md)
+- [端到端教程](docs/tutorials/e2e-walkthrough-端到端教程.md)
+- [CLI 参考](docs/reference/cli-reference-CLI参考.md)
 
 ### 方法与架构
 
