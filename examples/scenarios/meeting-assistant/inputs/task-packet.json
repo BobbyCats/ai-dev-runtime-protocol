@@ -1,0 +1,24 @@
+{
+  "title": "Fix meeting deletion drift 修复会议删除漂移",
+  "objective": "只修删除解析和执行链路，不顺手扩成一次存储层重构",
+  "type": "bugfix",
+  "scope": [
+    "只改删除目标解析、执行器和相关测试"
+  ],
+  "non_goals": [
+    "不重做整个会议列表状态管理"
+  ],
+  "acceptance": [
+    "删除动作必须命中正确会议",
+    "日志里能串起删除链路的关键编号"
+  ],
+  "constraints": [
+    "不要扩大到邀请、同步或提醒功能"
+  ],
+  "search_terms": [
+    "meeting",
+    "delete",
+    "selection",
+    "event"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Meeting deletion drift 会议删除漂移",
+  "symptom": "删除选中的会议时，另一条会议也可能被误删",
+  "observed": "界面提示删除成功，但消失的是错误的会议卡片",
+  "expected": "只能删除用户点中的会议",
+  "impact": "团队会对会议状态失去信任，后续改期和确认都不可靠",
+  "trace_id": "trace-meeting-001",
+  "request_id": "req-meeting-001",
+  "decision_id": "dec-meeting-001",
+  "plan_id": "plan-delete-001",
+  "tool_call_id": "tool-delete-001",
+  "entrypoint": "meeting.delete",
+  "failure_stage": "executor",
+  "reproduction_steps": [
+    "打开会议列表并删除第二条会议",
+    "确认弹窗后观察实际消失的卡片"
+  ],
+  "suspected_files": [
+    "src/calendar_agent.py",
+    "src/ui_state.py"
+  ],
+  "log_files": [
+    "logs/runtime.log"
+  ],
+  "search_terms": [
+    "wrong meeting removed",
+    "selection_id",
+    "meeting_id"
+  ]
+}

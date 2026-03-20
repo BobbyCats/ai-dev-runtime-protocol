@@ -1,0 +1,185 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-03-20T18:50:32+00:00",
+  "project_root": "C:\\Users\\pc\\AppData\\Local\\Temp\\tmp3v4sxnm8\\fixture",
+  "git": {
+    "branch": "",
+    "head": "",
+    "dirty": false
+  },
+  "summary": {
+    "file_count": 10,
+    "language_counts": {
+      "text": 2,
+      "markdown": 2,
+      "json": 1,
+      "toml": 1,
+      "python": 4
+    },
+    "role_counts": {
+      "source": 6,
+      "documentation": 2,
+      "configuration": 2
+    },
+    "seed_files": [
+      "AGENTS.md",
+      "README.md",
+      "pyproject.toml",
+      "src/meeting_assistant.py",
+      "src/calendar_agent.py",
+      "src/event_store.py",
+      "src/ui_state.py",
+      ".aidrpignore",
+      "logs/runtime.log",
+      "design-system/meeting-ui-tokens.json"
+    ],
+    "risk_files": [],
+    "commands": {
+      "npm": [],
+      "python": [
+        "meeting-demo"
+      ],
+      "make": []
+    },
+    "context_budget": {
+      "seed_file_limit": 12,
+      "candidate_file_limit": 10,
+      "hard_file_cap": 24,
+      "max_file_chars": 18000,
+      "max_snippet_chars": 1200
+    }
+  },
+  "files": [
+    {
+      "path": ".aidrpignore",
+      "language": "text",
+      "role": "source",
+      "lines": 14,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "a9484217e9c4",
+      "score": 2
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 3,
+      "symbols": [
+        "AGENTS"
+      ],
+      "imports": [],
+      "headings": [
+        "AGENTS"
+      ],
+      "hash": "207add795d52",
+      "score": 7
+    },
+    {
+      "path": "design-system/meeting-ui-tokens.json",
+      "language": "json",
+      "role": "configuration",
+      "lines": 7,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "cd0581e15e5e",
+      "score": 0
+    },
+    {
+      "path": "logs/runtime.log",
+      "language": "text",
+      "role": "source",
+      "lines": 3,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "3cf4171274a0",
+      "score": 2
+    },
+    {
+      "path": "pyproject.toml",
+      "language": "toml",
+      "role": "configuration",
+      "lines": 14,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "aed7af243481",
+      "score": 6
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 24,
+      "symbols": [
+        "Meeting Assistant Fixture"
+      ],
+      "imports": [],
+      "headings": [
+        "Meeting Assistant Fixture"
+      ],
+      "hash": "2ce2e9fbeb4a",
+      "score": 7
+    },
+    {
+      "path": "src/calendar_agent.py",
+      "language": "python",
+      "role": "source",
+      "lines": 17,
+      "symbols": [
+        "build_delete_plan",
+        "delete_selected_meeting"
+      ],
+      "imports": [],
+      "headings": [],
+      "hash": "1dad483e9581",
+      "score": 4
+    },
+    {
+      "path": "src/event_store.py",
+      "language": "python",
+      "role": "source",
+      "lines": 16,
+      "symbols": [
+        "EventStore"
+      ],
+      "imports": [],
+      "headings": [],
+      "hash": "a8c58794e89d",
+      "score": 3
+    },
+    {
+      "path": "src/meeting_assistant.py",
+      "language": "python",
+      "role": "source",
+      "lines": 22,
+      "symbols": [
+        "main"
+      ],
+      "imports": [
+        "calendar_agent",
+        "event_store",
+        "ui_state"
+      ],
+      "headings": [],
+      "hash": "7a3ad80f7bb7",
+      "score": 6
+    },
+    {
+      "path": "src/ui_state.py",
+      "language": "python",
+      "role": "source",
+      "lines": 13,
+      "symbols": [
+        "visible_meeting_cards"
+      ],
+      "imports": [],
+      "headings": [],
+      "hash": "33c0c3ab2540",
+      "score": 3
+    }
+  ]
+}

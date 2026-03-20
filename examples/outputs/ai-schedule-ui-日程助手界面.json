@@ -1,13 +1,14 @@
 {
   "schema_version": "0.1.0",
   "token_pack_id": "ai-schedule-ui-日程助手界面",
-  "generated_at": "2026-03-20T18:01:25+00:00",
+  "generated_at": "2026-03-20T18:57:34+00:00",
   "title": "AI schedule UI 日程助手界面",
   "product_surface": "Conversation-first scheduling and expense assistant 对话优先的日程与费用助手",
   "brand_direction": "Calm productivity with strong structure and low visual noise. 冷静、高效、结构感强、低噪音。",
   "design_principles": [
-    "先定义语义令牌，再写组件，不要在组件里直接写死颜色。",
-    "同一套令牌要同时约束 Web、App 和设计稿。"
+    "先定义语义，再写组件，不要在组件里直接写死颜色和间距。",
+    "用同一套令牌同时约束 Web、App 和设计稿，减少平台漂移。",
+    "优先稳定、耐看、可扩展，不为了一时的炫技破坏一致性。"
   ],
   "modes": [
     "light"
@@ -239,7 +240,9 @@
     }
   ],
   "guardrails": [
-    "组件代码里不要直接写十六进制颜色。"
+    "组件代码里不要直接写十六进制颜色。",
+    "新增尺寸、颜色、阴影前，先确认现有令牌是否已能表达。",
+    "语义令牌命名不要绑具体颜色名，例如不要用 blue-primary 这种写法。"
   ],
   "export_targets": [
     "CSS variables: `:root { --color-accent-primary: ... }`",

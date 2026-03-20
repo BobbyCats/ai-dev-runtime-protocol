@@ -1,0 +1,12 @@
+{
+  "title": "Meeting deletion docs refresh 会议删除修复文档同步",
+  "summary": "删除链路已经改成稳定 meeting_id，相关 walkthrough、示例和 README 索引都需要同步。",
+  "changed_files": [
+    "src/calendar_agent.py",
+    "src/event_store.py",
+    "docs/tutorials/e2e-walkthrough-端到端教程.md"
+  ],
+  "change_notes": [
+    "不要只补一句，先检查 README 的工作流表达是否仍然准确。"
+  ]
+}

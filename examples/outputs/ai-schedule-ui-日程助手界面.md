@@ -1,7 +1,7 @@
 # Design Token Pack | 设计令牌包: AI schedule UI 日程助手界面
 
 - Token Pack ID | 令牌包 ID: `ai-schedule-ui-日程助手界面`
-- Generated | 生成时间: `2026-03-20T18:01:25+00:00`
+- Generated | 生成时间: `2026-03-20T18:57:34+00:00`
 - Product Surface | 产品界面: Conversation-first scheduling and expense assistant 对话优先的日程与费用助手
 
 ## Brand Direction | 视觉方向
@@ -10,8 +10,9 @@ Calm productivity with strong structure and low visual noise. 冷静、高效、
 
 ## Design Principles | 设计原则
 
-- 先定义语义令牌，再写组件，不要在组件里直接写死颜色。
-- 同一套令牌要同时约束 Web、App 和设计稿。
+- 先定义语义，再写组件，不要在组件里直接写死颜色和间距。
+- 用同一套令牌同时约束 Web、App 和设计稿，减少平台漂移。
+- 优先稳定、耐看、可扩展，不为了一时的炫技破坏一致性。
 
 ## Modes | 模式
 
@@ -51,6 +52,8 @@ Calm productivity with strong structure and low visual noise. 冷静、高效、
 ## Guardrails | 护栏
 
 - 组件代码里不要直接写十六进制颜色。
+- 新增尺寸、颜色、阴影前，先确认现有令牌是否已能表达。
+- 语义令牌命名不要绑具体颜色名，例如不要用 blue-primary 这种写法。
 
 ## Export Targets | 导出目标
 

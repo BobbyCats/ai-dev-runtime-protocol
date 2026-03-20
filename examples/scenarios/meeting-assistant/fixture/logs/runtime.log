@@ -1,0 +1,2 @@
+trace_id:trace-meeting-001 request_id:req-meeting-001 decision_id:dec-meeting-001 plan_id:plan-delete-001 tool_call_id:tool-delete-001 entrypoint:meeting.delete failure_stage:planner msg="resolved delete request from selected card"
+trace_id:trace-meeting-001 request_id:req-meeting-001 decision_id:dec-meeting-001 plan_id:plan-delete-001 tool_call_id:tool-delete-001 entrypoint:meeting.delete failure_stage:executor msg="wrong meeting removed" selection_id=card-2 expected_meeting_id=meeting-2 actual_meeting_id=meeting-1

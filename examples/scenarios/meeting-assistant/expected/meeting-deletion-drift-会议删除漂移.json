@@ -1,0 +1,325 @@
+{
+  "schema_version": "0.1.0",
+  "debug_id": "meeting-deletion-drift-会议删除漂移",
+  "generated_at": "2026-03-20T18:50:32+00:00",
+  "title": "Meeting deletion drift 会议删除漂移",
+  "symptom": "删除选中的会议时，另一条会议也可能被误删",
+  "observed": "界面提示删除成功，但消失的是错误的会议卡片",
+  "expected": "只能删除用户点中的会议",
+  "impact": "团队会对会议状态失去信任，后续改期和确认都不可靠",
+  "entrypoint": "meeting.delete",
+  "failure_stage": "executor",
+  "trace_id": "trace-meeting-001",
+  "correlation_ids": {
+    "request_id": "req-meeting-001",
+    "decision_id": "dec-meeting-001",
+    "plan_id": "plan-delete-001",
+    "tool_call_id": "tool-delete-001"
+  },
+  "observability_correlation": {
+    "schema_version": "0.1.0",
+    "correlation_id": "meeting-deletion-drift-会议删除漂移",
+    "generated_at": "2026-03-20T18:50:32+00:00",
+    "title": "Meeting deletion drift 会议删除漂移",
+    "trace_id": "trace-meeting-001",
+    "request_id": "req-meeting-001",
+    "decision_id": "dec-meeting-001",
+    "plan_id": "plan-delete-001",
+    "tool_call_id": "tool-delete-001",
+    "entrypoint": "meeting.delete",
+    "failure_stage": "executor",
+    "log_files": [
+      "logs/runtime.log"
+    ],
+    "grep_queries": [
+      "trace_id:trace-meeting-001",
+      "trace-meeting-001",
+      "request_id:req-meeting-001",
+      "req-meeting-001",
+      "decision_id:dec-meeting-001",
+      "dec-meeting-001",
+      "plan_id:plan-delete-001",
+      "plan-delete-001",
+      "tool_call_id:tool-delete-001",
+      "tool-delete-001",
+      "entrypoint:meeting.delete",
+      "meeting.delete",
+      "failure_stage:executor",
+      "executor",
+      "wrong meeting removed",
+      "selection_id",
+      "meeting_id"
+    ],
+    "matched_entries": [
+      {
+        "path": "logs/runtime.log",
+        "line": 1,
+        "query": "trace_id:trace-meeting-001",
+        "matched_queries": [
+          "trace_id:trace-meeting-001",
+          "trace-meeting-001",
+          "request_id:req-meeting-001",
+          "req-meeting-001",
+          "decision_id:dec-meeting-001",
+          "dec-meeting-001",
+          "plan_id:plan-delete-001",
+          "plan-delete-001",
+          "tool_call_id:tool-delete-001",
+          "tool-delete-001",
+          "entrypoint:meeting.delete",
+          "meeting.delete"
+        ],
+        "excerpt": "trace_id:trace-meeting-001 request_id:req-meeting-001 decision_id:dec-meeting-001 plan_id:plan-delete-001 tool_call_id:tool-delete-001 entrypoint:meeting.delete failure_stage:planner msg=\"resolved delete request from selected card\""
+      },
+      {
+        "path": "logs/runtime.log",
+        "line": 2,
+        "query": "trace_id:trace-meeting-001",
+        "matched_queries": [
+          "trace_id:trace-meeting-001",
+          "trace-meeting-001",
+          "request_id:req-meeting-001",
+          "req-meeting-001",
+          "decision_id:dec-meeting-001",
+          "dec-meeting-001",
+          "plan_id:plan-delete-001",
+          "plan-delete-001",
+          "tool_call_id:tool-delete-001",
+          "tool-delete-001",
+          "entrypoint:meeting.delete",
+          "meeting.delete",
+          "failure_stage:executor",
+          "executor",
+          "wrong meeting removed",
+          "selection_id",
+          "meeting_id"
+        ],
+        "excerpt": "trace_id:trace-meeting-001 request_id:req-meeting-001 decision_id:dec-meeting-001 plan_id:plan-delete-001 tool_call_id:tool-delete-001 entrypoint:meeting.delete failure_stage:executor msg=\"wrong meeting removed\" selection_id=card-2 expected"
+      }
+    ],
+    "missing_queries": [],
+    "review_order": [
+      "先按关联编号 grep 日志，再决定是否看代码。",
+      "优先检查 `executor` 阶段前后的日志连续性。",
+      "先确认入口 `meeting.delete` 是否真的被触发。",
+      "只有日志证据不足时，才扩大到代码级搜索。"
+    ],
+    "failure_signature": [
+      "入口 `meeting.delete` 已有日志，可继续向下缩到故障阶段。",
+      "故障阶段 `executor` 已有日志，可继续比对前后阶段差异。",
+      "关键编号已经能串起来，优先比较计划、工具调用和状态写入的差异。"
+    ]
+  },
+  "log_focus": {
+    "primary_keys": [
+      "trace-meeting-001",
+      "req-meeting-001",
+      "dec-meeting-001",
+      "plan-delete-001",
+      "tool-delete-001"
+    ],
+    "entrypoint": "meeting.delete",
+    "failure_stage": "executor",
+    "grep_queries": [
+      "trace_id:trace-meeting-001",
+      "trace-meeting-001",
+      "request_id:req-meeting-001",
+      "req-meeting-001",
+      "decision_id:dec-meeting-001",
+      "dec-meeting-001",
+      "plan_id:plan-delete-001",
+      "plan-delete-001",
+      "tool_call_id:tool-delete-001",
+      "tool-delete-001",
+      "entrypoint:meeting.delete",
+      "meeting.delete",
+      "failure_stage:executor",
+      "executor",
+      "wrong meeting removed",
+      "selection_id",
+      "meeting_id"
+    ],
+    "log_files": [
+      "logs/runtime.log"
+    ],
+    "review_order": [
+      "先按关联编号 grep 日志，再决定是否看代码。",
+      "优先检查 `executor` 阶段前后的日志连续性。",
+      "先确认入口 `meeting.delete` 是否真的被触发。",
+      "只有日志证据不足时，才扩大到代码级搜索。"
+    ],
+    "missing_queries": []
+  },
+  "reproduction_steps": [
+    "打开会议列表并删除第二条会议",
+    "确认弹窗后观察实际消失的卡片"
+  ],
+  "triage_read_order": [
+    "AGENTS.md",
+    ".aidrp/repo-map.md",
+    "src/calendar_agent.py",
+    "src/ui_state.py",
+    "README.md",
+    "src/meeting_assistant.py",
+    "AGENTS.md",
+    "pyproject.toml",
+    "design-system/meeting-ui-tokens.json",
+    "src/event_store.py"
+  ],
+  "suspected_files": [
+    {
+      "path": "src/calendar_agent.py",
+      "reason": "Provided explicitly by the reporter",
+      "score": 999
+    },
+    {
+      "path": "src/ui_state.py",
+      "reason": "Provided explicitly by the reporter",
+      "score": 999
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 10,
+      "reason": "Matched tokens: meeting"
+    },
+    {
+      "path": "src/meeting_assistant.py",
+      "language": "python",
+      "role": "source",
+      "score": 9,
+      "reason": "Matched tokens: meeting"
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 7,
+      "reason": "High-signal documentation file"
+    },
+    {
+      "path": "pyproject.toml",
+      "language": "toml",
+      "role": "configuration",
+      "score": 6,
+      "reason": "High-signal configuration file"
+    },
+    {
+      "path": "design-system/meeting-ui-tokens.json",
+      "language": "json",
+      "role": "configuration",
+      "score": 3,
+      "reason": "Matched tokens: meeting"
+    },
+    {
+      "path": "src/event_store.py",
+      "language": "python",
+      "role": "source",
+      "score": 3,
+      "reason": "High-signal source file"
+    },
+    {
+      "path": ".aidrpignore",
+      "language": "text",
+      "role": "source",
+      "score": 2,
+      "reason": "High-signal source file"
+    },
+    {
+      "path": "logs/runtime.log",
+      "language": "text",
+      "role": "source",
+      "score": 2,
+      "reason": "High-signal source file"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "logs/runtime.log",
+      "query": "wrong meeting removed",
+      "excerpt": "trace-meeting-001 request_id:req-meeting-001 decision_id:dec-meeting-001 plan_id:plan-delete-001 tool_call_id:tool-delete-001 entrypoint:meeting.delete failure_stage:executor msg=\"wrong meeting removed\" selection_id=card-2 expected_meeting_id=meeting-2 actual_meeting_id=meeting-1"
+    },
+    {
+      "path": "README.md",
+      "query": "meeting_id",
+      "excerpt": "- `src/calendar_agent.py` - `src/event_store.py` - `src/ui_state.py` - `design-system/meeting-ui-tokens.json` - `logs/runtime.log` 这个样例的核心 bug 是： **删除会议时，系统有时按可见卡片顺序删，而不是按稳定的 `meeting_id` 删。** 这正好适合演示： - `task-packet` - `debug-pack` - `observability-correlation` - `eval-case` - `doc-sync`"
+    },
+    {
+      "path": "src/calendar_agent.py",
+      "query": "selection_id",
+      "excerpt": "ENTRYPOINT = \"meeting.delete\" def build_delete_plan(selection_id: str) -> dict[str, str]: return { \"entrypoint\": ENTRYPOINT, \"selection_id\": selection_id, \"intent\": \"delete meeting by user-selected card\", } def"
+    },
+    {
+      "path": "src/event_store.py",
+      "query": "meeting_id",
+      "excerpt": "-> None: self.items = list(items) def delete_by_index(self, visible_index: int) -> dict[str, str]: return self.items.pop(visible_index - 1) def delete_by_meeting_id(self, meeting_id: str) -> dict[str, str]: for index, item in enumerate(self.items): if item[\"meeting_id\"] == meeting_id: return self.items.pop("
+    },
+    {
+      "path": "src/meeting_assistant.py",
+      "query": "selection_id",
+      "excerpt": "\": \"Design Critique\"}, {\"meeting_id\": \"meeting-3\", \"title\": \"Hiring Sync\"}, ] ) cards = visible_meeting_cards(store.items) plan = build_delete_plan(selection_id=\"card-2\") result = delete_selected_meeting(selection_id=\"card-2\", visible_cards=cards, store=store) return f\"{plan['entrypoint']} -> {result['deleted_meeting_id']}\" if _"
+    },
+    {
+      "path": "src/ui_state.py",
+      "query": "meeting_id",
+      "excerpt": "cards = [] for visible_index, meeting in enumerate(meetings, start=1): cards.append( { \"card_id\": f\"card-{visible_index}\", \"meeting_id\": meeting[\"meeting_id\"], \"visible_index\": visible_index, \"title\": meeting[\"title\"], } ) return cards"
+    }
+  ],
+  "log_snippets": [
+    {
+      "path": "logs/runtime.log",
+      "line": 1,
+      "query": "trace_id:trace-meeting-001",
+      "matched_queries": [
+        "trace_id:trace-meeting-001",
+        "trace-meeting-001",
+        "request_id:req-meeting-001",
+        "req-meeting-001",
+        "decision_id:dec-meeting-001",
+        "dec-meeting-001",
+        "plan_id:plan-delete-001",
+        "plan-delete-001",
+        "tool_call_id:tool-delete-001",
+        "tool-delete-001",
+        "entrypoint:meeting.delete",
+        "meeting.delete"
+      ],
+      "excerpt": "trace_id:trace-meeting-001 request_id:req-meeting-001 decision_id:dec-meeting-001 plan_id:plan-delete-001 tool_call_id:tool-delete-001 entrypoint:meeting.delete failure_stage:planner msg=\"resolved delete request from selected card\""
+    },
+    {
+      "path": "logs/runtime.log",
+      "line": 2,
+      "query": "trace_id:trace-meeting-001",
+      "matched_queries": [
+        "trace_id:trace-meeting-001",
+        "trace-meeting-001",
+        "request_id:req-meeting-001",
+        "req-meeting-001",
+        "decision_id:dec-meeting-001",
+        "dec-meeting-001",
+        "plan_id:plan-delete-001",
+        "plan-delete-001",
+        "tool_call_id:tool-delete-001",
+        "tool-delete-001",
+        "entrypoint:meeting.delete",
+        "meeting.delete",
+        "failure_stage:executor",
+        "executor",
+        "wrong meeting removed",
+        "selection_id",
+        "meeting_id"
+      ],
+      "excerpt": "trace_id:trace-meeting-001 request_id:req-meeting-001 decision_id:dec-meeting-001 plan_id:plan-delete-001 tool_call_id:tool-delete-001 entrypoint:meeting.delete failure_stage:executor msg=\"wrong meeting removed\" selection_id=card-2 expected"
+    }
+  ],
+  "recent_commits": [],
+  "recommended_next_actions": [
+    "Reproduce the bug before editing code.",
+    "Search logs and traces by IDs first; do not start from broad symptom scans.",
+    "Read only the triage set first; do not expand to broad scans unless evidence is insufficient.",
+    "Capture a decision trace for every hypothesis change.",
+    "If key IDs are missing from logs, fix instrumentation before broad code exploration.",
+    "Convert the confirmed bug into an eval case before closing the task."
+  ]
+}

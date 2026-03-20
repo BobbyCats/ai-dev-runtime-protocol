@@ -1,0 +1,132 @@
+{
+  "schema_version": "0.1.0",
+  "task_id": "fix-meeting-deletion-drift-修复会议删除漂移",
+  "generated_at": "2026-03-20T18:50:32+00:00",
+  "title": "Fix meeting deletion drift 修复会议删除漂移",
+  "type": "bugfix",
+  "objective": "只修删除解析和执行链路，不顺手扩成一次存储层重构",
+  "scope": [
+    "只改删除目标解析、执行器和相关测试"
+  ],
+  "non_goals": [
+    "不重做整个会议列表状态管理"
+  ],
+  "acceptance_criteria": [
+    "删除动作必须命中正确会议",
+    "日志里能串起删除链路的关键编号"
+  ],
+  "constraints": [
+    "不要扩大到邀请、同步或提醒功能"
+  ],
+  "search_terms": [
+    "meeting",
+    "delete",
+    "selection",
+    "event"
+  ],
+  "context_budget": {
+    "seed_file_limit": 12,
+    "candidate_file_limit": 10,
+    "hard_file_cap": 24,
+    "max_file_chars": 18000,
+    "max_snippet_chars": 1200
+  },
+  "read_order": [
+    "AGENTS.md",
+    ".aidrp/repo-map.md",
+    "README.md",
+    "src/meeting_assistant.py",
+    "src/calendar_agent.py",
+    "pyproject.toml",
+    "src/event_store.py",
+    "src/ui_state.py",
+    "design-system/meeting-ui-tokens.json",
+    ".aidrpignore",
+    "logs/runtime.log"
+  ],
+  "candidate_files": [
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 13,
+      "reason": "Matched tokens: fix, meeting"
+    },
+    {
+      "path": "src/meeting_assistant.py",
+      "language": "python",
+      "role": "source",
+      "score": 12,
+      "reason": "Matched tokens: event, meeting"
+    },
+    {
+      "path": "src/calendar_agent.py",
+      "language": "python",
+      "role": "source",
+      "score": 10,
+      "reason": "Matched tokens: delete, meeting"
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 7,
+      "reason": "High-signal documentation file"
+    },
+    {
+      "path": "pyproject.toml",
+      "language": "toml",
+      "role": "configuration",
+      "score": 6,
+      "reason": "High-signal configuration file"
+    },
+    {
+      "path": "src/event_store.py",
+      "language": "python",
+      "role": "source",
+      "score": 6,
+      "reason": "Matched tokens: event"
+    },
+    {
+      "path": "src/ui_state.py",
+      "language": "python",
+      "role": "source",
+      "score": 6,
+      "reason": "Matched tokens: meeting"
+    },
+    {
+      "path": "design-system/meeting-ui-tokens.json",
+      "language": "json",
+      "role": "configuration",
+      "score": 3,
+      "reason": "Matched tokens: meeting"
+    },
+    {
+      "path": ".aidrpignore",
+      "language": "text",
+      "role": "source",
+      "score": 2,
+      "reason": "High-signal source file"
+    },
+    {
+      "path": "logs/runtime.log",
+      "language": "text",
+      "role": "source",
+      "score": 2,
+      "reason": "High-signal source file"
+    }
+  ],
+  "validation_commands": {
+    "npm": [],
+    "python": [
+      "meeting-demo"
+    ],
+    "make": []
+  },
+  "deliverables": [
+    "Code changes scoped to the task",
+    "Updated or new tests for changed behavior",
+    "Decision trace for major tradeoffs",
+    "Follow-up notes for unresolved risks"
+  ]
+}

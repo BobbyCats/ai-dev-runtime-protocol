@@ -1,10 +1,18 @@
-# Examples | 示例
+# Examples | 示例地图
 
-这个目录存放的是仓库自身生成出来的示例工件。
+这个目录现在分三类内容，不再只是单个工件的堆叠。
 
-如果你想知道这些示例分别该在什么场景下使用，先看：
+## 1. 单工件示例
 
-- [docs/guides/usage-guide-完整使用手册.md](../docs/guides/usage-guide-完整使用手册.md)
+目录：
+
+- `examples/outputs/`
+
+这里存放的是仓库自身生成出来的标准工件样例，适合：
+
+- 快速看某个工件长什么样
+- 对照 CLI 输出
+- 做快照或金样参考
 
 包括：
 
@@ -21,11 +29,39 @@
 - `cost-privacy-budget | 成本权限预算`
 - `doc-sync | 文档同步包`
 
-另外还包含：
+## 2. 端到端教程样例
 
-- `examples/logs/` 下的示例运行日志，用于演示真实日志排障流
+目录：
 
-你可以在安装后重新生成：
+- `examples/scenarios/meeting-assistant/`
+
+这里是一个完整的教学场景，包含：
+
+- `fixture/`：最小可复现样例仓库
+- `inputs/`：需求、bug、trace 和文档同步的输入素材
+- `expected/`：关键工件的标准输出
+
+先看：
+
+- [meeting-assistant 场景说明](scenarios/meeting-assistant/README.md)
+- [端到端教程](../docs/tutorials/e2e-walkthrough-端到端教程.md)
+
+## 3. 真实日志排障样例
+
+目录：
+
+- `examples/logs/`
+
+这里放的是排障和可观测性关联演示用日志。
+
+如果你想知道这些示例分别该在什么场景下使用，先看：
+
+- [完整使用手册](../docs/guides/usage-guide-完整使用手册.md)
+- [CLI 参考](../docs/reference/cli-reference-CLI参考.md)
+
+## 重新生成单工件示例
+
+你可以在安装后重新生成 `examples/outputs/` 里的单工件样例：
 
 ```bash
 python -m aidrp init-workspace --project-root . --write-agents-template
