@@ -30,6 +30,38 @@
         "ship": { "type": "array", "items": { "type": "string" } }
       }
     },
+    "reasoning_budget": {
+      "type": "object",
+      "properties": {
+        "default_profile": { "type": "string" },
+        "upgrade_triggers": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "permission_budget": {
+      "type": "object",
+      "properties": {
+        "allowed_tools": { "type": "array", "items": { "type": "string" } },
+        "confirmation_required": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "data_budget": {
+      "type": "object",
+      "properties": {
+        "log_safe_fields": { "type": "array", "items": { "type": "string" } },
+        "redact_fields": { "type": "array", "items": { "type": "string" } },
+        "forbidden_export_fields": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "observability": {
+      "type": "object",
+      "properties": {
+        "log_globs": { "type": "array", "items": { "type": "string" } },
+        "max_log_files": { "type": "integer", "minimum": 1 },
+        "max_log_matches": { "type": "integer", "minimum": 1 },
+        "max_log_line_chars": { "type": "integer", "minimum": 20 },
+        "max_log_file_size_kb": { "type": "integer", "minimum": 1 }
+      }
+    },
     "preferred_entry_files": {
       "type": "array",
       "items": { "type": "string" }

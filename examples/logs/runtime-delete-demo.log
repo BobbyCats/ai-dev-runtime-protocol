@@ -1,0 +1,3 @@
+2026-03-21T10:00:01Z level=INFO trace_id:trace-77 request_id:req-88 decision_id:dec-99 plan_id:plan-delete-01 tool_call_id:tool-delete-01 entrypoint:calendar.delete failure_stage:planner msg="delete request received"
+2026-03-21T10:00:01Z level=INFO trace_id:trace-77 request_id:req-88 decision_id:dec-99 plan_id:plan-delete-01 entrypoint:calendar.delete failure_stage:planner msg="resolved stable event id evt_123"
+2026-03-21T10:00:02Z level=ERROR trace_id:trace-77 request_id:req-88 decision_id:dec-99 plan_id:plan-delete-01 tool_call_id:tool-delete-01 entrypoint:calendar.delete failure_stage:executor msg="delete failed because event version mismatched"

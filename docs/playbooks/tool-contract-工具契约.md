@@ -43,3 +43,14 @@
 推荐模板：
 
 - [templates/tool-contract-工具契约.md](../../templates/tool-contract-工具契约.md)
+
+## CLI 用法
+
+```bash
+python -m aidrp tool-contract \
+  --tool-name "delete_event" \
+  --domain "schedule" \
+  --purpose "Delete an event by stable ID." \
+  --input-field "event_id|string|true|Stable event identifier." \
+  --output-field "deleted|boolean|Whether deletion succeeded."
+```

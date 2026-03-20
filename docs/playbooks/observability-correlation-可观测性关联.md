@@ -45,3 +45,18 @@
 推荐模板：
 
 - [templates/observability-correlation-可观测性关联.md](../../templates/observability-correlation-可观测性关联.md)
+
+## CLI 用法
+
+```bash
+python -m aidrp observability-correlation \
+  --project-root . \
+  --title "Delete event correlation" \
+  --trace-id "trace-77" \
+  --decision-id "dec-99" \
+  --entrypoint "calendar.delete" \
+  --failure-stage "executor" \
+  --log-file "logs/runtime.log"
+```
+
+如果不显式传 `--log-file`，CLI 会尝试根据 `.aidrp/config.json` 里的 `observability.log_globs` 去找候选日志文件。

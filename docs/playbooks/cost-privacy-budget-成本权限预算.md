@@ -33,3 +33,14 @@
 推荐模板：
 
 - [templates/cost-privacy-budget-成本权限预算.md](../../templates/cost-privacy-budget-成本权限预算.md)
+
+## CLI 用法
+
+```bash
+python -m aidrp cost-privacy-budget \
+  --project-root . \
+  --workflow "debug flow" \
+  --allowed-tool "read" \
+  --allowed-tool "grep" \
+  --confirm-action "delete"
+```

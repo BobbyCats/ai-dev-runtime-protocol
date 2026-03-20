@@ -1,28 +1,28 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-03-20T17:48:10+00:00",
+  "generated_at": "2026-03-20T18:24:59+00:00",
   "project_root": "F:\\开发思路\\ai-dev-runtime-protocol",
   "git": {
     "branch": "main",
-    "head": "9b91868a09e9a1440402f12ad5868a7c660e76ee",
+    "head": "75045c852d160033e22a649e8b5c3d00004699cc",
     "dirty": true
   },
   "summary": {
-    "file_count": 61,
+    "file_count": 85,
     "language_counts": {
-      "text": 4,
+      "text": 5,
       "yaml": 1,
-      "markdown": 31,
+      "markdown": 44,
       "toml": 1,
-      "json": 10,
-      "python": 14
+      "json": 15,
+      "python": 19
     },
     "role_counts": {
-      "source": 30,
+      "source": 42,
       "infrastructure": 1,
-      "documentation": 18,
+      "documentation": 25,
       "configuration": 2,
-      "schema": 9,
+      "schema": 14,
       "test": 1
     },
     "seed_files": [
@@ -34,10 +34,10 @@
       "src/aidrp/debug_pack.py",
       "src/aidrp/design_token_pack.py",
       "src/aidrp/doc_sync.py",
+      "src/aidrp/observability_correlation.py",
       "src/aidrp/repo_map.py",
       "src/aidrp/task_packet.py",
-      "src/aidrp/utils.py",
-      "src/aidrp/workspace.py"
+      "src/aidrp/utils.py"
     ],
     "risk_files": [],
     "commands": {
@@ -135,7 +135,7 @@
       "path": "AGENTS.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 32,
+      "lines": 35,
       "symbols": [
         "AGENTS",
         "工作规则",
@@ -149,14 +149,14 @@
         "验证",
         "编辑边界"
       ],
-      "hash": "5a6e22dc0f93",
+      "hash": "0538d9567184",
       "score": 10
     },
     {
       "path": "docs/architecture-架构说明.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 135,
+      "lines": 156,
       "symbols": [
         "Architecture | 架构说明",
         "四层结构",
@@ -164,12 +164,12 @@
         "2. Stage Layer | 阶段层",
         "3. Artifact Layer | 工件层",
         "4. Runtime Layer | 运行层",
+        "为什么要补“高级运行时工件”",
         "为什么不是只写 Prompt？",
         "为什么坚持 JSON First？",
         "为什么 CLI 要保持很薄？",
         "为什么 Design Token 也要进入协议？",
-        "为什么要把文档同步做成独立工件？",
-        "未来可以继续补的方向"
+        "为什么要把文档同步做成独立工件？"
       ],
       "imports": [],
       "headings": [
@@ -179,19 +179,19 @@
         "2. Stage Layer | 阶段层",
         "3. Artifact Layer | 工件层",
         "4. Runtime Layer | 运行层",
+        "为什么要补“高级运行时工件”",
         "为什么不是只写 Prompt？",
         "为什么坚持 JSON First？",
-        "为什么 CLI 要保持很薄？",
-        "为什么 Design Token 也要进入协议？"
+        "为什么 CLI 要保持很薄？"
       ],
-      "hash": "3e2cab7a5338",
+      "hash": "2adf35ad76ac",
       "score": 4
     },
     {
       "path": "docs/playbooks/bugfix-缺陷修复.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 39,
+      "lines": 41,
       "symbols": [
         "Bugfix Playbook | 缺陷修复手册",
         "标准顺序",
@@ -205,14 +205,37 @@
         "硬规则",
         "最少需要的工件"
       ],
-      "hash": "100f9d1ed066",
+      "hash": "6481bdf09eb0",
+      "score": 4
+    },
+    {
+      "path": "docs/playbooks/cost-privacy-budget-成本权限预算.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 47,
+      "symbols": [
+        "成本权限预算（Cost & Privacy Budget）",
+        "这一步解决什么问题",
+        "至少要定的 4 类预算",
+        "推荐规则",
+        "CLI 用法"
+      ],
+      "imports": [],
+      "headings": [
+        "成本权限预算（Cost & Privacy Budget）",
+        "这一步解决什么问题",
+        "至少要定的 4 类预算",
+        "推荐规则",
+        "CLI 用法"
+      ],
+      "hash": "a88536c23054",
       "score": 4
     },
     {
       "path": "docs/playbooks/design-token-system-设计令牌体系.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 129,
+      "lines": 136,
       "symbols": [
         "设计令牌体系（Design Token System）",
         "为什么这一步重要",
@@ -239,7 +262,7 @@
         "硬规则",
         "CLI 用法"
       ],
-      "hash": "095d04e6aefd",
+      "hash": "deadc243c7e0",
       "score": 4
     },
     {
@@ -293,6 +316,54 @@
       "score": 4
     },
     {
+      "path": "docs/playbooks/domain-map-领域地图.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 56,
+      "symbols": [
+        "领域地图（Domain Map）",
+        "这一步解决什么问题",
+        "最少要画清楚的 5 件事",
+        "推荐规则",
+        "产物要求",
+        "CLI 用法"
+      ],
+      "imports": [],
+      "headings": [
+        "领域地图（Domain Map）",
+        "这一步解决什么问题",
+        "最少要画清楚的 5 件事",
+        "推荐规则",
+        "产物要求",
+        "CLI 用法"
+      ],
+      "hash": "ce9bfdf4dd97",
+      "score": 4
+    },
+    {
+      "path": "docs/playbooks/execution-plan-执行计划.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 49,
+      "symbols": [
+        "执行计划（Execution Plan）",
+        "这一步解决什么问题",
+        "一份执行计划至少包含",
+        "推荐规则",
+        "CLI 用法"
+      ],
+      "imports": [],
+      "headings": [
+        "执行计划（Execution Plan）",
+        "这一步解决什么问题",
+        "一份执行计划至少包含",
+        "推荐规则",
+        "CLI 用法"
+      ],
+      "hash": "48b3de7faa56",
+      "score": 4
+    },
+    {
       "path": "docs/playbooks/feature-功能开发.md",
       "language": "markdown",
       "role": "documentation",
@@ -312,10 +383,35 @@
       "score": 3
     },
     {
+      "path": "docs/playbooks/git-commit-提交规范.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 62,
+      "symbols": [
+        "Git Commit 提交规范",
+        "为什么要把这件事写成协议",
+        "标题格式",
+        "标题规则",
+        "正文建议",
+        "文档同步要求"
+      ],
+      "imports": [],
+      "headings": [
+        "Git Commit 提交规范",
+        "为什么要把这件事写成协议",
+        "标题格式",
+        "标题规则",
+        "正文建议",
+        "文档同步要求"
+      ],
+      "hash": "33aaabb0eccb",
+      "score": 4
+    },
+    {
       "path": "docs/playbooks/investigate-根因调查.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 42,
+      "lines": 44,
       "symbols": [
         "根因调查（Investigate）",
         "这一步的目标",
@@ -331,14 +427,39 @@
         "根因陈述应该长什么样",
         "硬规则"
       ],
-      "hash": "849e7d532fb6",
+      "hash": "69d6ae9175c7",
+      "score": 4
+    },
+    {
+      "path": "docs/playbooks/observability-correlation-可观测性关联.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 63,
+      "symbols": [
+        "可观测性关联（Observability Correlation）",
+        "王自如那套真正有价值的地方",
+        "推荐最小编号集合",
+        "推荐排查顺序",
+        "产物要求",
+        "CLI 用法"
+      ],
+      "imports": [],
+      "headings": [
+        "可观测性关联（Observability Correlation）",
+        "王自如那套真正有价值的地方",
+        "推荐最小编号集合",
+        "推荐排查顺序",
+        "产物要求",
+        "CLI 用法"
+      ],
+      "hash": "68c61793fabb",
       "score": 4
     },
     {
       "path": "docs/playbooks/plan-engineering-review-工程评审.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 50,
+      "lines": 52,
       "symbols": [
         "工程评审（Engineering Review）",
         "这一步的目标",
@@ -354,7 +475,7 @@
         "输出要求",
         "硬规则"
       ],
-      "hash": "b6178cf174dd",
+      "hash": "550e40e9b5b9",
       "score": 4
     },
     {
@@ -407,7 +528,7 @@
       "path": "docs/playbooks/stage-router-阶段路由.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 98,
+      "lines": 103,
       "symbols": [
         "阶段路由（Stage Router）",
         "核心原则",
@@ -429,7 +550,30 @@
         "判断当前卡在哪一层",
         "路由的真正价值"
       ],
-      "hash": "b80432aeb03f",
+      "hash": "816569183b1b",
+      "score": 4
+    },
+    {
+      "path": "docs/playbooks/tool-contract-工具契约.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 57,
+      "symbols": [
+        "工具契约（Tool Contract）",
+        "这一步解决什么问题",
+        "一份好契约至少要写清楚",
+        "推荐规则",
+        "CLI 用法"
+      ],
+      "imports": [],
+      "headings": [
+        "工具契约（Tool Contract）",
+        "这一步解决什么问题",
+        "一份好契约至少要写清楚",
+        "推荐规则",
+        "CLI 用法"
+      ],
+      "hash": "87acfe02c861",
       "score": 4
     },
     {
@@ -460,10 +604,33 @@
       "score": 4
     },
     {
+      "path": "docs/reference/open-source-citation-开源引用规范.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 43,
+      "symbols": [
+        "开源引用规范",
+        "推荐引用格式",
+        "推荐表达方式",
+        "在哪些地方必须写引用",
+        "中文化改写要求"
+      ],
+      "imports": [],
+      "headings": [
+        "开源引用规范",
+        "推荐引用格式",
+        "推荐表达方式",
+        "在哪些地方必须写引用",
+        "中文化改写要求"
+      ],
+      "hash": "ffdf4fdeae74",
+      "score": 4
+    },
+    {
       "path": "docs/reference/open-source-inspiration-开源灵感.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 96,
+      "lines": 101,
       "symbols": [
         "Open-Source Inspiration | 开源灵感",
         "Aider",
@@ -481,14 +648,14 @@
         "gstack",
         "OpenTelemetry"
       ],
-      "hash": "b23ee105fef0",
+      "hash": "e8d24b910d7b",
       "score": 4
     },
     {
       "path": "docs/reference/terminology-glossary-术语对照.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 53,
+      "lines": 62,
       "symbols": [
         "术语对照（Terminology Glossary）",
         "记忆方式"
@@ -498,14 +665,25 @@
         "术语对照（Terminology Glossary）",
         "记忆方式"
       ],
-      "hash": "90ad47375773",
+      "hash": "3b39652a1b16",
+      "score": 2
+    },
+    {
+      "path": "examples/logs/runtime-delete-demo.log",
+      "language": "text",
+      "role": "source",
+      "lines": 4,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "e2e69e162dfa",
       "score": 2
     },
     {
       "path": "examples/README.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 24,
+      "lines": 38,
       "symbols": [
         "Examples | 示例"
       ],
@@ -513,7 +691,7 @@
       "headings": [
         "Examples | 示例"
       ],
-      "hash": "382042842508",
+      "hash": "4b5e4b5f23bb",
       "score": 7
     },
     {
@@ -531,7 +709,7 @@
       "path": "ONBOARDING.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 85,
+      "lines": 98,
       "symbols": [
         "Onboarding | 入门说明",
         "核心转变",
@@ -539,7 +717,8 @@
         "这套系统试图防止的坏味道",
         "必备工件",
         "集成到其他项目的步骤",
-        "如果你现在只能先落四件事"
+        "如果你现在只能先落四件事",
+        "协作补充规则"
       ],
       "imports": [],
       "headings": [
@@ -549,9 +728,10 @@
         "这套系统试图防止的坏味道",
         "必备工件",
         "集成到其他项目的步骤",
-        "如果你现在只能先落四件事"
+        "如果你现在只能先落四件事",
+        "协作补充规则"
       ],
-      "hash": "0a6d2ce9dedc",
+      "hash": "bf1eca18dc5c",
       "score": 10
     },
     {
@@ -569,7 +749,7 @@
       "path": "README.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 323,
+      "lines": 413,
       "symbols": [
         "AI Dev Runtime Protocol（AI 开发运行协议）",
         "这是什么",
@@ -577,12 +757,12 @@
         "中文化原则",
         "阶段路由",
         "核心工件",
+        "高级运行时工件",
         "文档同步原则",
         "安装",
         "快速开始",
         "0. 需求还不清楚时，先做 `需求访谈（discovery interview）`",
-        "1. 初始化工作区",
-        "2. 生成 `仓库地图（repo-map）`"
+        "1. 初始化工作区"
       ],
       "imports": [],
       "headings": [
@@ -592,23 +772,34 @@
         "中文化原则",
         "阶段路由",
         "核心工件",
+        "高级运行时工件",
         "文档同步原则",
         "安装",
-        "快速开始",
-        "0. 需求还不清楚时，先做 `需求访谈（discovery interview）`"
+        "快速开始"
       ],
-      "hash": "8cb1ee3d6f30",
+      "hash": "7ead28e932f9",
       "score": 10
+    },
+    {
+      "path": "schemas/cost-privacy-budget.schema.json",
+      "language": "json",
+      "role": "schema",
+      "lines": 17,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "9567c869c4f1",
+      "score": 0
     },
     {
       "path": "schemas/debug-pack.schema.json",
       "language": "json",
       "role": "schema",
-      "lines": 37,
+      "lines": 61,
       "symbols": [],
       "imports": [],
       "headings": [],
-      "hash": "96a6510165a5",
+      "hash": "b7572df485c8",
       "score": 0
     },
     {
@@ -645,6 +836,17 @@
       "score": 0
     },
     {
+      "path": "schemas/domain-map.schema.json",
+      "language": "json",
+      "role": "schema",
+      "lines": 28,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "5981a6a931e1",
+      "score": 0
+    },
+    {
       "path": "schemas/eval-case.schema.json",
       "language": "json",
       "role": "schema",
@@ -653,6 +855,28 @@
       "imports": [],
       "headings": [],
       "hash": "a84361daca0e",
+      "score": 0
+    },
+    {
+      "path": "schemas/execution-plan.schema.json",
+      "language": "json",
+      "role": "schema",
+      "lines": 32,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "c89572b0b597",
+      "score": 0
+    },
+    {
+      "path": "schemas/observability-correlation.schema.json",
+      "language": "json",
+      "role": "schema",
+      "lines": 21,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "6b61f902ebb2",
       "score": 0
     },
     {
@@ -689,14 +913,25 @@
       "score": 0
     },
     {
-      "path": "schemas/workspace-config.schema.json",
+      "path": "schemas/tool-contract.schema.json",
       "language": "json",
       "role": "schema",
-      "lines": 58,
+      "lines": 21,
       "symbols": [],
       "imports": [],
       "headings": [],
-      "hash": "92b5af203554",
+      "hash": "c39624ef07f9",
+      "score": 0
+    },
+    {
+      "path": "schemas/workspace-config.schema.json",
+      "language": "json",
+      "role": "schema",
+      "lines": 90,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "d7cc22933f4b",
       "score": 0
     },
     {
@@ -727,37 +962,64 @@
       "path": "src/aidrp/cli.py",
       "language": "python",
       "role": "source",
-      "lines": 312,
+      "lines": 646,
       "symbols": [
         "_path",
         "_project_path",
         "_list",
-        "build_parser",
-        "main"
+        "_csv",
+        "_split_spec",
+        "_to_bool",
+        "_parse_domain_specs",
+        "_parse_cross_flow_specs",
+        "_parse_input_field_specs",
+        "_parse_output_field_specs",
+        "_parse_failure_code_specs",
+        "_parse_step_specs"
       ],
       "imports": [
         "__future__",
         "argparse",
         "pathlib",
+        "aidrp.cost_privacy_budget",
         "aidrp.debug_pack",
         "aidrp.design_token_pack",
+        "aidrp.domain_map",
         "aidrp.doc_sync",
         "aidrp.eval_case",
-        "aidrp.requirement_brief",
-        "aidrp.repo_map",
-        "aidrp.task_packet",
-        "aidrp.trace",
+        "aidrp.execution_plan",
+        "aidrp.observability_correlation",
+        "aidrp.requirement_brief"
+      ],
+      "headings": [],
+      "hash": "a7afc544c38f",
+      "score": 9
+    },
+    {
+      "path": "src/aidrp/cost_privacy_budget.py",
+      "language": "python",
+      "role": "source",
+      "lines": 71,
+      "symbols": [
+        "build_cost_privacy_budget",
+        "cost_privacy_budget_to_markdown",
+        "write_cost_privacy_budget"
+      ],
+      "imports": [
+        "__future__",
+        "pathlib",
+        "typing",
         "aidrp.utils"
       ],
       "headings": [],
-      "hash": "4e0753385a60",
-      "score": 9
+      "hash": "34070e1a2697",
+      "score": 8
     },
     {
       "path": "src/aidrp/debug_pack.py",
       "language": "python",
       "role": "source",
-      "lines": 168,
+      "lines": 230,
       "symbols": [
         "_collect_recent_commits",
         "_collect_search_hits",
@@ -769,19 +1031,20 @@
         "__future__",
         "pathlib",
         "typing",
+        "aidrp.observability_correlation",
         "aidrp.repo_map",
         "aidrp.utils",
         "aidrp.workspace"
       ],
       "headings": [],
-      "hash": "1254ad42b352",
+      "hash": "2da58c3e545d",
       "score": 9
     },
     {
       "path": "src/aidrp/design_token_pack.py",
       "language": "python",
       "role": "source",
-      "lines": 295,
+      "lines": 644,
       "symbols": [
         "_normalize_hex",
         "_hex_to_rgb",
@@ -790,16 +1053,18 @@
         "_scale",
         "build_design_token_pack",
         "design_token_pack_to_markdown",
+        "design_token_pack_to_html",
         "write_design_token_pack"
       ],
       "imports": [
         "__future__",
+        "html",
         "pathlib",
         "typing",
         "aidrp.utils"
       ],
       "headings": [],
-      "hash": "564ea05f1a29",
+      "hash": "c6529fe133b9",
       "score": 9
     },
     {
@@ -827,6 +1092,26 @@
       "score": 9
     },
     {
+      "path": "src/aidrp/domain_map.py",
+      "language": "python",
+      "role": "source",
+      "lines": 72,
+      "symbols": [
+        "build_domain_map",
+        "domain_map_to_markdown",
+        "write_domain_map"
+      ],
+      "imports": [
+        "__future__",
+        "pathlib",
+        "typing",
+        "aidrp.utils"
+      ],
+      "headings": [],
+      "hash": "4716fa840b95",
+      "score": 8
+    },
+    {
       "path": "src/aidrp/eval_case.py",
       "language": "python",
       "role": "source",
@@ -844,6 +1129,52 @@
       "headings": [],
       "hash": "1d62b7194e2a",
       "score": 8
+    },
+    {
+      "path": "src/aidrp/execution_plan.py",
+      "language": "python",
+      "role": "source",
+      "lines": 84,
+      "symbols": [
+        "build_execution_plan",
+        "execution_plan_to_markdown",
+        "write_execution_plan"
+      ],
+      "imports": [
+        "__future__",
+        "pathlib",
+        "typing",
+        "aidrp.utils"
+      ],
+      "headings": [],
+      "hash": "ae23e836ea9a",
+      "score": 8
+    },
+    {
+      "path": "src/aidrp/observability_correlation.py",
+      "language": "python",
+      "role": "source",
+      "lines": 264,
+      "symbols": [
+        "_display_path",
+        "_resolve_log_paths",
+        "_build_queries",
+        "_collect_log_matches",
+        "build_observability_correlation",
+        "observability_correlation_to_markdown",
+        "write_observability_correlation"
+      ],
+      "imports": [
+        "__future__",
+        "fnmatch",
+        "pathlib",
+        "typing",
+        "aidrp.utils",
+        "aidrp.workspace"
+      ],
+      "headings": [],
+      "hash": "2ef02f41d31a",
+      "score": 9
     },
     {
       "path": "src/aidrp/repo_map.py",
@@ -924,6 +1255,26 @@
       "score": 9
     },
     {
+      "path": "src/aidrp/tool_contract.py",
+      "language": "python",
+      "role": "source",
+      "lines": 85,
+      "symbols": [
+        "build_tool_contract",
+        "tool_contract_to_markdown",
+        "write_tool_contract"
+      ],
+      "imports": [
+        "__future__",
+        "pathlib",
+        "typing",
+        "aidrp.utils"
+      ],
+      "headings": [],
+      "hash": "8e133e6b2d32",
+      "score": 8
+    },
+    {
       "path": "src/aidrp/trace.py",
       "language": "python",
       "role": "source",
@@ -981,7 +1332,7 @@
       "path": "src/aidrp/workspace.py",
       "language": "python",
       "role": "source",
-      "lines": 139,
+      "lines": 199,
       "symbols": [
         "workspace_dir",
         "config_path",
@@ -995,31 +1346,70 @@
         "aidrp.utils"
       ],
       "headings": [],
-      "hash": "49c7ebb1c0d3",
+      "hash": "f5415363c110",
       "score": 9
     },
     {
       "path": "templates/AGENTS.md.template",
       "language": "text",
       "role": "source",
-      "lines": 30,
+      "lines": 38,
       "symbols": [],
       "imports": [],
       "headings": [],
-      "hash": "8ece4d8cb3a2",
+      "hash": "66e373679285",
       "score": 2
+    },
+    {
+      "path": "templates/commit-message-提交信息.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 13,
+      "symbols": [
+        "Commit Message | 提交信息模板"
+      ],
+      "imports": [],
+      "headings": [
+        "Commit Message | 提交信息模板"
+      ],
+      "hash": "bd349d6122c6",
+      "score": 3
+    },
+    {
+      "path": "templates/cost-privacy-budget-成本权限预算.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 26,
+      "symbols": [
+        "Cost & Privacy Budget | 成本权限预算",
+        "Context Budget | 上下文预算",
+        "Reasoning Budget | 推理预算",
+        "Permission Budget | 权限预算",
+        "Data Budget | 数据预算"
+      ],
+      "imports": [],
+      "headings": [
+        "Cost & Privacy Budget | 成本权限预算",
+        "Context Budget | 上下文预算",
+        "Reasoning Budget | 推理预算",
+        "Permission Budget | 权限预算",
+        "Data Budget | 数据预算"
+      ],
+      "hash": "20e649774b60",
+      "score": 6
     },
     {
       "path": "templates/debug-pack-排障包.md",
       "language": "markdown",
       "role": "source",
-      "lines": 31,
+      "lines": 43,
       "symbols": [
         "Debug Pack | 排障包模板",
         "Reproduction Steps | 复现步骤",
         "Triage Read Order | 初步排查阅读顺序",
         "Suspected Files | 疑似文件",
         "Evidence | 证据",
+        "Log Focus | 日志聚焦",
         "Recent Commits | 最近提交"
       ],
       "imports": [],
@@ -1029,9 +1419,10 @@
         "Triage Read Order | 初步排查阅读顺序",
         "Suspected Files | 疑似文件",
         "Evidence | 证据",
+        "Log Focus | 日志聚焦",
         "Recent Commits | 最近提交"
       ],
-      "hash": "e6933b437ece",
+      "hash": "169d83ef0990",
       "score": 6
     },
     {
@@ -1102,6 +1493,29 @@
       "score": 6
     },
     {
+      "path": "templates/domain-map-领域地图.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 31,
+      "symbols": [
+        "Domain Map | 领域地图",
+        "Domains | 业务域",
+        "Shared Infrastructure | 共享基础设施",
+        "Cross-Domain Flows | 跨域流程",
+        "Ownership Rules | 归属规则"
+      ],
+      "imports": [],
+      "headings": [
+        "Domain Map | 领域地图",
+        "Domains | 业务域",
+        "Shared Infrastructure | 共享基础设施",
+        "Cross-Domain Flows | 跨域流程",
+        "Ownership Rules | 归属规则"
+      ],
+      "hash": "b8ef37648670",
+      "score": 6
+    },
+    {
       "path": "templates/eval-case-回归用例.md",
       "language": "markdown",
       "role": "source",
@@ -1120,6 +1534,50 @@
         "Tags | 标签"
       ],
       "hash": "22b1c679c206",
+      "score": 6
+    },
+    {
+      "path": "templates/execution-plan-执行计划.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 27,
+      "symbols": [
+        "Execution Plan | 执行计划",
+        "Preconditions | 前置条件",
+        "Steps | 步骤",
+        "Exit Conditions | 退出条件",
+        "Fallback | 降级路径"
+      ],
+      "imports": [],
+      "headings": [
+        "Execution Plan | 执行计划",
+        "Preconditions | 前置条件",
+        "Steps | 步骤",
+        "Exit Conditions | 退出条件",
+        "Fallback | 降级路径"
+      ],
+      "hash": "e0477393a8fb",
+      "score": 6
+    },
+    {
+      "path": "templates/observability-correlation-可观测性关联.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 25,
+      "symbols": [
+        "Observability Correlation | 可观测性关联",
+        "Log Focus | 日志聚焦",
+        "Timeline | 时间线",
+        "Failure Signature | 故障签名"
+      ],
+      "imports": [],
+      "headings": [
+        "Observability Correlation | 可观测性关联",
+        "Log Focus | 日志聚焦",
+        "Timeline | 时间线",
+        "Failure Signature | 故障签名"
+      ],
+      "hash": "377a651deace",
       "score": 6
     },
     {
@@ -1297,21 +1755,44 @@
       "score": 6
     },
     {
+      "path": "templates/tool-contract-工具契约.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 32,
+      "symbols": [
+        "Tool Contract | 工具契约",
+        "Input | 输入",
+        "Output | 输出",
+        "Guardrails | 护栏",
+        "Failure Semantics | 失败语义"
+      ],
+      "imports": [],
+      "headings": [
+        "Tool Contract | 工具契约",
+        "Input | 输入",
+        "Output | 输出",
+        "Guardrails | 护栏",
+        "Failure Semantics | 失败语义"
+      ],
+      "hash": "e8bea1fa3801",
+      "score": 6
+    },
+    {
       "path": "templates/workspace-config-工作区配置.json",
       "language": "json",
       "role": "configuration",
-      "lines": 53,
+      "lines": 79,
       "symbols": [],
       "imports": [],
       "headings": [],
-      "hash": "f4a1f4bf3a02",
+      "hash": "fbde2fa7d4b5",
       "score": 0
     },
     {
       "path": "tests/test_runtime_protocol.py",
       "language": "python",
       "role": "test",
-      "lines": 148,
+      "lines": 309,
       "symbols": [
         "RuntimeProtocolTests"
       ],
@@ -1320,17 +1801,17 @@
         "tempfile",
         "unittest",
         "pathlib",
+        "aidrp.cost_privacy_budget",
         "aidrp.debug_pack",
         "aidrp.design_token_pack",
+        "aidrp.domain_map",
         "aidrp.doc_sync",
         "aidrp.eval_case",
-        "aidrp.requirement_brief",
-        "aidrp.repo_map",
-        "aidrp.task_packet",
-        "aidrp.trace"
+        "aidrp.execution_plan",
+        "aidrp.observability_correlation"
       ],
       "headings": [],
-      "hash": "9153cf726df0",
+      "hash": "763fd035d0e9",
       "score": 6
     }
   ]

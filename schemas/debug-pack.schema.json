@@ -33,9 +33,11 @@
         "failure_stage": { "type": "string" },
         "grep_queries": { "type": "array", "items": { "type": "string" } },
         "log_files": { "type": "array", "items": { "type": "string" } },
-        "review_order": { "type": "array", "items": { "type": "string" } }
+        "review_order": { "type": "array", "items": { "type": "string" } },
+        "missing_queries": { "type": "array", "items": { "type": "string" } }
       }
     },
+    "observability_correlation": { "type": "object" },
     "reproduction_steps": { "type": "array", "items": { "type": "string" } },
     "triage_read_order": { "type": "array", "items": { "type": "string" } },
     "suspected_files": {

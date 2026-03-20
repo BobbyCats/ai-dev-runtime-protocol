@@ -1,0 +1,332 @@
+{
+  "schema_version": "0.1.0",
+  "debug_id": "delete-event-executor-failure",
+  "generated_at": "2026-03-20T18:24:10+00:00",
+  "title": "Delete event executor failure",
+  "symptom": "delete action reports failure",
+  "observed": "executor returns version mismatch",
+  "expected": "executor deletes the target event",
+  "impact": "user cannot delete schedule events",
+  "entrypoint": "calendar.delete",
+  "failure_stage": "executor",
+  "trace_id": "trace-77",
+  "correlation_ids": {
+    "request_id": "req-88",
+    "decision_id": "dec-99",
+    "plan_id": "plan-delete-01",
+    "tool_call_id": "tool-delete-01"
+  },
+  "observability_correlation": {
+    "schema_version": "0.1.0",
+    "correlation_id": "delete-event-executor-failure",
+    "generated_at": "2026-03-20T18:24:10+00:00",
+    "title": "Delete event executor failure",
+    "trace_id": "trace-77",
+    "request_id": "req-88",
+    "decision_id": "dec-99",
+    "plan_id": "plan-delete-01",
+    "tool_call_id": "tool-delete-01",
+    "entrypoint": "calendar.delete",
+    "failure_stage": "executor",
+    "log_files": [
+      "examples/logs/runtime-delete-demo.log"
+    ],
+    "grep_queries": [
+      "trace_id:trace-77",
+      "trace-77",
+      "request_id:req-88",
+      "req-88",
+      "decision_id:dec-99",
+      "dec-99",
+      "plan_id:plan-delete-01",
+      "plan-delete-01",
+      "tool_call_id:tool-delete-01",
+      "tool-delete-01",
+      "entrypoint:calendar.delete",
+      "calendar.delete",
+      "failure_stage:executor",
+      "executor",
+      "version mismatched"
+    ],
+    "matched_entries": [
+      {
+        "path": "examples/logs/runtime-delete-demo.log",
+        "line": 1,
+        "query": "trace_id:trace-77",
+        "matched_queries": [
+          "trace_id:trace-77",
+          "trace-77",
+          "request_id:req-88",
+          "req-88",
+          "decision_id:dec-99",
+          "dec-99",
+          "plan_id:plan-delete-01",
+          "plan-delete-01",
+          "tool_call_id:tool-delete-01",
+          "tool-delete-01",
+          "entrypoint:calendar.delete",
+          "calendar.delete"
+        ],
+        "excerpt": "2026-03-21T10:00:01Z level=INFO trace_id:trace-77 request_id:req-88 decision_id:dec-99 plan_id:plan-delete-01 tool_call_id:tool-delete-01 entrypoint:calendar.delete failure_stage:planner msg=\"delete request received\""
+      },
+      {
+        "path": "examples/logs/runtime-delete-demo.log",
+        "line": 2,
+        "query": "trace_id:trace-77",
+        "matched_queries": [
+          "trace_id:trace-77",
+          "trace-77",
+          "request_id:req-88",
+          "req-88",
+          "decision_id:dec-99",
+          "dec-99",
+          "plan_id:plan-delete-01",
+          "plan-delete-01",
+          "entrypoint:calendar.delete",
+          "calendar.delete"
+        ],
+        "excerpt": "2026-03-21T10:00:01Z level=INFO trace_id:trace-77 request_id:req-88 decision_id:dec-99 plan_id:plan-delete-01 entrypoint:calendar.delete failure_stage:planner msg=\"resolved stable event id evt_123\""
+      },
+      {
+        "path": "examples/logs/runtime-delete-demo.log",
+        "line": 3,
+        "query": "trace_id:trace-77",
+        "matched_queries": [
+          "trace_id:trace-77",
+          "trace-77",
+          "request_id:req-88",
+          "req-88",
+          "decision_id:dec-99",
+          "dec-99",
+          "plan_id:plan-delete-01",
+          "plan-delete-01",
+          "tool_call_id:tool-delete-01",
+          "tool-delete-01",
+          "entrypoint:calendar.delete",
+          "calendar.delete",
+          "failure_stage:executor",
+          "executor",
+          "version mismatched"
+        ],
+        "excerpt": "2026-03-21T10:00:02Z level=ERROR trace_id:trace-77 request_id:req-88 decision_id:dec-99 plan_id:plan-delete-01 tool_call_id:tool-delete-01 entrypoint:calendar.delete failure_stage:executor msg=\"delete failed because event version mismatched"
+      }
+    ],
+    "missing_queries": [],
+    "review_order": [
+      "先按关联编号 grep 日志，再决定是否看代码。",
+      "优先检查 `executor` 阶段前后的日志连续性。",
+      "先确认入口 `calendar.delete` 是否真的被触发。",
+      "只有日志证据不足时，才扩大到代码级搜索。"
+    ],
+    "failure_signature": [
+      "入口 `calendar.delete` 已有日志，可继续向下缩到故障阶段。",
+      "故障阶段 `executor` 已有日志，可继续比对前后阶段差异。",
+      "关键编号已经能串起来，优先比较计划、工具调用和状态写入的差异。"
+    ]
+  },
+  "log_focus": {
+    "primary_keys": [
+      "trace-77",
+      "req-88",
+      "dec-99",
+      "plan-delete-01",
+      "tool-delete-01"
+    ],
+    "entrypoint": "calendar.delete",
+    "failure_stage": "executor",
+    "grep_queries": [
+      "trace_id:trace-77",
+      "trace-77",
+      "request_id:req-88",
+      "req-88",
+      "decision_id:dec-99",
+      "dec-99",
+      "plan_id:plan-delete-01",
+      "plan-delete-01",
+      "tool_call_id:tool-delete-01",
+      "tool-delete-01",
+      "entrypoint:calendar.delete",
+      "calendar.delete",
+      "failure_stage:executor",
+      "executor",
+      "version mismatched"
+    ],
+    "log_files": [
+      "examples/logs/runtime-delete-demo.log"
+    ],
+    "review_order": [
+      "先按关联编号 grep 日志，再决定是否看代码。",
+      "优先检查 `executor` 阶段前后的日志连续性。",
+      "先确认入口 `calendar.delete` 是否真的被触发。",
+      "只有日志证据不足时，才扩大到代码级搜索。"
+    ],
+    "missing_queries": []
+  },
+  "reproduction_steps": [
+    "Delete an event from the schedule list."
+  ],
+  "triage_read_order": [
+    "AGENTS.md",
+    ".aidrp/repo-map.md",
+    "src/aidrp/debug_pack.py",
+    "src/aidrp/doc_sync.py",
+    "templates/requirement-brief-需求简报.md",
+    "AGENTS.md",
+    "ONBOARDING.md",
+    "README.md",
+    "src/aidrp/trace.py",
+    "src/aidrp/cli.py"
+  ],
+  "suspected_files": [
+    {
+      "path": "src/aidrp/debug_pack.py",
+      "reason": "Provided explicitly by the reporter",
+      "score": 999
+    },
+    {
+      "path": "src/aidrp/doc_sync.py",
+      "language": "python",
+      "role": "source",
+      "score": 12,
+      "reason": "Matched tokens: action"
+    },
+    {
+      "path": "templates/requirement-brief-需求简报.md",
+      "language": "markdown",
+      "role": "source",
+      "score": 12,
+      "reason": "Matched tokens: target, user"
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 10,
+      "reason": "High-signal documentation file"
+    },
+    {
+      "path": "ONBOARDING.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 10,
+      "reason": "High-signal documentation file"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 10,
+      "reason": "High-signal documentation file"
+    },
+    {
+      "path": "src/aidrp/trace.py",
+      "language": "python",
+      "role": "source",
+      "score": 10,
+      "reason": "Matched tokens: event"
+    },
+    {
+      "path": "src/aidrp/cli.py",
+      "language": "python",
+      "role": "source",
+      "score": 9,
+      "reason": "High-signal source file"
+    },
+    {
+      "path": "src/aidrp/design_token_pack.py",
+      "language": "python",
+      "role": "source",
+      "score": 9,
+      "reason": "High-signal source file"
+    },
+    {
+      "path": "src/aidrp/repo_map.py",
+      "language": "python",
+      "role": "source",
+      "score": 9,
+      "reason": "High-signal source file"
+    }
+  ],
+  "evidence": [],
+  "log_snippets": [
+    {
+      "path": "examples/logs/runtime-delete-demo.log",
+      "line": 1,
+      "query": "trace_id:trace-77",
+      "matched_queries": [
+        "trace_id:trace-77",
+        "trace-77",
+        "request_id:req-88",
+        "req-88",
+        "decision_id:dec-99",
+        "dec-99",
+        "plan_id:plan-delete-01",
+        "plan-delete-01",
+        "tool_call_id:tool-delete-01",
+        "tool-delete-01",
+        "entrypoint:calendar.delete",
+        "calendar.delete"
+      ],
+      "excerpt": "2026-03-21T10:00:01Z level=INFO trace_id:trace-77 request_id:req-88 decision_id:dec-99 plan_id:plan-delete-01 tool_call_id:tool-delete-01 entrypoint:calendar.delete failure_stage:planner msg=\"delete request received\""
+    },
+    {
+      "path": "examples/logs/runtime-delete-demo.log",
+      "line": 2,
+      "query": "trace_id:trace-77",
+      "matched_queries": [
+        "trace_id:trace-77",
+        "trace-77",
+        "request_id:req-88",
+        "req-88",
+        "decision_id:dec-99",
+        "dec-99",
+        "plan_id:plan-delete-01",
+        "plan-delete-01",
+        "entrypoint:calendar.delete",
+        "calendar.delete"
+      ],
+      "excerpt": "2026-03-21T10:00:01Z level=INFO trace_id:trace-77 request_id:req-88 decision_id:dec-99 plan_id:plan-delete-01 entrypoint:calendar.delete failure_stage:planner msg=\"resolved stable event id evt_123\""
+    },
+    {
+      "path": "examples/logs/runtime-delete-demo.log",
+      "line": 3,
+      "query": "trace_id:trace-77",
+      "matched_queries": [
+        "trace_id:trace-77",
+        "trace-77",
+        "request_id:req-88",
+        "req-88",
+        "decision_id:dec-99",
+        "dec-99",
+        "plan_id:plan-delete-01",
+        "plan-delete-01",
+        "tool_call_id:tool-delete-01",
+        "tool-delete-01",
+        "entrypoint:calendar.delete",
+        "calendar.delete",
+        "failure_stage:executor",
+        "executor",
+        "version mismatched"
+      ],
+      "excerpt": "2026-03-21T10:00:02Z level=ERROR trace_id:trace-77 request_id:req-88 decision_id:dec-99 plan_id:plan-delete-01 tool_call_id:tool-delete-01 entrypoint:calendar.delete failure_stage:executor msg=\"delete failed because event version mismatched"
+    }
+  ],
+  "recent_commits": [
+    "75045c8 运行协议: 补齐高级工件与编号化排障规范",
+    "1bae94e Add HTML preview for design token packs",
+    "91ce145 Add design token system to runtime protocol",
+    "9b91868 Add stage routing and documentation sync workflow",
+    "045ec4b Refine Chinese-first wording and adaptation guidance",
+    "81b7b5f Add discovery interview and requirement brief workflow",
+    "55fff14 Localize docs and artifacts with bilingual terminology",
+    "d986126 Bootstrap runtime-oriented AI dev protocol"
+  ],
+  "recommended_next_actions": [
+    "Reproduce the bug before editing code.",
+    "Search logs and traces by IDs first; do not start from broad symptom scans.",
+    "Read only the triage set first; do not expand to broad scans unless evidence is insufficient.",
+    "Capture a decision trace for every hypothesis change.",
+    "If key IDs are missing from logs, fix instrumentation before broad code exploration.",
+    "Convert the confirmed bug into an eval case before closing the task."
+  ]
+}

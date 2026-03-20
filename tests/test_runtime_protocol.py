@@ -4,18 +4,23 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from aidrp.cost_privacy_budget import build_cost_privacy_budget
 from aidrp.debug_pack import build_debug_pack
 from aidrp.design_token_pack import (
     build_design_token_pack,
     design_token_pack_to_html,
     write_design_token_pack,
 )
+from aidrp.domain_map import build_domain_map
 from aidrp.doc_sync import build_doc_sync
 from aidrp.eval_case import build_eval_case
+from aidrp.execution_plan import build_execution_plan
+from aidrp.observability_correlation import build_observability_correlation
 from aidrp.requirement_brief import build_requirement_brief
 from aidrp.repo_map import build_repo_map
 from aidrp.task_packet import build_task_packet
 from aidrp.trace import append_trace_event, start_trace
+from aidrp.tool_contract import build_tool_contract
 from aidrp.workspace import init_workspace
 
 
@@ -27,6 +32,11 @@ class RuntimeProtocolTests(unittest.TestCase):
             (root / "src").mkdir()
             (root / "design-system").mkdir()
             (root / "design-system" / "app-tokens.json").write_text("{\"ok\": true}\n", encoding="utf-8")
+            (root / "logs").mkdir()
+            (root / "logs" / "app.log").write_text(
+                "trace_id:trace-123 request_id:req-456 decision_id:dec-789 plan_id:plan-101 tool_call_id:tool-202 entrypoint:task_packet.build failure_stage:planner status=fail\n",
+                encoding="utf-8",
+            )
             (root / "src" / "app.py").write_text(
                 "import json\n\n"
                 "def create_task_packet():\n"
@@ -73,13 +83,16 @@ class RuntimeProtocolTests(unittest.TestCase):
                 failure_stage="planner",
                 reproduction_steps=["Run the packet builder."],
                 suspected_files=["src/app.py"],
-                log_files=[],
+                log_files=["logs/app.log"],
                 search_terms=["candidate", "packet"],
             )
             self.assertEqual(debug["trace_id"], "trace-123")
             self.assertEqual(debug["correlation_ids"]["decision_id"], "dec-789")
             self.assertIn("trace_id:trace-123", debug["log_focus"]["grep_queries"])
+            self.assertNotIn("trace_id:trace-123", debug["log_focus"]["missing_queries"])
             self.assertEqual(debug["failure_stage"], "planner")
+            self.assertTrue(debug["log_snippets"])
+            self.assertEqual(debug["log_snippets"][0]["path"], "logs/app.log")
             self.assertTrue(debug["suspected_files"])
 
             doc_sync = build_doc_sync(
@@ -169,6 +182,126 @@ class RuntimeProtocolTests(unittest.TestCase):
                 prefix.with_suffix(".html"),
             )
             self.assertTrue(prefix.with_suffix(".html").exists())
+
+    def test_advanced_runtime_artifacts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            init_workspace(root)
+            (root / "logs").mkdir(exist_ok=True)
+            (root / "logs" / "runtime.log").write_text(
+                "trace_id:trace-77 request_id:req-88 decision_id:dec-99 entrypoint:calendar.delete failure_stage:executor msg=delete failed\n",
+                encoding="utf-8",
+            )
+
+            domain_map = build_domain_map(
+                product="AI schedule assistant",
+                orchestrator="calendar-orchestrator",
+                domains=[
+                    {
+                        "name": "schedule",
+                        "owned_state": ["events", "availability"],
+                        "capabilities": ["create", "update", "delete"],
+                        "non_goals": ["expense tracking"],
+                    }
+                ],
+                shared_infrastructure=["logging", "auth"],
+                cross_domain_flows=[
+                    {
+                        "name": "travel reimbursement",
+                        "trigger": "chat request",
+                        "domains": ["schedule", "expense"],
+                        "owner": "expense",
+                    }
+                ],
+            )
+            self.assertEqual(domain_map["domain_map_id"], "ai-schedule-assistant")
+
+            contract = build_tool_contract(
+                tool_name="delete_event",
+                domain="schedule",
+                purpose="Delete an event by stable ID.",
+                inputs=[
+                    {
+                        "name": "event_id",
+                        "type": "string",
+                        "required": True,
+                        "description": "Stable event identifier.",
+                    }
+                ],
+                outputs=[
+                    {
+                        "name": "deleted",
+                        "type": "boolean",
+                        "description": "Whether deletion succeeded.",
+                    }
+                ],
+                idempotency="Deleting an already deleted event is a no-op.",
+                permission_boundary="Only schedule domain may delete schedule events.",
+                retry_policy="No automatic retry.",
+                rollback_policy="Restore from event snapshot only.",
+                failure_codes=[
+                    {
+                        "code": "EVENT_NOT_FOUND",
+                        "meaning": "Target event is missing.",
+                        "caller_action": "Show user-facing error and stop.",
+                    }
+                ],
+            )
+            self.assertEqual(contract["contract_id"], "delete_event")
+
+            plan = build_execution_plan(
+                title="Delete event safely",
+                goal="Delete the targeted event after confirmation.",
+                trigger="User confirms deletion.",
+                preconditions=["Event ID is stable."],
+                steps=[
+                    {
+                        "name": "Resolve target",
+                        "inputs": ["event_id"],
+                        "tools": ["fetch_event"],
+                        "outputs": ["event snapshot"],
+                        "requires_confirmation": False,
+                    },
+                    {
+                        "name": "Execute delete",
+                        "inputs": ["event snapshot"],
+                        "tools": ["delete_event"],
+                        "outputs": ["delete result"],
+                        "requires_confirmation": True,
+                    },
+                ],
+                success_exit="Event disappears and delete result is true.",
+                failure_exit="Deletion fails or target is missing.",
+                fallbacks=["Ask user to refresh and retry."],
+            )
+            self.assertEqual(plan["plan_id"], "delete-event-safely")
+
+            correlation = build_observability_correlation(
+                root,
+                title="Delete event correlation",
+                trace_id="trace-77",
+                request_id="req-88",
+                decision_id="dec-99",
+                plan_id="",
+                tool_call_id="",
+                entrypoint="calendar.delete",
+                failure_stage="executor",
+                log_files=["logs/runtime.log"],
+                search_terms=["delete failed"],
+            )
+            self.assertTrue(correlation["matched_entries"])
+            self.assertIn("trace_id:trace-77", correlation["grep_queries"])
+            self.assertNotIn("trace_id:trace-77", correlation["missing_queries"])
+
+            budget = build_cost_privacy_budget(
+                workflow="debug flow",
+                scope="production bug triage",
+                context_budget={"seed_file_limit": 12, "candidate_file_limit": 10, "hard_file_cap": 24},
+                reasoning_budget={"default_profile": "balanced", "upgrade_triggers": ["Only when evidence is insufficient."]},
+                permission_budget={"allowed_tools": ["read", "grep"], "confirmation_required": ["delete"]},
+                data_budget={"log_safe_fields": ["trace_id"], "redact_fields": ["token"], "forbidden_export_fields": ["invoice_image"]},
+            )
+            self.assertEqual(budget["budget_id"], "debug-flow")
 
 
 if __name__ == "__main__":

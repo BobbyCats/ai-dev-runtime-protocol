@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.1.0",
+  "contract_id": "delete_event",
+  "generated_at": "2026-03-20T18:22:39+00:00",
+  "tool_name": "delete_event",
+  "domain": "schedule",
+  "purpose": "Delete an event by stable ID.",
+  "inputs": [
+    {
+      "name": "event_id",
+      "type": "string",
+      "required": true,
+      "description": "Stable event identifier."
+    },
+    {
+      "name": "actor_id",
+      "type": "string",
+      "required": true,
+      "description": "User performing the deletion."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "deleted",
+      "type": "boolean",
+      "description": "Whether deletion succeeded."
+    },
+    {
+      "name": "deleted_event_id",
+      "type": "string",
+      "description": "Stable identifier of the deleted event."
+    }
+  ],
+  "idempotency": "Deleting an already deleted event is a no-op.",
+  "permission_boundary": "Only schedule domain may delete schedule events.",
+  "retry_policy": "No automatic retry.",
+  "rollback_policy": "Restore from event snapshot only.",
+  "failure_codes": [
+    {
+      "code": "EVENT_NOT_FOUND",
+      "meaning": "Target event is missing.",
+      "caller_action": "Show error and stop."
+    },
+    {
+      "code": "VERSION_MISMATCH",
+      "meaning": "Event version is stale.",
+      "caller_action": "Refresh event snapshot before retry."
+    }
+  ]
+}

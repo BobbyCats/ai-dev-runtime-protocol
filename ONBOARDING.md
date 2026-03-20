@@ -38,12 +38,13 @@ Bug 修复默认顺序：
 
 1. 生成或刷新 `仓库地图（repo-map）`
 2. 生成 `排障包（debug-pack）`
-3. 先做 `根因调查（investigate）`
-4. 必要时记录 `决策轨迹（decision-trace）`
-5. 定点修复
-6. 做 `真实验收（live QA）`
-7. 把 bug 变成 `回归用例（eval-case）`
-8. 用 `文档同步包（doc-sync）` 收尾
+3. 先做 `可观测性关联（observability-correlation）`
+4. 再做 `根因调查（investigate）`
+5. 必要时记录 `决策轨迹（decision-trace）`
+6. 定点修复
+7. 做 `真实验收（live QA）`
+8. 把 bug 变成 `回归用例（eval-case）`
+9. 用 `文档同步包（doc-sync）` 收尾
 
 ## 这套系统试图防止的坏味道
 
@@ -65,6 +66,11 @@ Bug 修复默认顺序：
 - `.aidrp/traces/*.json`
 - `.aidrp/evals/*.json` 与 `*.md`
 - `.aidrp/docsync/*.json` 与 `*.md`
+- `.aidrp/domains/*.json` 与 `*.md`
+- `.aidrp/contracts/*.json` 与 `*.md`
+- `.aidrp/plans/*.json` 与 `*.md`
+- `.aidrp/correlations/*.json` 与 `*.md`
+- `.aidrp/budgets/*.json` 与 `*.md`
 
 ## 集成到其他项目的步骤
 

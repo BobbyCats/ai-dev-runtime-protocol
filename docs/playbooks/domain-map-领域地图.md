@@ -43,3 +43,13 @@
 推荐模板：
 
 - [templates/domain-map-领域地图.md](../../templates/domain-map-领域地图.md)
+
+## CLI 用法
+
+```bash
+python -m aidrp domain-map \
+  --product "AI schedule assistant" \
+  --orchestrator "calendar-orchestrator" \
+  --domain "schedule|events,availability|create,update,delete|expense tracking" \
+  --domain "expense|expense records,reimbursement items|record expense,link receipt,export reimbursement|calendar rendering"
+```

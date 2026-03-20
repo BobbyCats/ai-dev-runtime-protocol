@@ -1,0 +1,54 @@
+{
+  "schema_version": "0.1.0",
+  "domain_map_id": "ai-schedule-assistant",
+  "generated_at": "2026-03-20T18:22:39+00:00",
+  "product": "AI schedule assistant",
+  "orchestrator": "calendar-orchestrator",
+  "domains": [
+    {
+      "name": "schedule",
+      "owned_state": [
+        "events",
+        "availability"
+      ],
+      "capabilities": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "non_goals": [
+        "expense tracking"
+      ]
+    },
+    {
+      "name": "expense",
+      "owned_state": [
+        "expense records",
+        "reimbursement items"
+      ],
+      "capabilities": [
+        "record expense",
+        "link receipt",
+        "export reimbursement"
+      ],
+      "non_goals": [
+        "calendar rendering"
+      ]
+    }
+  ],
+  "shared_infrastructure": [
+    "logging",
+    "auth"
+  ],
+  "cross_domain_flows": [
+    {
+      "name": "travel reimbursement",
+      "trigger": "chat request",
+      "domains": [
+        "schedule",
+        "expense"
+      ],
+      "owner": "expense"
+    }
+  ]
+}

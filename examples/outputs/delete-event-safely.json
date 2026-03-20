@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.1.0",
+  "plan_id": "delete-event-safely",
+  "generated_at": "2026-03-20T18:22:39+00:00",
+  "title": "Delete event safely",
+  "goal": "Delete the targeted event after confirmation.",
+  "trigger": "User confirms deletion.",
+  "preconditions": [
+    "Event ID is stable."
+  ],
+  "steps": [
+    {
+      "name": "Resolve target",
+      "inputs": [
+        "event_id"
+      ],
+      "tools": [
+        "fetch_event"
+      ],
+      "outputs": [
+        "event snapshot"
+      ],
+      "requires_confirmation": false
+    },
+    {
+      "name": "Execute delete",
+      "inputs": [
+        "event snapshot"
+      ],
+      "tools": [
+        "delete_event"
+      ],
+      "outputs": [
+        "delete result"
+      ],
+      "requires_confirmation": true
+    }
+  ],
+  "success_exit": "Event disappears and delete result is true.",
+  "failure_exit": "Deletion fails or target is missing.",
+  "fallbacks": [
+    "Ask user to refresh and retry."
+  ]
+}

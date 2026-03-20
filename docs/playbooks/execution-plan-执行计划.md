@@ -36,3 +36,13 @@
 推荐模板：
 
 - [templates/execution-plan-执行计划.md](../../templates/execution-plan-执行计划.md)
+
+## CLI 用法
+
+```bash
+python -m aidrp execution-plan \
+  --title "Delete event safely" \
+  --goal "Delete the targeted event after confirmation." \
+  --step "Resolve target|event_id|fetch_event|event snapshot|false" \
+  --step "Execute delete|event snapshot|delete_event|delete result|true"
+```

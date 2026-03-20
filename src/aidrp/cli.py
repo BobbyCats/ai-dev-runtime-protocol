@@ -3,16 +3,24 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from aidrp.cost_privacy_budget import build_cost_privacy_budget, write_cost_privacy_budget
 from aidrp.debug_pack import build_debug_pack, write_debug_pack
 from aidrp.design_token_pack import build_design_token_pack, write_design_token_pack
+from aidrp.domain_map import build_domain_map, write_domain_map
 from aidrp.doc_sync import build_doc_sync, write_doc_sync
 from aidrp.eval_case import build_eval_case, write_eval_case
+from aidrp.execution_plan import build_execution_plan, write_execution_plan
+from aidrp.observability_correlation import (
+    build_observability_correlation,
+    write_observability_correlation,
+)
 from aidrp.requirement_brief import build_requirement_brief, write_requirement_brief
 from aidrp.repo_map import write_repo_map
 from aidrp.task_packet import build_task_packet, write_task_packet
 from aidrp.trace import append_trace_event, start_trace
+from aidrp.tool_contract import build_tool_contract, write_tool_contract
 from aidrp.utils import load_json, slugify
-from aidrp.workspace import init_workspace
+from aidrp.workspace import init_workspace, load_workspace_config
 
 
 def _path(value: str) -> Path:
@@ -28,6 +36,111 @@ def _project_path(project_root: Path, value: str) -> Path:
 
 def _list(values: list[str] | None) -> list[str]:
     return [value for value in (values or []) if value]
+
+
+def _csv(value: str) -> list[str]:
+    return [item.strip() for item in value.split(",") if item.strip()]
+
+
+def _split_spec(value: str, minimum_parts: int, label: str) -> list[str]:
+    parts = [item.strip() for item in value.split("|")]
+    if len(parts) < minimum_parts:
+        raise ValueError(f"{label} 需要至少 {minimum_parts} 段，当前收到: {value}")
+    return parts
+
+
+def _to_bool(value: str) -> bool:
+    return value.strip().lower() in {"1", "true", "yes", "y", "是"}
+
+
+def _parse_domain_specs(values: list[str]) -> list[dict[str, object]]:
+    domains = []
+    for value in values:
+        parts = _split_spec(value, 3, "domain")
+        non_goals = _csv(parts[3]) if len(parts) > 3 else []
+        domains.append(
+            {
+                "name": parts[0],
+                "owned_state": _csv(parts[1]),
+                "capabilities": _csv(parts[2]),
+                "non_goals": non_goals,
+            }
+        )
+    return domains
+
+
+def _parse_cross_flow_specs(values: list[str]) -> list[dict[str, object]]:
+    flows = []
+    for value in values:
+        parts = _split_spec(value, 4, "cross-flow")
+        flows.append(
+            {
+                "name": parts[0],
+                "trigger": parts[1],
+                "domains": _csv(parts[2]),
+                "owner": parts[3],
+            }
+        )
+    return flows
+
+
+def _parse_input_field_specs(values: list[str]) -> list[dict[str, object]]:
+    fields = []
+    for value in values:
+        parts = _split_spec(value, 4, "input-field")
+        fields.append(
+            {
+                "name": parts[0],
+                "type": parts[1],
+                "required": _to_bool(parts[2]),
+                "description": parts[3],
+            }
+        )
+    return fields
+
+
+def _parse_output_field_specs(values: list[str]) -> list[dict[str, str]]:
+    fields = []
+    for value in values:
+        parts = _split_spec(value, 3, "output-field")
+        fields.append(
+            {
+                "name": parts[0],
+                "type": parts[1],
+                "description": parts[2],
+            }
+        )
+    return fields
+
+
+def _parse_failure_code_specs(values: list[str]) -> list[dict[str, str]]:
+    codes = []
+    for value in values:
+        parts = _split_spec(value, 3, "failure-code")
+        codes.append(
+            {
+                "code": parts[0],
+                "meaning": parts[1],
+                "caller_action": parts[2],
+            }
+        )
+    return codes
+
+
+def _parse_step_specs(values: list[str]) -> list[dict[str, object]]:
+    steps = []
+    for value in values:
+        parts = _split_spec(value, 5, "step")
+        steps.append(
+            {
+                "name": parts[0],
+                "inputs": _csv(parts[1]),
+                "tools": _csv(parts[2]),
+                "outputs": _csv(parts[3]),
+                "requires_confirmation": _to_bool(parts[4]),
+            }
+        )
+    return steps
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -55,6 +168,38 @@ def build_parser() -> argparse.ArgumentParser:
     brief_cmd.add_argument("--open-question", action="append", default=[])
     brief_cmd.add_argument("--assumption", action="append", default=[])
     brief_cmd.add_argument("--output-dir", default=".aidrp/briefs")
+
+    domain_cmd = subparsers.add_parser("domain-map", help="Generate a domain map artifact | 生成领域地图")
+    domain_cmd.add_argument("--product", required=True)
+    domain_cmd.add_argument("--orchestrator", default="")
+    domain_cmd.add_argument("--domain", action="append", default=[])
+    domain_cmd.add_argument("--shared-infra", action="append", default=[])
+    domain_cmd.add_argument("--cross-flow", action="append", default=[])
+    domain_cmd.add_argument("--output-dir", default=".aidrp/domains")
+
+    contract_cmd = subparsers.add_parser("tool-contract", help="Generate a tool contract artifact | 生成工具契约")
+    contract_cmd.add_argument("--tool-name", required=True)
+    contract_cmd.add_argument("--domain", default="")
+    contract_cmd.add_argument("--purpose", required=True)
+    contract_cmd.add_argument("--input-field", action="append", default=[])
+    contract_cmd.add_argument("--output-field", action="append", default=[])
+    contract_cmd.add_argument("--idempotency", default="")
+    contract_cmd.add_argument("--permission-boundary", default="")
+    contract_cmd.add_argument("--retry-policy", default="")
+    contract_cmd.add_argument("--rollback-policy", default="")
+    contract_cmd.add_argument("--failure-code", action="append", default=[])
+    contract_cmd.add_argument("--output-dir", default=".aidrp/contracts")
+
+    plan_cmd = subparsers.add_parser("execution-plan", help="Generate an execution plan artifact | 生成执行计划")
+    plan_cmd.add_argument("--title", required=True)
+    plan_cmd.add_argument("--goal", required=True)
+    plan_cmd.add_argument("--trigger", default="")
+    plan_cmd.add_argument("--precondition", action="append", default=[])
+    plan_cmd.add_argument("--step", action="append", default=[])
+    plan_cmd.add_argument("--success-exit", default="")
+    plan_cmd.add_argument("--failure-exit", default="")
+    plan_cmd.add_argument("--fallback", action="append", default=[])
+    plan_cmd.add_argument("--output-dir", default=".aidrp/plans")
 
     task_cmd = subparsers.add_parser("task-packet", help="Generate a task packet from a repo map | 生成任务包")
     task_cmd.add_argument("--project-root", default=".")
@@ -114,6 +259,42 @@ def build_parser() -> argparse.ArgumentParser:
     token_cmd.add_argument("--mode", action="append", default=[])
     token_cmd.add_argument("--guardrail", action="append", default=[])
     token_cmd.add_argument("--output-dir", default="design-system")
+
+    correlation_cmd = subparsers.add_parser(
+        "observability-correlation",
+        help="Generate an observability correlation artifact | 生成可观测性关联",
+    )
+    correlation_cmd.add_argument("--project-root", default=".")
+    correlation_cmd.add_argument("--title", required=True)
+    correlation_cmd.add_argument("--trace-id", default="")
+    correlation_cmd.add_argument("--request-id", default="")
+    correlation_cmd.add_argument("--decision-id", default="")
+    correlation_cmd.add_argument("--plan-id", default="")
+    correlation_cmd.add_argument("--tool-call-id", default="")
+    correlation_cmd.add_argument("--entrypoint", default="")
+    correlation_cmd.add_argument("--failure-stage", default="")
+    correlation_cmd.add_argument("--log-file", action="append", default=[])
+    correlation_cmd.add_argument("--search-term", action="append", default=[])
+    correlation_cmd.add_argument("--output-dir", default=".aidrp/correlations")
+
+    budget_cmd = subparsers.add_parser(
+        "cost-privacy-budget",
+        help="Generate a cost and privacy budget artifact | 生成成本权限预算",
+    )
+    budget_cmd.add_argument("--project-root", default=".")
+    budget_cmd.add_argument("--workflow", required=True)
+    budget_cmd.add_argument("--scope", default="")
+    budget_cmd.add_argument("--max-seed-files", type=int, default=None)
+    budget_cmd.add_argument("--max-candidate-files", type=int, default=None)
+    budget_cmd.add_argument("--hard-file-cap", type=int, default=None)
+    budget_cmd.add_argument("--default-profile", default="")
+    budget_cmd.add_argument("--upgrade-trigger", action="append", default=[])
+    budget_cmd.add_argument("--allowed-tool", action="append", default=[])
+    budget_cmd.add_argument("--confirm-action", action="append", default=[])
+    budget_cmd.add_argument("--log-safe-field", action="append", default=[])
+    budget_cmd.add_argument("--redact-field", action="append", default=[])
+    budget_cmd.add_argument("--forbid-export-field", action="append", default=[])
+    budget_cmd.add_argument("--output-dir", default=".aidrp/budgets")
 
     doc_sync_cmd = subparsers.add_parser("doc-sync", help="Generate a documentation sync pack | 生成文档同步包")
     doc_sync_cmd.add_argument("--project-root", default=".")
@@ -181,6 +362,71 @@ def main(argv: list[str] | None = None) -> int:
         output_dir.mkdir(parents=True, exist_ok=True)
         prefix = output_dir / brief["brief_id"]
         write_requirement_brief(brief, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
+        print(prefix.with_suffix(".json"))
+        print(prefix.with_suffix(".md"))
+        return 0
+
+    if args.command == "domain-map":
+        try:
+            domain_map = build_domain_map(
+                product=args.product,
+                orchestrator=args.orchestrator,
+                domains=_parse_domain_specs(_list(args.domain)),
+                shared_infrastructure=_list(args.shared_infra),
+                cross_domain_flows=_parse_cross_flow_specs(_list(args.cross_flow)),
+            )
+        except ValueError as exc:
+            parser.error(str(exc))
+        output_dir = _path(args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        prefix = output_dir / domain_map["domain_map_id"]
+        write_domain_map(domain_map, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
+        print(prefix.with_suffix(".json"))
+        print(prefix.with_suffix(".md"))
+        return 0
+
+    if args.command == "tool-contract":
+        try:
+            contract = build_tool_contract(
+                tool_name=args.tool_name,
+                domain=args.domain,
+                purpose=args.purpose,
+                inputs=_parse_input_field_specs(_list(args.input_field)),
+                outputs=_parse_output_field_specs(_list(args.output_field)),
+                idempotency=args.idempotency,
+                permission_boundary=args.permission_boundary,
+                retry_policy=args.retry_policy,
+                rollback_policy=args.rollback_policy,
+                failure_codes=_parse_failure_code_specs(_list(args.failure_code)),
+            )
+        except ValueError as exc:
+            parser.error(str(exc))
+        output_dir = _path(args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        prefix = output_dir / contract["contract_id"]
+        write_tool_contract(contract, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
+        print(prefix.with_suffix(".json"))
+        print(prefix.with_suffix(".md"))
+        return 0
+
+    if args.command == "execution-plan":
+        try:
+            plan = build_execution_plan(
+                title=args.title,
+                goal=args.goal,
+                trigger=args.trigger,
+                preconditions=_list(args.precondition),
+                steps=_parse_step_specs(_list(args.step)),
+                success_exit=args.success_exit,
+                failure_exit=args.failure_exit,
+                fallbacks=_list(args.fallback),
+            )
+        except ValueError as exc:
+            parser.error(str(exc))
+        output_dir = _path(args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        prefix = output_dir / plan["plan_id"]
+        write_execution_plan(plan, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
         print(prefix.with_suffix(".json"))
         print(prefix.with_suffix(".md"))
         return 0
@@ -284,6 +530,76 @@ def main(argv: list[str] | None = None) -> int:
         print(prefix.with_suffix(".json"))
         print(prefix.with_suffix(".md"))
         print(prefix.with_suffix(".html"))
+        return 0
+
+    if args.command == "observability-correlation":
+        project_root = _path(args.project_root)
+        correlation = build_observability_correlation(
+            project_root,
+            title=args.title,
+            trace_id=args.trace_id,
+            request_id=args.request_id,
+            decision_id=args.decision_id,
+            plan_id=args.plan_id,
+            tool_call_id=args.tool_call_id,
+            entrypoint=args.entrypoint,
+            failure_stage=args.failure_stage,
+            log_files=_list(args.log_file),
+            search_terms=_list(args.search_term),
+        )
+        output_dir = _project_path(project_root, args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        prefix = output_dir / correlation["correlation_id"]
+        write_observability_correlation(correlation, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
+        print(prefix.with_suffix(".json"))
+        print(prefix.with_suffix(".md"))
+        return 0
+
+    if args.command == "cost-privacy-budget":
+        project_root = _path(args.project_root)
+        config = load_workspace_config(project_root)
+        context_budget = dict(config["context_budget"])
+        if args.max_seed_files is not None:
+            context_budget["seed_file_limit"] = args.max_seed_files
+        if args.max_candidate_files is not None:
+            context_budget["candidate_file_limit"] = args.max_candidate_files
+        if args.hard_file_cap is not None:
+            context_budget["hard_file_cap"] = args.hard_file_cap
+
+        reasoning_budget = dict(config.get("reasoning_budget", {}))
+        if args.default_profile:
+            reasoning_budget["default_profile"] = args.default_profile
+        if _list(args.upgrade_trigger):
+            reasoning_budget["upgrade_triggers"] = _list(args.upgrade_trigger)
+
+        permission_budget = dict(config.get("permission_budget", {}))
+        if _list(args.allowed_tool):
+            permission_budget["allowed_tools"] = _list(args.allowed_tool)
+        if _list(args.confirm_action):
+            permission_budget["confirmation_required"] = _list(args.confirm_action)
+
+        data_budget = dict(config.get("data_budget", {}))
+        if _list(args.log_safe_field):
+            data_budget["log_safe_fields"] = _list(args.log_safe_field)
+        if _list(args.redact_field):
+            data_budget["redact_fields"] = _list(args.redact_field)
+        if _list(args.forbid_export_field):
+            data_budget["forbidden_export_fields"] = _list(args.forbid_export_field)
+
+        budget = build_cost_privacy_budget(
+            workflow=args.workflow,
+            scope=args.scope,
+            context_budget=context_budget,
+            reasoning_budget=reasoning_budget,
+            permission_budget=permission_budget,
+            data_budget=data_budget,
+        )
+        output_dir = _project_path(project_root, args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        prefix = output_dir / budget["budget_id"]
+        write_cost_privacy_budget(budget, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
+        print(prefix.with_suffix(".json"))
+        print(prefix.with_suffix(".md"))
         return 0
 
     if args.command == "doc-sync":

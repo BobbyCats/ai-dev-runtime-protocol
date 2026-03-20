@@ -9,6 +9,32 @@
     "max_file_chars": 18000,
     "max_snippet_chars": 1200
   },
+  "reasoning_budget": {
+    "default_profile": "balanced",
+    "upgrade_triggers": [
+      "只有证据不足时，才允许扩大上下文或升级推理强度。"
+    ]
+  },
+  "permission_budget": {
+    "allowed_tools": [],
+    "confirmation_required": [
+      "删除",
+      "批量修改",
+      "外部发送"
+    ]
+  },
+  "data_budget": {
+    "log_safe_fields": ["trace_id", "request_id", "decision_id", "plan_id", "tool_call_id"],
+    "redact_fields": ["token", "cookie", "password", "secret", "authorization"],
+    "forbidden_export_fields": []
+  },
+  "observability": {
+    "log_globs": ["logs/*.log", "logs/*.txt", "logs/*.jsonl", "*.log", "*.txt", "*.jsonl"],
+    "max_log_files": 8,
+    "max_log_matches": 24,
+    "max_log_line_chars": 240,
+    "max_log_file_size_kb": 512
+  },
   "validation_commands": {
     "quick": [],
     "precommit": [],

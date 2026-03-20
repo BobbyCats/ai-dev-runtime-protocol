@@ -96,4 +96,5 @@
 
 - `trace_id`
 - `decision-trace`
-- 排障包里的证据链
+- `observability-correlation`
+- `debug-pack` 里的日志聚焦与命中证据

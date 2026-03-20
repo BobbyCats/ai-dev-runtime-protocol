@@ -11,7 +11,7 @@
 - 功能开发先过 `产品评审（product review）` 和 `工程评审（engineering review）`
 - 前端或多端 UI 任务先补 `设计令牌包（design-token-pack）`
 - 非 trivial 任务先生成 `任务包（task-packet）`
-- bug 先生成 `排障包（debug-pack）`，再做 `根因调查（investigate）`
+- bug 先生成 `排障包（debug-pack）` 和 `可观测性关联（observability-correlation）`，再做 `根因调查（investigate）`
 - 排障优先按 `trace_id / decision_id / request_id / plan_id / tool_call_id` 聚焦日志，不要先大范围扫代码
 - 判断方向变了，就写 `决策轨迹（decision-trace）`
 - 影响用户路径、CLI、API、文件输出的改动，必须做 `真实验收（live QA）`

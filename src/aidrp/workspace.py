@@ -17,6 +17,32 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "max_file_chars": 18000,
         "max_snippet_chars": 1200,
     },
+    "reasoning_budget": {
+        "default_profile": "balanced",
+        "upgrade_triggers": [
+            "只有证据不足时，才允许扩大上下文或升级推理强度。",
+        ],
+    },
+    "permission_budget": {
+        "allowed_tools": [],
+        "confirmation_required": [
+            "删除",
+            "批量修改",
+            "外部发送",
+        ],
+    },
+    "data_budget": {
+        "log_safe_fields": ["trace_id", "request_id", "decision_id", "plan_id", "tool_call_id"],
+        "redact_fields": ["token", "cookie", "password", "secret", "authorization"],
+        "forbidden_export_fields": [],
+    },
+    "observability": {
+        "log_globs": ["logs/*.log", "logs/*.txt", "logs/*.jsonl", "*.log", "*.txt", "*.jsonl"],
+        "max_log_files": 8,
+        "max_log_matches": 24,
+        "max_log_line_chars": 240,
+        "max_log_file_size_kb": 512,
+    },
     "validation_commands": {
         "quick": [],
         "precommit": [],
@@ -85,6 +111,26 @@ def load_workspace_config(project_root: Path) -> dict[str, Any]:
             **DEFAULT_CONFIG["validation_commands"],
             **data["validation_commands"],
         }
+    if "reasoning_budget" in data:
+        merged["reasoning_budget"] = {
+            **DEFAULT_CONFIG["reasoning_budget"],
+            **data["reasoning_budget"],
+        }
+    if "permission_budget" in data:
+        merged["permission_budget"] = {
+            **DEFAULT_CONFIG["permission_budget"],
+            **data["permission_budget"],
+        }
+    if "data_budget" in data:
+        merged["data_budget"] = {
+            **DEFAULT_CONFIG["data_budget"],
+            **data["data_budget"],
+        }
+    if "observability" in data:
+        merged["observability"] = {
+            **DEFAULT_CONFIG["observability"],
+            **data["observability"],
+        }
     if "documentation" in data:
         merged["documentation"] = {
             **DEFAULT_CONFIG["documentation"],
@@ -96,7 +142,21 @@ def load_workspace_config(project_root: Path) -> dict[str, Any]:
 def init_workspace(project_root: Path, write_agents_template: bool = False) -> list[Path]:
     created: list[Path] = []
     workspace = workspace_dir(project_root)
-    for relative in ["briefs", "tasks", "debug", "evals", "traces", "docsync", "cache", "artifacts"]:
+    for relative in [
+        "briefs",
+        "tasks",
+        "debug",
+        "evals",
+        "traces",
+        "docsync",
+        "cache",
+        "artifacts",
+        "domains",
+        "contracts",
+        "plans",
+        "correlations",
+        "budgets",
+    ]:
         path = workspace / relative
         path.mkdir(parents=True, exist_ok=True)
         created.append(path)

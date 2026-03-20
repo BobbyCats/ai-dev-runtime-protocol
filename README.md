@@ -130,6 +130,47 @@
 - [docs/playbooks/observability-correlation-可观测性关联.md](docs/playbooks/observability-correlation-可观测性关联.md)
 - [docs/playbooks/cost-privacy-budget-成本权限预算.md](docs/playbooks/cost-privacy-budget-成本权限预算.md)
 
+这些进阶工件现在都已经有 CLI，不再只是手册和模板：
+
+```bash
+python -m aidrp domain-map \
+  --product "AI schedule assistant" \
+  --orchestrator "calendar-orchestrator" \
+  --domain "schedule|events,availability|create,update,delete|expense tracking" \
+  --shared-infra "logging" \
+  --cross-flow "travel reimbursement|chat request|schedule,expense|expense"
+
+python -m aidrp tool-contract \
+  --tool-name "delete_event" \
+  --domain "schedule" \
+  --purpose "Delete an event by stable ID." \
+  --input-field "event_id|string|true|Stable event identifier." \
+  --output-field "deleted|boolean|Whether deletion succeeded." \
+  --failure-code "EVENT_NOT_FOUND|Target event is missing.|Show error and stop."
+
+python -m aidrp execution-plan \
+  --title "Delete event safely" \
+  --goal "Delete the targeted event after confirmation." \
+  --step "Resolve target|event_id|fetch_event|event snapshot|false" \
+  --step "Execute delete|event snapshot|delete_event|delete result|true"
+
+python -m aidrp observability-correlation \
+  --project-root . \
+  --title "Delete event correlation" \
+  --trace-id "trace-77" \
+  --decision-id "dec-99" \
+  --entrypoint "calendar.delete" \
+  --failure-stage "executor" \
+  --log-file "logs/runtime.log"
+
+python -m aidrp cost-privacy-budget \
+  --project-root . \
+  --workflow "debug flow" \
+  --allowed-tool "read" \
+  --allowed-tool "grep" \
+  --confirm-action "delete"
+```
+
 ## 文档同步原则
 
 这个仓库现在明确反对一种常见坏习惯：
@@ -243,6 +284,8 @@ python -m aidrp debug-pack \
 
 `debug-pack` 现在默认强调“编号优先”的排查顺序：先按 `trace_id / decision_id / request_id / plan_id / tool_call_id` 聚焦日志，再决定是否扩大到代码阅读。
 
+如果你已经有真实日志，建议先单独跑一次 `observability-correlation`，再回头生成 `debug-pack`。这样排障包里的日志聚焦和命中证据会更完整。
+
 ### 6. 记录 `决策轨迹（decision-trace）`
 
 ```bash
@@ -295,11 +338,12 @@ Bug 修复默认走这条：
 
 1. 仓库地图
 2. 排障包
-3. 根因调查
-4. 定点修复
-5. 真实验收
-6. 回归用例
-7. 文档同步
+3. 可观测性关联
+4. 根因调查
+5. 定点修复
+6. 真实验收
+7. 回归用例
+8. 文档同步
 
 ## 仓库结构
 
@@ -328,6 +372,7 @@ Bug 修复默认走这条：
 - [docs/playbooks/investigate-根因调查.md](docs/playbooks/investigate-根因调查.md)
 - [docs/playbooks/qa-live-真实验收.md](docs/playbooks/qa-live-真实验收.md)
 - [docs/playbooks/documentation-sync-文档同步.md](docs/playbooks/documentation-sync-文档同步.md)
+- [docs/playbooks/observability-correlation-可观测性关联.md](docs/playbooks/observability-correlation-可观测性关联.md)
 - [docs/playbooks/git-commit-提交规范.md](docs/playbooks/git-commit-提交规范.md)
 - [docs/reference/open-source-inspiration-开源灵感.md](docs/reference/open-source-inspiration-开源灵感.md)
 - [docs/reference/open-source-citation-开源引用规范.md](docs/reference/open-source-citation-开源引用规范.md)

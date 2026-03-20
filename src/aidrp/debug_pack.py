@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+from aidrp.observability_correlation import build_observability_correlation
 from aidrp.repo_map import rank_candidate_files
 from aidrp.utils import compact_excerpt, git_output, now_iso, read_text, slugify, tokenize, write_json, write_text
 from aidrp.workspace import load_workspace_config
@@ -35,65 +36,6 @@ def _collect_search_hits(project_root: Path, repo_map: dict[str, Any], queries: 
                 )
                 break
     return hits
-
-
-def _build_log_focus(
-    *,
-    trace_id: str,
-    request_id: str,
-    decision_id: str,
-    plan_id: str,
-    tool_call_id: str,
-    entrypoint: str,
-    failure_stage: str,
-    log_files: list[str],
-    search_terms: list[str],
-) -> dict[str, Any]:
-    primary_keys = [
-        item
-        for item in [trace_id, request_id, decision_id, plan_id, tool_call_id]
-        if item
-    ]
-    grep_queries = []
-    for label, value in [
-        ("trace_id", trace_id),
-        ("request_id", request_id),
-        ("decision_id", decision_id),
-        ("plan_id", plan_id),
-        ("tool_call_id", tool_call_id),
-        ("entrypoint", entrypoint),
-        ("failure_stage", failure_stage),
-    ]:
-        if value:
-            grep_queries.append(f"{label}:{value}")
-            grep_queries.append(value)
-    grep_queries.extend(item for item in search_terms if item)
-    deduped_queries: list[str] = []
-    seen = set()
-    for query in grep_queries:
-        if query not in seen:
-            deduped_queries.append(query)
-            seen.add(query)
-
-    review_order = []
-    if primary_keys:
-        review_order.append("先按关联编号搜日志，不要先扫代码。")
-    if entrypoint:
-        review_order.append(f"先确认入口 `{entrypoint}` 是否真的触发。")
-    if failure_stage:
-        review_order.append(f"优先检查 `{failure_stage}` 这一阶段前后的日志缺口。")
-    if log_files:
-        review_order.append("先看提供的日志文件，再扩大到其他模块。")
-    review_order.append("只有当日志证据不足时，才扩大代码阅读范围。")
-
-    return {
-        "primary_keys": primary_keys,
-        "entrypoint": entrypoint,
-        "failure_stage": failure_stage,
-        "grep_queries": deduped_queries,
-        "log_files": log_files[:6],
-        "review_order": review_order,
-    }
 
 
 def build_debug_pack(
@@ -139,7 +81,9 @@ def build_debug_pack(
         if len(chosen) >= config["context_budget"]["candidate_file_limit"]:
             break
 
-    log_focus = _build_log_focus(
+    correlation = build_observability_correlation(
+        project_root,
+        title=title,
         trace_id=trace_id,
         request_id=request_id,
         decision_id=decision_id,
@@ -150,37 +94,24 @@ def build_debug_pack(
         log_files=log_files,
         search_terms=search_terms,
     )
+    log_focus = {
+        "primary_keys": [
+            item
+            for item in [trace_id, request_id, decision_id, plan_id, tool_call_id]
+            if item
+        ],
+        "entrypoint": entrypoint,
+        "failure_stage": failure_stage,
+        "grep_queries": correlation["grep_queries"],
+        "log_files": correlation["log_files"],
+        "review_order": correlation["review_order"],
+        "missing_queries": correlation["missing_queries"],
+    }
 
-    queries = [
-        trace_id,
-        request_id,
-        decision_id,
-        plan_id,
-        tool_call_id,
-        entrypoint,
-        failure_stage,
-        symptom,
-        observed,
-        expected,
-        *search_terms,
-    ]
-    evidence = _collect_search_hits(project_root, repo_map, queries=queries, limit=12)
-
-    log_snippets = []
-    for raw in log_files[:6]:
-        path = Path(raw)
-        if not path.is_absolute():
-            path = project_root / raw
-        if not path.exists():
-            continue
-        text = read_text(path, max_chars=4000)
-        needle = trace_id or symptom or observed
-        log_snippets.append(
-            {
-                "path": str(path),
-                "excerpt": compact_excerpt(text, needle or text[:120]),
-            }
-        )
+    code_queries = [symptom, observed, expected, *search_terms]
+    if not correlation["matched_entries"]:
+        code_queries = [*correlation["grep_queries"], entrypoint, failure_stage, *code_queries]
+    evidence = _collect_search_hits(project_root, repo_map, queries=code_queries, limit=12)
 
     triage_read_order = ["AGENTS.md", ".aidrp/repo-map.md"]
     triage_read_order.extend(item["path"] for item in chosen[:8])
@@ -203,18 +134,20 @@ def build_debug_pack(
             "plan_id": plan_id,
             "tool_call_id": tool_call_id,
         },
+        "observability_correlation": correlation,
         "log_focus": log_focus,
         "reproduction_steps": reproduction_steps,
         "triage_read_order": triage_read_order,
         "suspected_files": chosen,
         "evidence": evidence,
-        "log_snippets": log_snippets,
+        "log_snippets": correlation["matched_entries"][:12],
         "recent_commits": _collect_recent_commits(project_root),
         "recommended_next_actions": [
             "Reproduce the bug before editing code.",
             "Search logs and traces by IDs first; do not start from broad symptom scans.",
             "Read only the triage set first; do not expand to broad scans unless evidence is insufficient.",
             "Capture a decision trace for every hypothesis change.",
+            "If key IDs are missing from logs, fix instrumentation before broad code exploration.",
             "Convert the confirmed bug into an eval case before closing the task.",
         ],
     }
@@ -265,6 +198,19 @@ def debug_pack_to_markdown(pack: dict[str, Any]) -> str:
         lines.extend(["", "### Grep Queries | 检索关键词", ""])
         for item in log_focus["grep_queries"]:
             lines.append(f"- `{item}`")
+    if log_focus.get("missing_queries"):
+        lines.extend(["", "### Missing Queries | 未命中关键词", ""])
+        for item in log_focus["missing_queries"]:
+            lines.append(f"- `{item}`")
+
+    if pack["log_snippets"]:
+        lines.extend(["", "## Log Hits | 日志命中", ""])
+        for item in pack["log_snippets"]:
+            if "line" in item and "query" in item:
+                queries = ", ".join(f"`{query}`" for query in item.get("matched_queries", [item["query"]]))
+                lines.append(f"- `{item['path']}:{item['line']}` matched {queries}: {item['excerpt']}")
+            else:
+                lines.append(f"- `{item['path']}`: {item['excerpt']}")
 
     if pack["evidence"]:
         lines.extend(["", "## Evidence | 证据", ""])
