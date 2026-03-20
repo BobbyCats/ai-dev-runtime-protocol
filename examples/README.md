@@ -2,6 +2,14 @@
 
 这个目录存放的是仓库自身生成出来的示例工件。
 
+包括：
+
+- `repo-map | 仓库地图`
+- `requirement-brief | 需求简报`
+- `task-packet | 任务包`
+- `debug-pack | 排障包`
+- `eval-case | 回归用例`
+
 你可以在安装后重新生成：
 
 ```bash

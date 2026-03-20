@@ -21,6 +21,7 @@
 这层负责沉淀“当前任务真实需要的上下文”。
 
 - `repo-map` | 仓库地图
+- `requirement-brief` | 需求简报
 - `task-packet` | 任务包
 - `debug-pack` | 排障包
 - `decision-trace` | 决策轨迹

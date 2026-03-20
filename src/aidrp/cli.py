@@ -5,6 +5,7 @@ from pathlib import Path
 
 from aidrp.debug_pack import build_debug_pack, write_debug_pack
 from aidrp.eval_case import build_eval_case, write_eval_case
+from aidrp.requirement_brief import build_requirement_brief, write_requirement_brief
 from aidrp.repo_map import write_repo_map
 from aidrp.task_packet import build_task_packet, write_task_packet
 from aidrp.trace import append_trace_event, start_trace
@@ -38,6 +39,20 @@ def build_parser() -> argparse.ArgumentParser:
     repo_cmd = subparsers.add_parser("repo-map", help="Generate repo map JSON and Markdown | 生成仓库地图")
     repo_cmd.add_argument("--project-root", default=".")
     repo_cmd.add_argument("--output-dir", default=".aidrp")
+
+    brief_cmd = subparsers.add_parser("requirement-brief", help="Generate a requirement brief | 生成需求简报")
+    brief_cmd.add_argument("--title", required=True)
+    brief_cmd.add_argument("--product-idea", required=True)
+    brief_cmd.add_argument("--target-user", action="append", default=[])
+    brief_cmd.add_argument("--pain-point", action="append", default=[])
+    brief_cmd.add_argument("--desired-outcome", action="append", default=[])
+    brief_cmd.add_argument("--scenario", action="append", default=[])
+    brief_cmd.add_argument("--non-goal", action="append", default=[])
+    brief_cmd.add_argument("--constraint", action="append", default=[])
+    brief_cmd.add_argument("--success-metric", action="append", default=[])
+    brief_cmd.add_argument("--open-question", action="append", default=[])
+    brief_cmd.add_argument("--assumption", action="append", default=[])
+    brief_cmd.add_argument("--output-dir", default=".aidrp/briefs")
 
     task_cmd = subparsers.add_parser("task-packet", help="Generate a task packet from a repo map | 生成任务包")
     task_cmd.add_argument("--project-root", default=".")
@@ -114,6 +129,28 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(output_dir / "repo-map.json")
         print(output_dir / "repo-map.md")
+        return 0
+
+    if args.command == "requirement-brief":
+        brief = build_requirement_brief(
+            title=args.title,
+            product_idea=args.product_idea,
+            target_users=_list(args.target_user),
+            pain_points=_list(args.pain_point),
+            desired_outcomes=_list(args.desired_outcome),
+            core_scenarios=_list(args.scenario),
+            non_goals=_list(args.non_goal),
+            constraints=_list(args.constraint),
+            success_metrics=_list(args.success_metric),
+            open_questions=_list(args.open_question),
+            assumptions=_list(args.assumption),
+        )
+        output_dir = _path(args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        prefix = output_dir / brief["brief_id"]
+        write_requirement_brief(brief, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
+        print(prefix.with_suffix(".json"))
+        print(prefix.with_suffix(".md"))
         return 0
 
     if args.command == "task-packet":

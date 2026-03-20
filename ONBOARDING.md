@@ -18,10 +18,11 @@
 
 1. 初始化 `.aidrp/`
 2. 生成 `repo-map | 仓库地图`
-3. 任务生成 `task-packet | 任务包`，bug 生成 `debug-pack | 排障包`
-4. 优先阅读短名单，不要一上来全仓扫描
-5. 关键推理变化写入 `decision-trace | 决策轨迹`
-6. 被确认的 bug 变成 `eval-case | 回归用例`
+3. 想法不清楚时，先做 `discovery interview | 需求访谈` 并落成 `requirement-brief | 需求简报`
+4. 任务生成 `task-packet | 任务包`，bug 生成 `debug-pack | 排障包`
+5. 优先阅读短名单，不要一上来全仓扫描
+6. 关键推理变化写入 `decision-trace | 决策轨迹`
+7. 被确认的 bug 变成 `eval-case | 回归用例`
 
 ## 这套系统试图防止的坏味道
 
@@ -35,6 +36,7 @@
 
 - `.aidrp/repo-map.json`
 - `.aidrp/repo-map.md`
+- `.aidrp/briefs/*.json` 与 `*.md`
 - `.aidrp/tasks/*.json` 与 `*.md`
 - `.aidrp/debug/*.json` 与 `*.md`
 - `.aidrp/traces/*.json`
@@ -51,5 +53,6 @@
 ## 如果你现在只能落三件事
 
 - 固定提交 `repo-map | 仓库地图`
+- 想法没收敛前先写 `requirement-brief | 需求简报`
 - 修 bug 前必须先写 `debug-pack | 排障包`
 - 真实 bug 修完后必须补 `eval-case | 回归用例`

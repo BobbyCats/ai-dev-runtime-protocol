@@ -6,6 +6,7 @@ from pathlib import Path
 
 from aidrp.debug_pack import build_debug_pack
 from aidrp.eval_case import build_eval_case
+from aidrp.requirement_brief import build_requirement_brief
 from aidrp.repo_map import build_repo_map
 from aidrp.task_packet import build_task_packet
 from aidrp.trace import append_trace_event, start_trace
@@ -87,6 +88,23 @@ class RuntimeProtocolTests(unittest.TestCase):
             )
             self.assertEqual(eval_case["eval_id"], "regression-for-missing-files")
             self.assertIn("packet", eval_case["tags"])
+
+    def test_requirement_brief(self) -> None:
+        brief = build_requirement_brief(
+            title="AI meeting helper AI 会议助手",
+            product_idea="Use an interview-first workflow to clarify a scheduling assistant before coding. 在编码前用访谈方式先澄清需求。",
+            target_users=["Founders who think in ideas first. 先有想法再落产品的创业者。"],
+            pain_points=["Requirements are vague at the start. 一开始需求很模糊。"],
+            desired_outcomes=["Turn chat into a brief. 把聊天收敛成简报。"],
+            core_scenarios=["Clarify the first milestone. 澄清第一个里程碑。"],
+            non_goals=["Do not design the full backend yet. 暂不设计完整后端。"],
+            constraints=["Keep the first version lightweight. 第一版保持轻量。"],
+            success_metrics=["A task packet can be created from the brief. 能从简报继续生成任务包。"],
+            open_questions=["Should the interview stop after five questions? 是否限制为五个问题？"],
+            assumptions=["The user prefers Chinese-first wording. 默认用户更适合中文主导表达。"],
+        )
+        self.assertEqual(brief["brief_id"], "ai-meeting-helper-ai-会议助手")
+        self.assertIn("Turn chat into a brief", brief["desired_outcomes"][0])
 
 
 if __name__ == "__main__":

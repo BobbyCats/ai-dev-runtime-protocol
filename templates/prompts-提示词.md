@@ -1,5 +1,9 @@
 # Prompt Starters | 提示词起手式
 
+## Discovery Interview First | 先需求访谈
+
+如果需求本身还模糊，不要直接写方案或写代码。先按 `templates/discovery-interview-需求访谈.md` 做访谈，再输出 `requirement-brief | 需求简报`。
+
 ## Task Packet First | 先任务包
 
 先读 `.aidrp/repo-map.md`，再创建或打开对应的 `task-packet | 任务包`。在任务包候选文件读完之前，不要全仓扫描。

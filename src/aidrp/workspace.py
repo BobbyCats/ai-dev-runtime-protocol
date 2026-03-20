@@ -71,7 +71,7 @@ def load_workspace_config(project_root: Path) -> dict[str, Any]:
 def init_workspace(project_root: Path, write_agents_template: bool = False) -> list[Path]:
     created: list[Path] = []
     workspace = workspace_dir(project_root)
-    for relative in ["tasks", "debug", "evals", "traces", "cache", "artifacts"]:
+    for relative in ["briefs", "tasks", "debug", "evals", "traces", "cache", "artifacts"]:
         path = workspace / relative
         path.mkdir(parents=True, exist_ok=True)
         created.append(path)

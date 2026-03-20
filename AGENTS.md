@@ -6,6 +6,7 @@
 
 - 大改之前先读 [ONBOARDING.md](ONBOARDING.md)
 - 优先生成 `.aidrp/` 工件，而不是直接大范围扫仓库
+- 想法不清楚时，先做 `discovery interview | 需求访谈`，再写 `requirement-brief | 需求简报`
 - 非 trivial 任务先生成 `task-packet | 任务包`
 - bug 先生成 `debug-pack | 排障包`
 - 判断方向变了，就写 `decision-trace | 决策轨迹`

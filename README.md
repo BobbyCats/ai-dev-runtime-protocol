@@ -15,6 +15,7 @@
 它把原来只存在于聊天窗口里的临时上下文，沉淀成一组可复用工件（artifacts）：
 
 - `repo-map` | 仓库地图
+- `requirement-brief` | 需求简报
 - `task-packet` | 任务包
 - `debug-pack` | 排障包
 - `decision-trace` | 决策轨迹
@@ -41,6 +42,7 @@
 - 一个跨平台、零第三方运行时依赖的 Python CLI
 - 一套 `.aidrp/` 工作区结构
 - 仓库扫描与高信号文件排序
+- 需求访谈 / 需求简报 生成能力
 - 任务包 / 排障包 / 回归用例 / 决策轨迹 生成能力
 - JSON Schema
 - 中文主导的文档、模板、手册
@@ -52,6 +54,7 @@
 | English | 中文 | 直接理解 |
 | --- | --- | --- |
 | repo-map | 仓库地图 | 项目结构摘要 |
+| requirement-brief | 需求简报 | 把模糊想法压成简报 |
 | task-packet | 任务包 | 一次任务的工作单 |
 | debug-pack | 排障包 | 一次 bug 的排查资料包 |
 | decision-trace | 决策轨迹 | 为什么这么改的记录 |
@@ -69,6 +72,14 @@ python -m pip install -e .
 
 ## 快速开始
 
+### 0. 需求还不清楚时，先做 `discovery interview | 需求访谈`
+
+直接使用这个模板：
+
+- [templates/discovery-interview-需求访谈.md](templates/discovery-interview-需求访谈.md)
+
+访谈的目标不是一直问，而是尽快收敛出 `requirement-brief | 需求简报`。
+
 ### 1. 初始化工作区
 
 ```bash
@@ -81,7 +92,24 @@ python -m aidrp init-workspace --project-root . --write-agents-template
 python -m aidrp repo-map --project-root . --output-dir .aidrp
 ```
 
-### 3. 开工前先生成 `task-packet | 任务包`
+### 3. 用 CLI 生成 `requirement-brief | 需求简报`
+
+```bash
+python -m aidrp requirement-brief \
+  --title "AI meeting helper AI 会议助手" \
+  --product-idea "Use a discovery interview before coding. 在编码前先通过需求访谈收敛需求。" \
+  --target-user "Builders with fuzzy first ideas 想法先行、需求还模糊的构建者" \
+  --pain-point "Ideas are too vague to code directly 想法太模糊，不能直接开写" \
+  --desired-outcome "Turn conversation into a structured brief 把对话变成结构化简报" \
+  --scenario "Clarify the first milestone 澄清第一阶段目标" \
+  --non-goal "Do not design the whole system yet 暂不设计完整系统" \
+  --constraint "Keep the first workflow lightweight 第一版流程保持轻量" \
+  --success-metric "The brief can be converted into a task packet 简报可以继续转成任务包" \
+  --open-question "How many interview rounds are enough 访谈问几轮算够" \
+  --assumption "Chinese-first wording is preferred 优先中文表达"
+```
+
+### 4. 开工前再生成 `task-packet | 任务包`
 
 ```bash
 python -m aidrp task-packet \
@@ -96,7 +124,7 @@ python -m aidrp task-packet \
   --search-term schedule
 ```
 
-### 4. 修 bug 前先生成 `debug-pack | 排障包`
+### 5. 修 bug 前先生成 `debug-pack | 排障包`
 
 ```bash
 python -m aidrp debug-pack \
@@ -115,7 +143,7 @@ python -m aidrp debug-pack \
   --search-term event
 ```
 
-### 5. 记录 `decision-trace | 决策轨迹`
+### 6. 记录 `decision-trace | 决策轨迹`
 
 ```bash
 python -m aidrp trace-start --title "Fix schedule deletion drift 修复日程删除漂移" --task-id fix-schedule-deletion-drift-修复日程删除漂移
@@ -128,7 +156,7 @@ python -m aidrp trace-event \
   --outcome "Need targeted patch 需要定点修复"
 ```
 
-### 6. 修完后生成 `eval-case | 回归用例`
+### 7. 修完后生成 `eval-case | 回归用例`
 
 ```bash
 python -m aidrp eval-case \
@@ -145,10 +173,11 @@ python -m aidrp eval-case \
 
 1. 初始化 `.aidrp/`
 2. 提交一份仓库地图
-3. 非 trivial 任务先写任务包
-4. bug 先写排障包
-5. 判断转向时补决策轨迹
-6. 修复真实 bug 后补回归用例
+3. 想法模糊时先做需求访谈并落成需求简报
+4. 非 trivial 任务先写任务包
+5. bug 先写排障包
+6. 判断转向时补决策轨迹
+7. 修复真实 bug 后补回归用例
 
 ## 仓库结构
 
@@ -170,6 +199,7 @@ python -m aidrp eval-case \
 - [ONBOARDING.md](ONBOARDING.md)
 - [AGENTS.md](AGENTS.md)
 - [docs/architecture-架构说明.md](docs/architecture-架构说明.md)
+- [docs/playbooks/discovery-interview-需求访谈.md](docs/playbooks/discovery-interview-需求访谈.md)
 - [docs/playbooks/bugfix-缺陷修复.md](docs/playbooks/bugfix-缺陷修复.md)
 - [docs/playbooks/feature-功能开发.md](docs/playbooks/feature-功能开发.md)
 - [docs/reference/open-source-inspiration-开源灵感.md](docs/reference/open-source-inspiration-开源灵感.md)
@@ -195,6 +225,7 @@ python -m aidrp eval-case \
 
 它更像：
 
+- 需求澄清层
 - AI 开发运行时协议
 - Agent 的上下文压缩层
 - bug 排查与回归沉淀层

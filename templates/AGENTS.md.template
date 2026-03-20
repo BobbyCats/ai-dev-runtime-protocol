@@ -6,6 +6,7 @@
 
 - `.aidrp/repo-map.json`
 - `.aidrp/repo-map.md`
+- `.aidrp/briefs/*.json`
 - `.aidrp/tasks/*.json`
 - `.aidrp/debug/*.json`
 - `.aidrp/traces/*.json`
@@ -13,6 +14,7 @@
 
 ## 规则
 
+- 需求还模糊时，先做 `discovery interview | 需求访谈` 并产出 `requirement-brief | 需求简报`
 - 非 trivial 任务先生成 `task-packet | 任务包`
 - bug 先生成 `debug-pack | 排障包`
 - 当前工件解释不了问题时，才能扩大阅读范围
