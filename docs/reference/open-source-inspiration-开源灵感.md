@@ -82,6 +82,34 @@
 - 宿主平台强绑定
 - 它特有的人设和交互语气
 
+## Vercel AI SDK
+
+参考：
+
+- [AI SDK 介绍](https://ai-sdk.dev/docs/introduction)
+- [Agents 概览](https://ai-sdk.dev/docs/agents/overview)
+- [Loop Control](https://ai-sdk.dev/docs/agents/loop-control)
+
+吸收点：
+
+- Agent 运行层需要统一处理工具循环、上下文管理和停止条件
+- 结构化输出、工具调用、流式 UI 和观测能力应该放在同一运行层思考
+- 对复杂场景不能只依赖自由循环，需要显式的 workflow pattern
+
+落地到本仓库：
+
+- `tool-contract`
+- `execution-plan`
+- `observability-correlation`
+- `cost-privacy-budget`
+- [docs/reference/vercel-ai-sdk-理解与借鉴.md](vercel-ai-sdk-理解与借鉴.md)
+
+没有照搬的部分：
+
+- TypeScript / React / Next.js 宿主绑定
+- 它自己的 UI hooks 体系
+- 直接依赖某个模型或平台生态
+
 ## OpenTelemetry
 
 参考：

@@ -2,6 +2,10 @@
 
 这个目录存放的是仓库自身生成出来的示例工件。
 
+如果你想知道这些示例分别该在什么场景下使用，先看：
+
+- [docs/guides/usage-guide-完整使用手册.md](../docs/guides/usage-guide-完整使用手册.md)
+
 包括：
 
 - `repo-map | 仓库地图`

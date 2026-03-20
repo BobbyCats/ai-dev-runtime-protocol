@@ -4,6 +4,11 @@
 
 不要把聊天上下文当成工程事实来源，而要把关键状态、阶段门和收尾动作落成可复用协议。
 
+如果你更关心“到底该怎么落地使用”，优先看：
+
+- [docs/guides/usage-guide-完整使用手册.md](guides/usage-guide-完整使用手册.md)
+- [docs/reference/vercel-ai-sdk-理解与借鉴.md](reference/vercel-ai-sdk-理解与借鉴.md)
+
 ## 四层结构
 
 ### 1. Protocol Layer | 协议层
@@ -13,6 +18,7 @@
 - [README.md](../README.md)
 - [ONBOARDING.md](../ONBOARDING.md)
 - [AGENTS.md](../AGENTS.md)
+- [docs/guides/usage-guide-完整使用手册.md](guides/usage-guide-完整使用手册.md)
 - [docs/playbooks/stage-router-阶段路由.md](playbooks/stage-router-阶段路由.md)
 
 ### 2. Stage Layer | 阶段层
