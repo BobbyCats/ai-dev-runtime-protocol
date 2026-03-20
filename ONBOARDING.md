@@ -27,8 +27,8 @@
 3. 落成 `需求简报（requirement-brief）`
 4. 过 `产品评审（product review）`
 5. UI / 多端任务先补 `设计令牌包（design-token-pack）`
-6. 过 `工程评审（engineering review）`
-7. 生成 `仓库地图（repo-map）`
+6. 生成 `仓库地图（repo-map）`
+7. 过 `工程评审（engineering review）`
 8. 生成 `任务包（task-packet）`
 9. 按短名单实现，不要直接全仓扫描
 10. 做 `真实验收（live QA）`
@@ -61,6 +61,8 @@ Bug 修复默认顺序：
 - `.aidrp/repo-map.json`
 - `.aidrp/repo-map.md`
 - `.aidrp/briefs/*.json` 与 `*.md`
+- `.aidrp/product-reviews/*.json` 与 `*.md`
+- `.aidrp/engineering-reviews/*.json` 与 `*.md`
 - `.aidrp/tasks/*.json` 与 `*.md`
 - `.aidrp/debug/*.json` 与 `*.md`
 - `.aidrp/traces/*.json`
@@ -82,7 +84,7 @@ Bug 修复默认顺序：
 6. 把真实验收和回归用例纳入默认收尾
 7. 把中文提交规范与开源引用规范纳入日常协作
 
-## 如果你现在只能先落四件事
+## 如果你现在只能先落五件事
 
 - 固定提交 `仓库地图（repo-map）`
 - 想法没收敛前先写 `需求简报（requirement-brief）`

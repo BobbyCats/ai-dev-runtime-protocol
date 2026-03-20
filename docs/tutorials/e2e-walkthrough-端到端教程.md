@@ -20,13 +20,14 @@
 
 1. 初始化工作区
 2. 生成 `requirement-brief`
-3. 用产品评审和工程评审 playbook 锁范围
+3. 生成 `product-review`
 4. 生成 `repo-map`
-5. 生成 `task-packet`
-6. 为删除误删 bug 生成 `debug-pack`
-7. 跑 `observability-correlation`
-8. 写 `eval-case`
-9. 生成 `doc-sync`
+5. 生成 `engineering-review`
+6. 生成 `task-packet`
+7. 为删除误删 bug 生成 `debug-pack`
+8. 跑 `observability-correlation`
+9. 写 `eval-case`
+10. 生成 `doc-sync`
 
 这条链刻意没有塞满所有工件。
 
@@ -96,23 +97,32 @@ python -m aidrp requirement-brief \
 - `../expected/ai-会议助手第一版.json`
 - `../expected/ai-会议助手第一版.md`
 
-## 3. 用评审层锁住范围
+## 3. 生成 `product-review`
 
-这一步没有 CLI，走 playbook。
+输入素材在：
 
-先看：
+- `../inputs/product-review.json`
 
-- [产品评审](../playbooks/plan-product-review-产品评审.md)
-- [工程评审](../playbooks/plan-engineering-review-工程评审.md)
+执行：
 
-在这个场景里，我们固定这两个结论：
+```bash
+python -m aidrp product-review \
+  --brief .aidrp/briefs/ai-会议助手第一版.json \
+  --current-goal "把第一版压成一个真正可交付的会议助手切片" \
+  --mvs "只做创建 / 查看 / 删除会议，并在删除前给出可确认计划" \
+  --non-goal "第一版不做外部日历双向同步" \
+  --non-goal "不做邀请邮件和复杂权限" \
+  --scope-decision 保持 \
+  --scope-reason "第一版边界已经清楚，先不要扩展到外部同步、邀请邮件和复杂权限" \
+  --success-signal "团队能稳定通过聊天创建、查看和删除会议" \
+  --expand-trigger "真实验收连续通过，且用户重复提出同一扩展需求" \
+  --output-dir .aidrp/product-reviews
+```
 
-- 产品评审：第一版只做“创建 / 查看 / 删除会议”，不做日历同步、邀请邮件和复杂权限
-- 工程评审：本轮只修删除误删链路，不把存储层或前端状态整体重构
+对照标准输出：
 
-如果你想看这次教程的人工评审输入，可以看：
-
-- `../inputs/review-decisions.md`
+- `../expected/ai-会议助手第一版-product-review.json`
+- `../expected/ai-会议助手第一版-product-review.md`
 
 ## 4. 生成 `repo-map`
 
@@ -137,7 +147,32 @@ python -m aidrp repo-map --project-root . --output-dir .aidrp
 - `../expected/repo-map.json`
 - `../expected/repo-map.md`
 
-## 5. 生成 `task-packet`
+## 5. 生成 `engineering-review`
+
+输入素材在：
+
+- `../inputs/engineering-review.json`
+
+执行：
+
+```bash
+python -m aidrp engineering-review \
+  --project-root . \
+  --brief .aidrp/briefs/ai-会议助手第一版.json \
+  --product-review .aidrp/product-reviews/ai-会议助手第一版-product-review.json \
+  --repo-map .aidrp/repo-map.json \
+  --change-goal "只修删除误删链路，不顺手扩成一次存储层重构" \
+  --decision 可以开工 \
+  --decision-reason "写入边界、风险、日志观察点和验证方式已经足够清楚" \
+  --output-dir .aidrp/engineering-reviews
+```
+
+对照标准输出：
+
+- `../expected/ai-会议助手第一版-engineering-review.json`
+- `../expected/ai-会议助手第一版-engineering-review.md`
+
+## 6. 生成 `task-packet`
 
 这里我们把这次工作明确压成“修删除漂移”，而不是“顺手重构整个会议系统”。
 
@@ -176,7 +211,7 @@ python -m aidrp task-packet \
 - `../expected/fix-meeting-deletion-drift-修复会议删除漂移.json`
 - `../expected/fix-meeting-deletion-drift-修复会议删除漂移.md`
 
-## 6. 为误删 bug 生成 `debug-pack`
+## 7. 为误删 bug 生成 `debug-pack`
 
 现在进入真实 bug。
 
@@ -229,7 +264,7 @@ python -m aidrp debug-pack \
 - `../expected/meeting-deletion-drift-会议删除漂移.json`
 - `../expected/meeting-deletion-drift-会议删除漂移.md`
 
-## 7. 单独跑 `observability-correlation`
+## 8. 单独跑 `observability-correlation`
 
 这一步是把“不要先扫全仓”做实。
 
@@ -262,7 +297,7 @@ python -m aidrp observability-correlation \
 - `../expected/meeting-deletion-correlation-会议删除关联.json`
 - `../expected/meeting-deletion-correlation-会议删除关联.md`
 
-## 8. 写 `eval-case`
+## 9. 写 `eval-case`
 
 修完以后，不要只停在“这次好了”。
 
@@ -286,7 +321,7 @@ python -m aidrp eval-case \
 - `../expected/regression-for-meeting-deletion-drift-会议删除漂移回归用例.json`
 - `../expected/regression-for-meeting-deletion-drift-会议删除漂移回归用例.md`
 
-## 9. 最后跑 `doc-sync`
+## 10. 最后跑 `doc-sync`
 
 只要这个修复改变了：
 

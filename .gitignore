@@ -12,6 +12,8 @@ venv/
 node_modules/
 .aidrp/cache/
 .aidrp/briefs/
+.aidrp/product-reviews/
+.aidrp/engineering-reviews/
 .aidrp/tasks/
 .aidrp/debug/
 .aidrp/evals/

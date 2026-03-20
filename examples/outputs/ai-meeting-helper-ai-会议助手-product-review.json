@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.1.0",
+  "review_id": "ai-meeting-helper-ai-会议助手-product-review",
+  "generated_at": "2026-03-20T19:11:29+00:00",
+  "title": "AI meeting helper AI 会议助手",
+  "brief_id": "ai-meeting-helper-ai-会议助手",
+  "current_goal": "把第一版压成可交付切片",
+  "core_user": "脑子里先有感觉、但暂时说不清需求的构建者 | Builders with fuzzy first ideas",
+  "core_problem": "想法太散，没法直接开写，也容易一上来做偏 | Ideas are too vague to code directly",
+  "primary_scenario": "先把第一阶段要不要做、做什么聊清楚 | Clarify the first milestone",
+  "minimum_valuable_slice": "把对话收敛成一份能继续执行的结构化简报 | Turn conversation into a structured brief",
+  "non_goals": [
+    "暂时不设计全系统，也不提前扩 scope | Do not design the whole system yet"
+  ],
+  "scope_decision": "hold",
+  "scope_decision_label": "保持",
+  "scope_reason": "先把最小有价值切片做稳，再决定是否扩范围",
+  "recommended_scope_decision": "hold",
+  "recommended_scope_reason": "第一版已经有明确边界，建议先保持范围，把最小切片做稳。",
+  "success_signals": [
+    "这份简报可以顺利转成任务包并指导开工 | The brief can be converted into a task packet"
+  ],
+  "expansion_triggers": [
+    "当前最小切片已经稳定通过真实验收，且用户重复提出同一扩展需求。",
+    "现有第一版已经能稳定指导 task-packet 和实现，不再反复返工。"
+  ],
+  "open_questions": [
+    "访谈问到什么程度就该收口 | How many interview rounds are enough"
+  ],
+  "assumptions": [
+    "中文是主工作语言，英文术语作为辅助记忆 | Chinese-first wording is preferred"
+  ],
+  "recommended_next_step": "进入 engineering-review；如果 scope 决策是 shrink，就先回写 requirement-brief 再继续。"
+}

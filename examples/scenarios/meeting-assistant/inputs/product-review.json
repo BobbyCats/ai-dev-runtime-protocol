@@ -1,0 +1,21 @@
+{
+  "current_goal": "把第一版压成一个真正可交付的会议助手切片",
+  "core_user": "",
+  "core_problem": "",
+  "primary_scenario": "",
+  "minimum_slice": "只做创建 / 查看 / 删除会议，并在删除前给出可确认计划",
+  "non_goals": [
+    "第一版不做外部日历双向同步",
+    "不做邀请邮件和复杂权限"
+  ],
+  "scope_decision": "保持",
+  "scope_reason": "第一版边界已经清楚，先不要扩展到外部同步、邀请邮件和复杂权限",
+  "success_signals": [
+    "团队能稳定通过聊天创建、查看和删除会议"
+  ],
+  "expansion_triggers": [
+    "真实验收连续通过，且用户重复提出同一扩展需求"
+  ],
+  "open_questions": [],
+  "assumptions": []
+}

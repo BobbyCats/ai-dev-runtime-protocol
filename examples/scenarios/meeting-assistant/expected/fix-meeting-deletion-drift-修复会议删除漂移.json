@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "task_id": "fix-meeting-deletion-drift-修复会议删除漂移",
-  "generated_at": "2026-03-20T18:50:32+00:00",
+  "generated_at": "2026-03-20T19:11:28+00:00",
   "title": "Fix meeting deletion drift 修复会议删除漂移",
   "type": "bugfix",
   "objective": "只修删除解析和执行链路，不顺手扩成一次存储层重构",

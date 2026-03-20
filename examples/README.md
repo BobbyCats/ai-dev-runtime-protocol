@@ -18,6 +18,8 @@
 
 - `repo-map | 仓库地图`
 - `requirement-brief | 需求简报`
+- `product-review | 产品评审`
+- `engineering-review | 工程评审`
 - `design-token-pack | 设计令牌包`
 - `domain-map | 领域地图`
 - `tool-contract | 工具契约`
@@ -67,6 +69,8 @@
 python -m aidrp init-workspace --project-root . --write-agents-template
 python -m aidrp repo-map --project-root . --output-dir examples/outputs
 python -m aidrp requirement-brief --title "AI meeting helper AI 会议助手" --product-idea "先通过需求访谈把问题聊清楚，再决定写不写代码 | Use a discovery interview before coding" --target-user "脑子里先有感觉、但暂时说不清需求的构建者 | Builders with fuzzy first ideas" --pain-point "想法太散，没法直接开写，也容易一上来做偏 | Ideas are too vague to code directly" --desired-outcome "把对话收敛成一份能继续执行的结构化简报 | Turn conversation into a structured brief" --output-dir examples/outputs
+python -m aidrp product-review --brief examples/outputs/ai-meeting-helper-ai-会议助手.json --current-goal "把第一版压成可交付切片" --scope-decision 保持 --scope-reason "先把最小有价值切片做稳，再决定是否扩范围" --output-dir examples/outputs
+python -m aidrp engineering-review --project-root . --brief examples/outputs/ai-meeting-helper-ai-会议助手.json --product-review examples/outputs/ai-meeting-helper-ai-会议助手-product-review.json --repo-map examples/outputs/repo-map.json --change-goal "先固定写入边界、候选文件和验证方式" --decision 可以开工 --output-dir examples/outputs
 python -m aidrp domain-map --product "AI schedule assistant" --orchestrator "calendar-orchestrator" --domain "schedule|events,availability|create,update,delete|expense tracking" --output-dir examples/outputs
 python -m aidrp tool-contract --tool-name "delete_event" --domain "schedule" --purpose "Delete an event by stable ID." --input-field "event_id|string|true|Stable event identifier." --output-field "deleted|boolean|Whether deletion succeeded." --output-dir examples/outputs
 python -m aidrp execution-plan --title "Delete event safely" --goal "Delete the targeted event after confirmation." --step "Resolve target|event_id|fetch_event|event snapshot|false" --step "Execute delete|event snapshot|delete_event|delete result|true" --output-dir examples/outputs

@@ -96,8 +96,9 @@ python -m aidrp requirement-brief \
 
 常见搭配：
 
-- `plan-product-review` 手册
-- `plan-engineering-review` 手册
+- `product-review`
+- `repo-map`
+- `engineering-review`
 - `task-packet`
 
 典型输出：
@@ -108,6 +109,72 @@ python -m aidrp requirement-brief \
 说明：
 
 - `需求访谈` 当前以模板和 playbook 为主，不是 CLI 命令
+
+### `product-review`
+
+用途：
+
+- 把产品评审结论结构化，不再只停留在一段会后总结
+
+最小用法：
+
+```bash
+python -m aidrp product-review \
+  --brief .aidrp/briefs/<brief-id>.json \
+  --current-goal "把第一版压成可交付切片" \
+  --scope-decision 保持 \
+  --scope-reason "第一版边界已经清楚，先做稳"
+```
+
+何时使用：
+
+- 已有 `requirement-brief`
+- 还没决定第一版是扩、保持还是缩
+
+常见搭配：
+
+- `repo-map`
+- `engineering-review`
+- `task-packet`
+
+典型输出：
+
+- `product-reviews/*.json`
+- `product-reviews/*.md`
+
+### `engineering-review`
+
+用途：
+
+- 把工程评审从会前共识变成可复用工件
+
+最小用法：
+
+```bash
+python -m aidrp engineering-review \
+  --project-root . \
+  --brief .aidrp/briefs/<brief-id>.json \
+  --product-review .aidrp/product-reviews/<review-id>.json \
+  --repo-map .aidrp/repo-map.json \
+  --change-goal "只修最小改动面" \
+  --decision 可以开工
+```
+
+何时使用：
+
+- 已经知道要做什么，但还没定写入边界和验证方式
+- 已经有 `repo-map`，想把候选文件、写入边界和验证路径压成正式工件
+
+常见搭配：
+
+- `repo-map`
+- `task-packet`
+- `debug-pack`
+
+典型输出：
+
+- `engineering-reviews/*.json`
+- `engineering-reviews/*.md`
 
 ## 2. 任务执行输入
 

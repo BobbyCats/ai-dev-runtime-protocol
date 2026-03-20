@@ -39,6 +39,19 @@
 
 - [templates/plan-product-review-产品评审.md](../../templates/plan-product-review-产品评审.md)
 
+如果你已经有 `requirement-brief`，建议直接生成结构化工件，而不是只写散文结论：
+
+```bash
+python -m aidrp product-review \
+  --brief .aidrp/briefs/<brief-id>.json \
+  --current-goal "把第一版压成可交付的最小切片" \
+  --scope-decision 保持 \
+  --scope-reason "第一版边界已经清楚，先不要扩张" \
+  --output-dir .aidrp/product-reviews
+```
+
+这样后面的工程评审、教程、示例和测试都可以直接复用同一份事实来源。
+
 ## 硬规则
 
 - 没做 scope 决策，不要进入工程评审

@@ -1,7 +1,7 @@
 # Requirement Brief | 需求简报: AI 会议助手第一版
 
 - Brief ID | 简报 ID: `ai-会议助手第一版`
-- Generated | 生成时间: `2026-03-20T18:50:32+00:00`
+- Generated | 生成时间: `2026-03-20T19:11:28+00:00`
 
 ## Product Idea | 产品想法
 

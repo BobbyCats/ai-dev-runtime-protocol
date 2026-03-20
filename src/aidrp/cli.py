@@ -10,10 +10,12 @@ from aidrp.domain_map import build_domain_map, write_domain_map
 from aidrp.doc_sync import build_doc_sync, write_doc_sync
 from aidrp.eval_case import build_eval_case, write_eval_case
 from aidrp.execution_plan import build_execution_plan, write_execution_plan
+from aidrp.engineering_review import build_engineering_review, write_engineering_review
 from aidrp.observability_correlation import (
     build_observability_correlation,
     write_observability_correlation,
 )
+from aidrp.product_review import build_product_review, write_product_review
 from aidrp.requirement_brief import build_requirement_brief, write_requirement_brief
 from aidrp.repo_map import write_repo_map
 from aidrp.task_packet import build_task_packet, write_task_packet
@@ -168,6 +170,41 @@ def build_parser() -> argparse.ArgumentParser:
     brief_cmd.add_argument("--open-question", action="append", default=[])
     brief_cmd.add_argument("--assumption", action="append", default=[])
     brief_cmd.add_argument("--output-dir", default=".aidrp/briefs")
+
+    product_review_cmd = subparsers.add_parser("product-review", help="Generate a product review artifact | 生成产品评审")
+    product_review_cmd.add_argument("--brief", required=True)
+    product_review_cmd.add_argument("--current-goal", default="")
+    product_review_cmd.add_argument("--core-user", default="")
+    product_review_cmd.add_argument("--core-problem", default="")
+    product_review_cmd.add_argument("--primary-scenario", default="")
+    product_review_cmd.add_argument("--mvs", default="")
+    product_review_cmd.add_argument("--non-goal", action="append", default=[])
+    product_review_cmd.add_argument("--scope-decision", default="")
+    product_review_cmd.add_argument("--scope-reason", default="")
+    product_review_cmd.add_argument("--success-signal", action="append", default=[])
+    product_review_cmd.add_argument("--expand-trigger", action="append", default=[])
+    product_review_cmd.add_argument("--open-question", action="append", default=[])
+    product_review_cmd.add_argument("--assumption", action="append", default=[])
+    product_review_cmd.add_argument("--output-dir", default=".aidrp/product-reviews")
+
+    engineering_review_cmd = subparsers.add_parser("engineering-review", help="Generate an engineering review artifact | 生成工程评审")
+    engineering_review_cmd.add_argument("--project-root", default=".")
+    engineering_review_cmd.add_argument("--brief", required=True)
+    engineering_review_cmd.add_argument("--product-review", required=True)
+    engineering_review_cmd.add_argument("--repo-map", default=".aidrp/repo-map.json")
+    engineering_review_cmd.add_argument("--change-goal", default="")
+    engineering_review_cmd.add_argument("--write-boundary", action="append", default=[])
+    engineering_review_cmd.add_argument("--avoid-file", action="append", default=[])
+    engineering_review_cmd.add_argument("--state-owner", default="")
+    engineering_review_cmd.add_argument("--risk", action="append", default=[])
+    engineering_review_cmd.add_argument("--failure-mode", action="append", default=[])
+    engineering_review_cmd.add_argument("--observe", action="append", default=[])
+    engineering_review_cmd.add_argument("--validation-command", action="append", default=[])
+    engineering_review_cmd.add_argument("--live-qa-entry", default="")
+    engineering_review_cmd.add_argument("--rollback-plan", default="")
+    engineering_review_cmd.add_argument("--decision", default="")
+    engineering_review_cmd.add_argument("--decision-reason", default="")
+    engineering_review_cmd.add_argument("--output-dir", default=".aidrp/engineering-reviews")
 
     domain_cmd = subparsers.add_parser("domain-map", help="Generate a domain map artifact | 生成领域地图")
     domain_cmd.add_argument("--product", required=True)
@@ -362,6 +399,62 @@ def main(argv: list[str] | None = None) -> int:
         output_dir.mkdir(parents=True, exist_ok=True)
         prefix = output_dir / brief["brief_id"]
         write_requirement_brief(brief, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
+        print(prefix.with_suffix(".json"))
+        print(prefix.with_suffix(".md"))
+        return 0
+
+    if args.command == "product-review":
+        brief = load_json(_path(args.brief))
+        review = build_product_review(
+            brief,
+            current_goal=args.current_goal,
+            core_user=args.core_user,
+            core_problem=args.core_problem,
+            primary_scenario=args.primary_scenario,
+            minimum_slice=args.mvs,
+            non_goals=_list(args.non_goal),
+            scope_decision=args.scope_decision,
+            scope_reason=args.scope_reason,
+            success_signals=_list(args.success_signal),
+            expansion_triggers=_list(args.expand_trigger),
+            open_questions=_list(args.open_question),
+            assumptions=_list(args.assumption),
+        )
+        output_dir = _path(args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        prefix = output_dir / review["review_id"]
+        write_product_review(review, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
+        print(prefix.with_suffix(".json"))
+        print(prefix.with_suffix(".md"))
+        return 0
+
+    if args.command == "engineering-review":
+        project_root = _path(args.project_root)
+        brief = load_json(_path(args.brief))
+        product_review = load_json(_path(args.product_review))
+        repo_map = load_json(_project_path(project_root, args.repo_map))
+        review = build_engineering_review(
+            project_root,
+            repo_map,
+            brief,
+            product_review,
+            change_goal=args.change_goal,
+            write_boundary=_list(args.write_boundary),
+            avoid_files=_list(args.avoid_file),
+            state_owner=args.state_owner,
+            risks=_list(args.risk),
+            failure_modes=_list(args.failure_mode),
+            observability_points=_list(args.observe),
+            validation_commands=_list(args.validation_command),
+            live_qa_entry=args.live_qa_entry,
+            rollback_plan=args.rollback_plan,
+            review_decision=args.decision,
+            decision_reason=args.decision_reason,
+        )
+        output_dir = _project_path(project_root, args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        prefix = output_dir / review["review_id"]
+        write_engineering_review(review, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
         print(prefix.with_suffix(".json"))
         print(prefix.with_suffix(".md"))
         return 0

@@ -41,6 +41,8 @@
 
 - `repo-map` | 仓库地图
 - `requirement-brief` | 需求简报
+- `product-review` | 产品评审
+- `engineering-review` | 工程评审
 - `design-token-pack` | 设计令牌包
 - `task-packet` | 任务包
 - `debug-pack` | 排障包
@@ -68,6 +70,7 @@
 
 - 初始化 `.aidrp/`
 - 扫描仓库并生成仓库地图
+- 生成产品评审与工程评审
 - 生成领域地图、工具契约、执行计划
 - 生成任务包与排障包
 - 生成可观测性关联与成本权限预算

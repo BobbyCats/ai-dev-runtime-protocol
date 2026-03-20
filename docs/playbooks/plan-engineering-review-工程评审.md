@@ -43,6 +43,22 @@
 
 - [templates/plan-engineering-review-工程评审.md](../../templates/plan-engineering-review-工程评审.md)
 
+如果你已经有 `requirement-brief`、`product-review` 和 `repo-map`，建议直接生成结构化工件：
+
+```bash
+python -m aidrp engineering-review \
+  --project-root . \
+  --brief .aidrp/briefs/<brief-id>.json \
+  --product-review .aidrp/product-reviews/<review-id>.json \
+  --repo-map .aidrp/repo-map.json \
+  --change-goal "只修这次任务需要的最小改动面" \
+  --decision 可以开工 \
+  --decision-reason "写入边界、观察点和验证路径已经清楚" \
+  --output-dir .aidrp/engineering-reviews
+```
+
+这样 `task-packet`、`debug-pack` 和后续 `doc-sync` 会更容易保持一致。
+
 ## 硬规则
 
 - 说不清写入边界，不要直接开工

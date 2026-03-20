@@ -1,0 +1,141 @@
+{
+  "schema_version": "0.1.0",
+  "review_id": "ai-meeting-helper-ai-会议助手-engineering-review",
+  "generated_at": "2026-03-20T19:11:29+00:00",
+  "title": "AI meeting helper AI 会议助手",
+  "brief_id": "ai-meeting-helper-ai-会议助手",
+  "product_review_id": "ai-meeting-helper-ai-会议助手-product-review",
+  "change_goal": "先固定写入边界、候选文件和验证方式",
+  "write_boundary": [
+    "templates/prompts-提示词.md",
+    "src/aidrp/cli.py",
+    "src/aidrp/utils.py"
+  ],
+  "avoid_files": [
+    ".github/workflows/ci.yml",
+    "AGENTS.md",
+    "docs/architecture-架构说明.md",
+    "docs/playbooks/bugfix-缺陷修复.md"
+  ],
+  "state_owner": "prompts-提示词",
+  "candidate_files": [
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 16,
+      "reason": "Matched tokens: discovery, interview"
+    },
+    {
+      "path": "templates/prompts-提示词.md",
+      "language": "markdown",
+      "role": "source",
+      "score": 15,
+      "reason": "Matched tokens: discovery, first, interview"
+    },
+    {
+      "path": "src/aidrp/cli.py",
+      "language": "python",
+      "role": "source",
+      "score": 12,
+      "reason": "Matched tokens: brief"
+    },
+    {
+      "path": "src/aidrp/utils.py",
+      "language": "python",
+      "role": "source",
+      "score": 12,
+      "reason": "Matched tokens: are"
+    },
+    {
+      "path": "templates/requirement-brief-需求简报.md",
+      "language": "markdown",
+      "role": "source",
+      "score": 12,
+      "reason": "Matched tokens: brief, use"
+    },
+    {
+      "path": "src/aidrp/requirement_brief.py",
+      "language": "python",
+      "role": "source",
+      "score": 11,
+      "reason": "Matched tokens: brief"
+    },
+    {
+      "path": "src/aidrp/tool_contract.py",
+      "language": "python",
+      "role": "source",
+      "score": 11,
+      "reason": "Matched tokens: too"
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 10,
+      "reason": "High-signal documentation file"
+    },
+    {
+      "path": "ONBOARDING.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 10,
+      "reason": "High-signal documentation file"
+    },
+    {
+      "path": "docs/playbooks/discovery-interview-需求访谈.md",
+      "language": "markdown",
+      "role": "documentation",
+      "score": 10,
+      "reason": "Matched tokens: discovery, interview"
+    }
+  ],
+  "risk_points": [
+    "关键编号没有透传到日志时，排障会退化成大范围扫描。"
+  ],
+  "failure_modes": [
+    "操作完成了，但日志里缺少 trace / decision / plan / tool call 编号。",
+    "代码修通了 happy path，但真实入口仍然复现旧问题。"
+  ],
+  "observability_points": [
+    "在入口、计划确认、执行器三个边界记录 trace_id / decision_id / plan_id / tool_call_id。",
+    "日志里同时记录 expected target 和 actual target，避免只看到“成功/失败”而不知道删的是谁。"
+  ],
+  "validation_commands": [
+    "aidrp",
+    "python -m unittest discover -s tests -v"
+  ],
+  "live_qa_entry": "先把第一阶段要不要做、做什么聊清楚 | Clarify the first milestone",
+  "rollback_plan": "如果真实验收或日志编号链路不稳定，就回到上一个可验证版本，并保留这次决策轨迹。",
+  "review_decision": "ready",
+  "review_decision_label": "可以开工",
+  "decision_reason": "改动边界、风险、观察点和验证路径已经明确，可以进入实现。",
+  "recommended_artifacts": [
+    {
+      "artifact": "domain-map",
+      "required": false,
+      "reason": "场景开始跨多个业务域时，需要先明确状态归属和编排关系。"
+    },
+    {
+      "artifact": "tool-contract",
+      "required": false,
+      "reason": "一旦进入工具调用和执行器阶段，就要明确输入、输出、失败语义和权限边界。"
+    },
+    {
+      "artifact": "execution-plan",
+      "required": false,
+      "reason": "涉及多步确认或批量动作时，计划与执行分离能显著减少返工和慢循环。"
+    },
+    {
+      "artifact": "observability-correlation",
+      "required": true,
+      "reason": "只要排障可能依赖编号和日志，就应该尽早接入关联定位。"
+    },
+    {
+      "artifact": "cost-privacy-budget",
+      "required": false,
+      "reason": "AI 原生产品只要要长期运行，就要提前约束上下文、权限和敏感数据暴露范围。"
+    }
+  ],
+  "recommended_next_step": "写 task-packet 或 debug-pack；如果评审结论不是 ready，就先缩范围或补信息。"
+}

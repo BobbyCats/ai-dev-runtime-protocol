@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bobbycats.github.io/ai-dev-runtime-protocol/schemas/engineering-review.schema.json",
+  "title": "EngineeringReview",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "review_id",
+    "generated_at",
+    "title",
+    "brief_id",
+    "product_review_id",
+    "change_goal",
+    "write_boundary",
+    "state_owner",
+    "risk_points",
+    "failure_modes",
+    "observability_points",
+    "validation_commands",
+    "review_decision",
+    "decision_reason",
+    "recommended_artifacts",
+    "recommended_next_step"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "review_id": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "title": { "type": "string" },
+    "brief_id": { "type": "string" },
+    "product_review_id": { "type": "string" },
+    "change_goal": { "type": "string" },
+    "write_boundary": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "avoid_files": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "state_owner": { "type": "string" },
+    "candidate_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "language", "role", "score", "reason"],
+        "properties": {
+          "path": { "type": "string" },
+          "language": { "type": "string" },
+          "role": { "type": "string" },
+          "score": { "type": "integer" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "risk_points": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "failure_modes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "observability_points": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "validation_commands": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "live_qa_entry": { "type": "string" },
+    "rollback_plan": { "type": "string" },
+    "review_decision": {
+      "type": "string",
+      "enum": ["ready", "shrink-scope", "needs-info"]
+    },
+    "review_decision_label": { "type": "string" },
+    "decision_reason": { "type": "string" },
+    "recommended_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["artifact", "required", "reason"],
+        "properties": {
+          "artifact": { "type": "string" },
+          "required": { "type": "boolean" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "recommended_next_step": { "type": "string" }
+  }
+}

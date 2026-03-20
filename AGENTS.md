@@ -8,7 +8,7 @@
 - 优先遵守 [docs/playbooks/stage-router-阶段路由.md](docs/playbooks/stage-router-阶段路由.md)
 - 优先生成 `.aidrp/` 工件，而不是直接大范围扫仓库
 - 想法不清楚时，先做 `需求访谈（discovery interview）`，再写 `需求简报（requirement-brief）`
-- 功能开发先过 `产品评审（product review）` 和 `工程评审（engineering review）`
+- 功能开发先过 `产品评审（product review）`，再用 `仓库地图（repo-map）` 和 `工程评审（engineering review）` 缩小改动边界
 - 前端或多端 UI 任务先补 `设计令牌包（design-token-pack）`
 - 非 trivial 任务先生成 `任务包（task-packet）`
 - bug 先生成 `排障包（debug-pack）` 和 `可观测性关联（observability-correlation）`，再做 `根因调查（investigate）`

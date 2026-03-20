@@ -67,12 +67,12 @@ flowchart TD
   B --> C["产品评审<br/>product review"]
   C --> D{"是否涉及 UI / 多端 / 设计系统?"}
   D -- 是 --> E["设计令牌包<br/>design token pack"]
-  D -- 否 --> F["工程评审<br/>engineering review"]
+  D -- 否 --> F["仓库地图<br/>repo map"]
   E --> F
-  F --> G["仓库地图<br/>repo map"]
-  G --> H{"这次是功能还是缺陷?"}
-  H -- 功能 --> I["任务包<br/>task packet"]
-  H -- 缺陷 --> J["排障包<br/>debug pack"]
+  F --> G{"这次是功能还是缺陷?"}
+  G -- 功能 --> H["工程评审<br/>engineering review"]
+  H --> I["任务包<br/>task packet"]
+  G -- 缺陷 --> J["排障包<br/>debug pack"]
   J --> K["可观测性关联<br/>observability correlation"]
   K --> L["根因调查<br/>investigate"]
   I --> M["实现与测试"]
@@ -96,9 +96,9 @@ flowchart TD
 
 1. `discovery-interview | 需求访谈`
 2. `requirement-brief | 需求简报`
-3. `plan-product-review | 产品评审`
-4. `plan-engineering-review | 工程评审`
-5. `repo-map | 仓库地图`
+3. `product-review | 产品评审`
+4. `repo-map | 仓库地图`
+5. `engineering-review | 工程评审`
 6. `task-packet | 任务包`
 7. 实现
 8. `qa-live | 真实验收`
@@ -121,7 +121,7 @@ flowchart TD
 推荐流程：
 
 1. `repo-map`
-2. `plan-engineering-review`
+2. `engineering-review`
 3. `task-packet`
 4. 必要时补 `domain-map` 和 `tool-contract`
 5. 实现与测试
@@ -172,12 +172,13 @@ flowchart TD
 
 1. `requirement-brief`
 2. `design-token-pack`
-3. `plan-product-review`
-4. `plan-engineering-review`
-5. `task-packet`
-6. 实现
-7. `qa-live`
-8. `doc-sync`
+3. `product-review`
+4. `repo-map`
+5. `engineering-review`
+6. `task-packet`
+7. 实现
+8. `qa-live`
+9. `doc-sync`
 
 关键判断：
 
@@ -196,7 +197,7 @@ flowchart TD
 推荐流程：
 
 1. `requirement-brief`
-2. `plan-product-review`
+2. `product-review`
 3. `domain-map`
 4. `tool-contract`
 5. `execution-plan`
@@ -233,8 +234,8 @@ flowchart TD
 
 - `discovery-interview`
 - `requirement-brief`
-- `plan-product-review`
-- `plan-engineering-review`
+- `product-review`
+- `engineering-review`
 
 ### 视觉系统层
 
@@ -264,6 +265,8 @@ flowchart TD
 
 - `discovery interview` 目前以模板为主
 - `requirement-brief`
+- `product-review`
+- `engineering-review`
 
 ### 任务执行输入
 
@@ -305,7 +308,7 @@ flowchart TD
 如果你是产品感很强、但工程基础一般的 Builder，再加：
 
 - `requirement-brief`
-- `plan-product-review`
+- `product-review`
 - `design-token-pack`
 
 如果你已经开始做 Agent 产品，再加：
@@ -320,7 +323,7 @@ flowchart TD
 推荐分工：
 
 - 产品或负责人维护 `requirement-brief`、产品评审结论、`design-token-pack`
-- 工程负责人维护 `plan-engineering-review`、`domain-map`、`tool-contract`
+- 工程负责人维护 `engineering-review`、`domain-map`、`tool-contract`
 - 开发执行者围绕 `task-packet` 或 `debug-pack` 工作
 - QA 或发布责任人维护 `eval-case`、`qa-live` 记录、`doc-sync`
 

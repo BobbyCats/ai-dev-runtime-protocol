@@ -13,8 +13,10 @@ from aidrp.design_token_pack import (
 )
 from aidrp.doc_sync import build_doc_sync
 from aidrp.domain_map import build_domain_map
+from aidrp.engineering_review import build_engineering_review
 from aidrp.eval_case import build_eval_case
 from aidrp.execution_plan import build_execution_plan
+from aidrp.product_review import build_product_review
 from aidrp.repo_map import build_repo_map
 from aidrp.requirement_brief import build_requirement_brief
 from aidrp.task_packet import build_task_packet
@@ -43,6 +45,69 @@ class ArtifactBuilderTests(unittest.TestCase):
         )
         self.assertEqual(brief["brief_id"], "ai-会议助手第一版")
         self.assertIn("task-packet", brief["recommended_next_step"])
+
+    def test_product_and_engineering_review_builders_generate_structured_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            fixture = copy_scenario_fixture(root)
+            init_workspace(fixture, write_agents_template=True)
+            repo_map = build_repo_map(fixture)
+            brief_data = scenario_input("requirement-brief.json")
+            product_data = scenario_input("product-review.json")
+            engineering_data = scenario_input("engineering-review.json")
+
+            brief = build_requirement_brief(
+                title=brief_data["title"],
+                product_idea=brief_data["product_idea"],
+                target_users=brief_data["target_users"],
+                pain_points=brief_data["pain_points"],
+                desired_outcomes=brief_data["desired_outcomes"],
+                core_scenarios=brief_data["core_scenarios"],
+                non_goals=brief_data["non_goals"],
+                constraints=brief_data["constraints"],
+                success_metrics=brief_data["success_metrics"],
+                open_questions=brief_data["open_questions"],
+                assumptions=brief_data["assumptions"],
+            )
+            product_review = build_product_review(
+                brief,
+                current_goal=product_data["current_goal"],
+                core_user=product_data["core_user"],
+                core_problem=product_data["core_problem"],
+                primary_scenario=product_data["primary_scenario"],
+                minimum_slice=product_data["minimum_slice"],
+                non_goals=product_data["non_goals"],
+                scope_decision=product_data["scope_decision"],
+                scope_reason=product_data["scope_reason"],
+                success_signals=product_data["success_signals"],
+                expansion_triggers=product_data["expansion_triggers"],
+                open_questions=product_data["open_questions"],
+                assumptions=product_data["assumptions"],
+            )
+            self.assertEqual(product_review["review_id"], "ai-会议助手第一版-product-review")
+            self.assertEqual(product_review["scope_decision"], "hold")
+
+            engineering_review = build_engineering_review(
+                fixture,
+                repo_map,
+                brief,
+                product_review,
+                change_goal=engineering_data["change_goal"],
+                write_boundary=engineering_data["write_boundary"],
+                avoid_files=engineering_data["avoid_files"],
+                state_owner=engineering_data["state_owner"],
+                risks=engineering_data["risks"],
+                failure_modes=engineering_data["failure_modes"],
+                observability_points=engineering_data["observability_points"],
+                validation_commands=engineering_data["validation_commands"],
+                live_qa_entry=engineering_data["live_qa_entry"],
+                rollback_plan=engineering_data["rollback_plan"],
+                review_decision=engineering_data["review_decision"],
+                decision_reason=engineering_data["decision_reason"],
+            )
+            self.assertEqual(engineering_review["review_id"], "ai-会议助手第一版-engineering-review")
+            self.assertEqual(engineering_review["review_decision"], "ready")
+            self.assertTrue(any(item["path"] == "src/calendar_agent.py" for item in engineering_review["candidate_files"]))
 
     def test_design_token_pack_writes_html_preview(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

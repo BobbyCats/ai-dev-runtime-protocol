@@ -1,0 +1,14 @@
+{
+  "change_goal": "只修删除误删链路，不顺手扩成一次存储层重构",
+  "write_boundary": [],
+  "avoid_files": [],
+  "state_owner": "",
+  "risks": [],
+  "failure_modes": [],
+  "observability_points": [],
+  "validation_commands": [],
+  "live_qa_entry": "",
+  "rollback_plan": "",
+  "review_decision": "可以开工",
+  "decision_reason": "写入边界、风险、日志观察点和验证方式已经足够清楚"
+}

@@ -65,6 +65,8 @@
 
 - `repo-map | 仓库地图`
 - `requirement-brief | 需求简报`
+- `product-review | 产品评审`
+- `engineering-review | 工程评审`
 - `design-token-pack | 设计令牌包`
 - `task-packet | 任务包`
 - `debug-pack | 排障包`
@@ -85,8 +87,8 @@
 2. 需求简报
 3. 产品评审
 4. 设计令牌包（UI 任务时）
-5. 工程评审
-6. 仓库地图
+5. 仓库地图
+6. 工程评审
 7. 任务包
 8. 实现
 9. 真实验收
@@ -119,6 +121,8 @@ python -m aidrp --help
 - `init-workspace`
 - `repo-map`
 - `requirement-brief`
+- `product-review`
+- `engineering-review`
 - `domain-map`
 - `tool-contract`
 - `execution-plan`

@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.1.0",
+  "review_id": "ai-会议助手第一版-product-review",
+  "generated_at": "2026-03-20T19:11:28+00:00",
+  "title": "AI 会议助手第一版",
+  "brief_id": "ai-会议助手第一版",
+  "current_goal": "把第一版压成一个真正可交付的会议助手切片",
+  "core_user": "高频安排评审会和同步会的团队负责人",
+  "core_problem": "会议安排总在聊天里反复改，最后没人能准确回答到底定在哪个时间",
+  "primary_scenario": "通过聊天创建、改期和删除会议",
+  "minimum_valuable_slice": "只做创建 / 查看 / 删除会议，并在删除前给出可确认计划",
+  "non_goals": [
+    "第一版不做外部日历双向同步",
+    "不做邀请邮件和复杂权限"
+  ],
+  "scope_decision": "hold",
+  "scope_decision_label": "保持",
+  "scope_reason": "第一版边界已经清楚，先不要扩展到外部同步、邀请邮件和复杂权限",
+  "recommended_scope_decision": "hold",
+  "recommended_scope_reason": "需求已具备第一版雏形，先保持范围，避免过早扩张。",
+  "success_signals": [
+    "团队能稳定通过聊天创建、查看和删除会议"
+  ],
+  "expansion_triggers": [
+    "真实验收连续通过，且用户重复提出同一扩展需求"
+  ],
+  "open_questions": [],
+  "assumptions": [
+    "默认用户更在意收敛速度而不是花哨交互"
+  ],
+  "recommended_next_step": "进入 engineering-review；如果 scope 决策是 shrink，就先回写 requirement-brief 再继续。"
+}

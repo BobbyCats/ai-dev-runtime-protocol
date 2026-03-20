@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "sync_id": "meeting-deletion-docs-refresh-会议删除修复文档同步",
-  "generated_at": "2026-03-20T18:50:32+00:00",
+  "generated_at": "2026-03-20T19:11:29+00:00",
   "title": "Meeting deletion docs refresh 会议删除修复文档同步",
   "summary": "删除链路已经改成稳定 meeting_id，相关 walkthrough、示例和 README 索引都需要同步。",
   "changed_files": [

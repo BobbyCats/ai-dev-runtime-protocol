@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "debug_id": "meeting-deletion-drift-会议删除漂移",
-  "generated_at": "2026-03-20T18:50:32+00:00",
+  "generated_at": "2026-03-20T19:11:28+00:00",
   "title": "Meeting deletion drift 会议删除漂移",
   "symptom": "删除选中的会议时，另一条会议也可能被误删",
   "observed": "界面提示删除成功，但消失的是错误的会议卡片",
@@ -19,7 +19,7 @@
   "observability_correlation": {
     "schema_version": "0.1.0",
     "correlation_id": "meeting-deletion-drift-会议删除漂移",
-    "generated_at": "2026-03-20T18:50:32+00:00",
+    "generated_at": "2026-03-20T19:11:28+00:00",
     "title": "Meeting deletion drift 会议删除漂移",
     "trace_id": "trace-meeting-001",
     "request_id": "req-meeting-001",

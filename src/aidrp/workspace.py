@@ -144,6 +144,8 @@ def init_workspace(project_root: Path, write_agents_template: bool = False) -> l
     workspace = workspace_dir(project_root)
     for relative in [
         "briefs",
+        "product-reviews",
+        "engineering-reviews",
         "tasks",
         "debug",
         "evals",

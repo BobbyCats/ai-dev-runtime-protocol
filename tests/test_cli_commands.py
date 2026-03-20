@@ -43,6 +43,74 @@ class CliCommandTests(unittest.TestCase):
             )
             self.assertTrue((out / "briefs" / "ai-会议助手第一版.json").exists())
 
+            product_review = scenario_input("product-review.json")
+            run_cli(
+                [
+                    "product-review",
+                    "--brief",
+                    str(out / "briefs" / "ai-会议助手第一版.json"),
+                    "--current-goal",
+                    product_review["current_goal"],
+                    "--core-user",
+                    product_review["core_user"],
+                    "--core-problem",
+                    product_review["core_problem"],
+                    "--primary-scenario",
+                    product_review["primary_scenario"],
+                    "--mvs",
+                    product_review["minimum_slice"],
+                    *sum([["--non-goal", item] for item in product_review["non_goals"]], []),
+                    "--scope-decision",
+                    product_review["scope_decision"],
+                    "--scope-reason",
+                    product_review["scope_reason"],
+                    *sum([["--success-signal", item] for item in product_review["success_signals"]], []),
+                    *sum([["--expand-trigger", item] for item in product_review["expansion_triggers"]], []),
+                    *sum([["--open-question", item] for item in product_review["open_questions"]], []),
+                    *sum([["--assumption", item] for item in product_review["assumptions"]], []),
+                    "--output-dir",
+                    str(out / "product-reviews"),
+                ]
+            )
+            self.assertTrue((out / "product-reviews" / "ai-会议助手第一版-product-review.json").exists())
+
+            engineering_review = scenario_input("engineering-review.json")
+            run_cli(
+                [
+                    "engineering-review",
+                    "--project-root",
+                    ".",
+                    "--brief",
+                    str(out / "briefs" / "ai-会议助手第一版.json"),
+                    "--product-review",
+                    str(out / "product-reviews" / "ai-会议助手第一版-product-review.json"),
+                    "--repo-map",
+                    ".aidrp/repo-map.json",
+                    "--change-goal",
+                    engineering_review["change_goal"],
+                    *sum([["--write-boundary", item] for item in engineering_review["write_boundary"]], []),
+                    *sum([["--avoid-file", item] for item in engineering_review["avoid_files"]], []),
+                    "--state-owner",
+                    engineering_review["state_owner"],
+                    *sum([["--risk", item] for item in engineering_review["risks"]], []),
+                    *sum([["--failure-mode", item] for item in engineering_review["failure_modes"]], []),
+                    *sum([["--observe", item] for item in engineering_review["observability_points"]], []),
+                    *sum([["--validation-command", item] for item in engineering_review["validation_commands"]], []),
+                    "--live-qa-entry",
+                    engineering_review["live_qa_entry"],
+                    "--rollback-plan",
+                    engineering_review["rollback_plan"],
+                    "--decision",
+                    engineering_review["review_decision"],
+                    "--decision-reason",
+                    engineering_review["decision_reason"],
+                    "--output-dir",
+                    str(out / "engineering-reviews"),
+                ],
+                cwd=fixture,
+            )
+            self.assertTrue((out / "engineering-reviews" / "ai-会议助手第一版-engineering-review.json").exists())
+
             run_cli(
                 [
                     "domain-map",

@@ -10,9 +10,11 @@ from aidrp.debug_pack import build_debug_pack
 from aidrp.design_token_pack import build_design_token_pack, design_token_pack_to_html
 from aidrp.doc_sync import build_doc_sync, doc_sync_to_markdown
 from aidrp.domain_map import build_domain_map
+from aidrp.engineering_review import build_engineering_review, engineering_review_to_markdown
 from aidrp.eval_case import build_eval_case
 from aidrp.execution_plan import build_execution_plan
 from aidrp.observability_correlation import build_observability_correlation, observability_correlation_to_markdown
+from aidrp.product_review import build_product_review, product_review_to_markdown
 from aidrp.repo_map import build_repo_map, repo_map_to_markdown
 from aidrp.requirement_brief import build_requirement_brief
 from aidrp.task_packet import build_task_packet
@@ -46,6 +48,8 @@ class SchemaAndSnapshotTests(unittest.TestCase):
             eval_input = scenario_input("eval-case.json")
             sync_input = scenario_input("doc-sync.json")
             brief_input = scenario_input("requirement-brief.json")
+            product_review_input = scenario_input("product-review.json")
+            engineering_review_input = scenario_input("engineering-review.json")
 
             trace_file = root / "trace.json"
             start_trace(trace_file, trace_id="trace-1", task_id="task-1", title="Trace demo")
@@ -58,22 +62,59 @@ class SchemaAndSnapshotTests(unittest.TestCase):
                 outcome="pass",
             )
 
+            requirement_brief = build_requirement_brief(
+                title=brief_input["title"],
+                product_idea=brief_input["product_idea"],
+                target_users=brief_input["target_users"],
+                pain_points=brief_input["pain_points"],
+                desired_outcomes=brief_input["desired_outcomes"],
+                core_scenarios=brief_input["core_scenarios"],
+                non_goals=brief_input["non_goals"],
+                constraints=brief_input["constraints"],
+                success_metrics=brief_input["success_metrics"],
+                open_questions=brief_input["open_questions"],
+                assumptions=brief_input["assumptions"],
+            )
+            product_review = build_product_review(
+                requirement_brief,
+                current_goal=product_review_input["current_goal"],
+                core_user=product_review_input["core_user"],
+                core_problem=product_review_input["core_problem"],
+                primary_scenario=product_review_input["primary_scenario"],
+                minimum_slice=product_review_input["minimum_slice"],
+                non_goals=product_review_input["non_goals"],
+                scope_decision=product_review_input["scope_decision"],
+                scope_reason=product_review_input["scope_reason"],
+                success_signals=product_review_input["success_signals"],
+                expansion_triggers=product_review_input["expansion_triggers"],
+                open_questions=product_review_input["open_questions"],
+                assumptions=product_review_input["assumptions"],
+            )
+            engineering_review = build_engineering_review(
+                fixture,
+                repo_map,
+                requirement_brief,
+                product_review,
+                change_goal=engineering_review_input["change_goal"],
+                write_boundary=engineering_review_input["write_boundary"],
+                avoid_files=engineering_review_input["avoid_files"],
+                state_owner=engineering_review_input["state_owner"],
+                risks=engineering_review_input["risks"],
+                failure_modes=engineering_review_input["failure_modes"],
+                observability_points=engineering_review_input["observability_points"],
+                validation_commands=engineering_review_input["validation_commands"],
+                live_qa_entry=engineering_review_input["live_qa_entry"],
+                rollback_plan=engineering_review_input["rollback_plan"],
+                review_decision=engineering_review_input["review_decision"],
+                decision_reason=engineering_review_input["decision_reason"],
+            )
+
             payloads = {
                 "workspace-config": DEFAULT_CONFIG,
                 "repo-map": repo_map,
-                "requirement-brief": build_requirement_brief(
-                    title=brief_input["title"],
-                    product_idea=brief_input["product_idea"],
-                    target_users=brief_input["target_users"],
-                    pain_points=brief_input["pain_points"],
-                    desired_outcomes=brief_input["desired_outcomes"],
-                    core_scenarios=brief_input["core_scenarios"],
-                    non_goals=brief_input["non_goals"],
-                    constraints=brief_input["constraints"],
-                    success_metrics=brief_input["success_metrics"],
-                    open_questions=brief_input["open_questions"],
-                    assumptions=brief_input["assumptions"],
-                ),
+                "requirement-brief": requirement_brief,
+                "product-review": product_review,
+                "engineering-review": engineering_review,
                 "task-packet": build_task_packet(
                     fixture,
                     repo_map,
@@ -200,9 +241,74 @@ class SchemaAndSnapshotTests(unittest.TestCase):
             fixture = copy_scenario_fixture(root)
             init_workspace(fixture, write_agents_template=True)
             repo_map = build_repo_map(fixture)
+            brief_input = scenario_input("requirement-brief.json")
+            product_review_input = scenario_input("product-review.json")
+            engineering_review_input = scenario_input("engineering-review.json")
+            requirement_brief = build_requirement_brief(
+                title=brief_input["title"],
+                product_idea=brief_input["product_idea"],
+                target_users=brief_input["target_users"],
+                pain_points=brief_input["pain_points"],
+                desired_outcomes=brief_input["desired_outcomes"],
+                core_scenarios=brief_input["core_scenarios"],
+                non_goals=brief_input["non_goals"],
+                constraints=brief_input["constraints"],
+                success_metrics=brief_input["success_metrics"],
+                open_questions=brief_input["open_questions"],
+                assumptions=brief_input["assumptions"],
+            )
+            product_review = build_product_review(
+                requirement_brief,
+                current_goal=product_review_input["current_goal"],
+                core_user=product_review_input["core_user"],
+                core_problem=product_review_input["core_problem"],
+                primary_scenario=product_review_input["primary_scenario"],
+                minimum_slice=product_review_input["minimum_slice"],
+                non_goals=product_review_input["non_goals"],
+                scope_decision=product_review_input["scope_decision"],
+                scope_reason=product_review_input["scope_reason"],
+                success_signals=product_review_input["success_signals"],
+                expansion_triggers=product_review_input["expansion_triggers"],
+                open_questions=product_review_input["open_questions"],
+                assumptions=product_review_input["assumptions"],
+            )
+            engineering_review = build_engineering_review(
+                fixture,
+                repo_map,
+                requirement_brief,
+                product_review,
+                change_goal=engineering_review_input["change_goal"],
+                write_boundary=engineering_review_input["write_boundary"],
+                avoid_files=engineering_review_input["avoid_files"],
+                state_owner=engineering_review_input["state_owner"],
+                risks=engineering_review_input["risks"],
+                failure_modes=engineering_review_input["failure_modes"],
+                observability_points=engineering_review_input["observability_points"],
+                validation_commands=engineering_review_input["validation_commands"],
+                live_qa_entry=engineering_review_input["live_qa_entry"],
+                rollback_plan=engineering_review_input["rollback_plan"],
+                review_decision=engineering_review_input["review_decision"],
+                decision_reason=engineering_review_input["decision_reason"],
+            )
 
             assert_text_snapshot(self, repo_map_to_markdown(repo_map), scenario_expected_root() / "repo-map.md")
             assert_json_snapshot(self, repo_map, scenario_expected_root() / "repo-map.json")
+            assert_text_snapshot(
+                self,
+                product_review_to_markdown(product_review),
+                scenario_expected_root() / "ai-会议助手第一版-product-review.md",
+            )
+            assert_json_snapshot(self, product_review, scenario_expected_root() / "ai-会议助手第一版-product-review.json")
+            assert_text_snapshot(
+                self,
+                engineering_review_to_markdown(engineering_review),
+                scenario_expected_root() / "ai-会议助手第一版-engineering-review.md",
+            )
+            assert_json_snapshot(
+                self,
+                engineering_review,
+                scenario_expected_root() / "ai-会议助手第一版-engineering-review.json",
+            )
 
             debug_input = scenario_input("debug-pack.json")
             correlation = build_observability_correlation(

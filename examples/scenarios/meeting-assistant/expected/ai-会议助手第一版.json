@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "brief_id": "ai-会议助手第一版",
-  "generated_at": "2026-03-20T18:50:32+00:00",
+  "generated_at": "2026-03-20T19:11:28+00:00",
   "title": "AI 会议助手第一版",
   "product_idea": "把模糊会议安排需求收敛成结构化计划，再交给用户确认和执行。",
   "target_users": [

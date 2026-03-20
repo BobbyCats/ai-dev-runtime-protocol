@@ -1,5 +1,19 @@
 # 工程评审（Engineering Review）
 
+如果你已经有 `requirement-brief`、`product-review` 和 `repo-map`，优先直接生成正式工件：
+
+```bash
+python -m aidrp engineering-review \
+  --project-root . \
+  --brief .aidrp/briefs/<brief-id>.json \
+  --product-review .aidrp/product-reviews/<review-id>.json \
+  --repo-map .aidrp/repo-map.json \
+  --change-goal "只修这次任务需要的最小改动面" \
+  --decision 可以开工 \
+  --decision-reason "写入边界、观察点和验证路径已经清楚" \
+  --output-dir .aidrp/engineering-reviews
+```
+
 ## 输入
 
 - 需求简报：

@@ -29,8 +29,12 @@ class IntegrationFlowTests(unittest.TestCase):
             actual_files = {
                 fixture / ".aidrp" / "briefs" / "ai-会议助手第一版.json": expected_root / "ai-会议助手第一版.json",
                 fixture / ".aidrp" / "briefs" / "ai-会议助手第一版.md": expected_root / "ai-会议助手第一版.md",
+                fixture / ".aidrp" / "product-reviews" / "ai-会议助手第一版-product-review.json": expected_root / "ai-会议助手第一版-product-review.json",
+                fixture / ".aidrp" / "product-reviews" / "ai-会议助手第一版-product-review.md": expected_root / "ai-会议助手第一版-product-review.md",
                 fixture / ".aidrp" / "repo-map.json": expected_root / "repo-map.json",
                 fixture / ".aidrp" / "repo-map.md": expected_root / "repo-map.md",
+                fixture / ".aidrp" / "engineering-reviews" / "ai-会议助手第一版-engineering-review.json": expected_root / "ai-会议助手第一版-engineering-review.json",
+                fixture / ".aidrp" / "engineering-reviews" / "ai-会议助手第一版-engineering-review.md": expected_root / "ai-会议助手第一版-engineering-review.md",
                 fixture / ".aidrp" / "tasks" / "fix-meeting-deletion-drift-修复会议删除漂移.json": expected_root / "fix-meeting-deletion-drift-修复会议删除漂移.json",
                 fixture / ".aidrp" / "tasks" / "fix-meeting-deletion-drift-修复会议删除漂移.md": expected_root / "fix-meeting-deletion-drift-修复会议删除漂移.md",
                 fixture / ".aidrp" / "debug" / "meeting-deletion-drift-会议删除漂移.json": expected_root / "meeting-deletion-drift-会议删除漂移.json",

@@ -7,6 +7,7 @@
 ## 你能在这里练什么
 
 - 从模糊需求生成 `requirement-brief`
+- 生成 `product-review` 和 `engineering-review`
 - 给样例仓库生成 `repo-map`
 - 为一次定点修复生成 `task-packet`
 - 为“删除会议误删对象”生成 `debug-pack`
@@ -19,7 +20,8 @@
 - `fixture/`
   最小样例仓库，包含少量源码、设计令牌和运行日志
 - `inputs/`
-  教程用到的需求、bug、trace 和文档同步输入
+  教程用到的需求、评审、bug、trace 和文档同步输入
+  包括 `requirement-brief.json`、`product-review.json`、`engineering-review.json`
 - `expected/`
   关键工件的标准输出，用于教学和测试
 

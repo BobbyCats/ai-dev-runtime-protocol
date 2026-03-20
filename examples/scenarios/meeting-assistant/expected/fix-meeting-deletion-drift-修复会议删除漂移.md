@@ -2,7 +2,7 @@
 
 - Task ID | 任务 ID: `fix-meeting-deletion-drift-修复会议删除漂移`
 - Type | 类型: `bugfix`
-- Generated | 生成时间: `2026-03-20T18:50:32+00:00`
+- Generated | 生成时间: `2026-03-20T19:11:28+00:00`
 
 ## Objective | 目标
 

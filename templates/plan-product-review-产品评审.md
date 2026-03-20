@@ -1,5 +1,16 @@
 # 产品评审（Product Review）
 
+如果你现在已经有 `requirement-brief`，优先直接生成正式工件：
+
+```bash
+python -m aidrp product-review \
+  --brief .aidrp/briefs/<brief-id>.json \
+  --current-goal "把第一版压成可交付的最小切片" \
+  --scope-decision 保持 \
+  --scope-reason "第一版边界已经清楚，先不要扩张" \
+  --output-dir .aidrp/product-reviews
+```
+
 ## 输入
 
 - 需求简报：
