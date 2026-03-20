@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 
 from aidrp.debug_pack import build_debug_pack, write_debug_pack
+from aidrp.doc_sync import build_doc_sync, write_doc_sync
 from aidrp.eval_case import build_eval_case, write_eval_case
 from aidrp.requirement_brief import build_requirement_brief, write_requirement_brief
 from aidrp.repo_map import write_repo_map
@@ -90,6 +91,14 @@ def build_parser() -> argparse.ArgumentParser:
     eval_cmd.add_argument("--assertion", action="append", default=[])
     eval_cmd.add_argument("--tag", action="append", default=[])
     eval_cmd.add_argument("--output-dir", default=".aidrp/evals")
+
+    doc_sync_cmd = subparsers.add_parser("doc-sync", help="Generate a documentation sync pack | 生成文档同步包")
+    doc_sync_cmd.add_argument("--project-root", default=".")
+    doc_sync_cmd.add_argument("--title", required=True)
+    doc_sync_cmd.add_argument("--summary", required=True)
+    doc_sync_cmd.add_argument("--changed-file", action="append", default=[])
+    doc_sync_cmd.add_argument("--change-note", action="append", default=[])
+    doc_sync_cmd.add_argument("--output-dir", default=".aidrp/docsync")
 
     trace_start_cmd = subparsers.add_parser("trace-start", help="Create a new decision trace file | 创建决策轨迹")
     trace_start_cmd.add_argument("--title", required=True)
@@ -214,6 +223,23 @@ def main(argv: list[str] | None = None) -> int:
         output_dir.mkdir(parents=True, exist_ok=True)
         prefix = output_dir / case["eval_id"]
         write_eval_case(case, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
+        print(prefix.with_suffix(".json"))
+        print(prefix.with_suffix(".md"))
+        return 0
+
+    if args.command == "doc-sync":
+        project_root = _path(args.project_root)
+        pack = build_doc_sync(
+            project_root,
+            title=args.title,
+            summary=args.summary,
+            changed_files=_list(args.changed_file),
+            change_notes=_list(args.change_note),
+        )
+        output_dir = _project_path(project_root, args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        prefix = output_dir / pack["sync_id"]
+        write_doc_sync(pack, prefix.with_suffix(".json"), prefix.with_suffix(".md"))
         print(prefix.with_suffix(".json"))
         print(prefix.with_suffix(".md"))
         return 0

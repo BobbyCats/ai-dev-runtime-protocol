@@ -1,6 +1,6 @@
 # AGENTS
 
-先读 `.aidrp/repo-map.md` 和当前激活的工件，再决定是否扩大上下文。
+先读 `.aidrp/repo-map.md`、`docs/playbooks/stage-router-阶段路由.md` 和当前激活的工件，再决定是否扩大上下文。
 
 ## 必要工件
 
@@ -11,12 +11,16 @@
 - `.aidrp/debug/*.json`
 - `.aidrp/traces/*.json`
 - `.aidrp/evals/*.json`
+- `.aidrp/docsync/*.json`
 
 ## 规则
 
-- 需求还模糊时，先做 `discovery interview | 需求访谈` 并产出 `requirement-brief | 需求简报`
-- 非 trivial 任务先生成 `task-packet | 任务包`
-- bug 先生成 `debug-pack | 排障包`
+- 需求还模糊时，先做 `需求访谈（discovery interview）` 并产出 `需求简报（requirement-brief）`
+- 功能开发先过产品评审和工程评审，再生成 `任务包（task-packet）`
+- bug 先生成 `排障包（debug-pack）`，再做根因调查
 - 当前工件解释不了问题时，才能扩大阅读范围
-- 推理明显转向时，要写 `decision-trace | 决策轨迹`
-- 确认修好的 bug，要生成 `eval-case | 回归用例`
+- 推理明显转向时，要写 `决策轨迹（decision-trace）`
+- 涉及真实用户路径的改动，要做真实验收
+- 确认修好的 bug，要生成 `回归用例（eval-case）`
+- 非 trivial 改动收尾时，要生成 `文档同步包（doc-sync）`
+- 如果命令、工作流或定位变了，README 需要按章节或整篇重写，不能只追加一段

@@ -37,6 +37,21 @@
     "risk_globs": {
       "type": "array",
       "items": { "type": "string" }
+    },
+    "documentation": {
+      "type": "object",
+      "properties": {
+        "canonical_docs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "readme_priority_sections": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "section_rewrite_threshold": { "type": "integer", "minimum": 1 },
+        "full_rewrite_threshold": { "type": "integer", "minimum": 1 }
+      }
     }
   }
 }

@@ -1,28 +1,28 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-03-20T16:40:09+00:00",
+  "generated_at": "2026-03-20T17:05:23+00:00",
   "project_root": "F:\\开发思路\\ai-dev-runtime-protocol",
   "git": {
     "branch": "main",
-    "head": "55fff14424fcee2be237bb97fcba8433266de197",
+    "head": "045ec4b51553ddd286a8954529185dc63343ddea",
     "dirty": true
   },
   "summary": {
-    "file_count": 44,
+    "file_count": 57,
     "language_counts": {
       "text": 4,
       "yaml": 1,
-      "markdown": 18,
+      "markdown": 29,
       "toml": 1,
-      "json": 8,
-      "python": 12
+      "json": 9,
+      "python": 13
     },
     "role_counts": {
-      "source": 23,
+      "source": 28,
       "infrastructure": 1,
-      "documentation": 10,
+      "documentation": 17,
       "configuration": 2,
-      "schema": 7,
+      "schema": 8,
       "test": 1
     },
     "seed_files": [
@@ -32,12 +32,12 @@
       "pyproject.toml",
       "src/aidrp/cli.py",
       "src/aidrp/debug_pack.py",
+      "src/aidrp/doc_sync.py",
       "src/aidrp/repo_map.py",
       "src/aidrp/utils.py",
       "src/aidrp/workspace.py",
       "src/aidrp/eval_case.py",
-      "src/aidrp/requirement_brief.py",
-      "src/aidrp/task_packet.py"
+      "src/aidrp/requirement_brief.py"
     ],
     "risk_files": [],
     "commands": {
@@ -82,11 +82,11 @@
       "path": ".gitignore",
       "language": "text",
       "role": "source",
-      "lines": 14,
+      "lines": 20,
       "symbols": [],
       "imports": [],
       "headings": [],
-      "hash": "8d92609a17be",
+      "hash": "1fb1e9a49f11",
       "score": 2
     },
     {
@@ -135,7 +135,7 @@
       "path": "AGENTS.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 25,
+      "lines": 31,
       "symbols": [
         "AGENTS",
         "工作规则",
@@ -149,45 +149,48 @@
         "验证",
         "编辑边界"
       ],
-      "hash": "7f0408edd728",
+      "hash": "2456566e7a92",
       "score": 10
     },
     {
       "path": "docs/architecture-架构说明.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 89,
+      "lines": 122,
       "symbols": [
         "Architecture | 架构说明",
-        "三层结构",
+        "四层结构",
         "1. Protocol Layer | 协议层",
-        "2. Artifact Layer | 工件层",
-        "3. Runtime Layer | 运行层",
+        "2. Stage Layer | 阶段层",
+        "3. Artifact Layer | 工件层",
+        "4. Runtime Layer | 运行层",
         "为什么不是只写 Prompt？",
         "为什么坚持 JSON First？",
         "为什么 CLI 要保持很薄？",
+        "为什么要把文档同步做成独立工件？",
         "未来可以继续补的方向"
       ],
       "imports": [],
       "headings": [
         "Architecture | 架构说明",
-        "三层结构",
+        "四层结构",
         "1. Protocol Layer | 协议层",
-        "2. Artifact Layer | 工件层",
-        "3. Runtime Layer | 运行层",
+        "2. Stage Layer | 阶段层",
+        "3. Artifact Layer | 工件层",
+        "4. Runtime Layer | 运行层",
         "为什么不是只写 Prompt？",
         "为什么坚持 JSON First？",
         "为什么 CLI 要保持很薄？",
-        "未来可以继续补的方向"
+        "为什么要把文档同步做成独立工件？"
       ],
-      "hash": "aaa272f6b768",
+      "hash": "3c2bb21b6315",
       "score": 4
     },
     {
       "path": "docs/playbooks/bugfix-缺陷修复.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 33,
+      "lines": 39,
       "symbols": [
         "Bugfix Playbook | 缺陷修复手册",
         "标准顺序",
@@ -201,16 +204,16 @@
         "硬规则",
         "最少需要的工件"
       ],
-      "hash": "e22e3f29f2e5",
+      "hash": "100f9d1ed066",
       "score": 4
     },
     {
       "path": "docs/playbooks/discovery-interview-需求访谈.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 52,
+      "lines": 53,
       "symbols": [
-        "Discovery Interview | 需求访谈手册",
+        "需求访谈手册（Discovery Interview）",
         "这一步的目标",
         "标准顺序",
         "AI 提问的重点",
@@ -219,21 +222,46 @@
       ],
       "imports": [],
       "headings": [
-        "Discovery Interview | 需求访谈手册",
+        "需求访谈手册（Discovery Interview）",
         "这一步的目标",
         "标准顺序",
         "AI 提问的重点",
         "硬规则",
         "结束条件"
       ],
-      "hash": "ae16b13beab7",
+      "hash": "f386c668372d",
+      "score": 4
+    },
+    {
+      "path": "docs/playbooks/documentation-sync-文档同步.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 59,
+      "symbols": [
+        "文档同步（Documentation Sync）",
+        "这一步为什么单独存在",
+        "标准顺序",
+        "什么时候该整篇重写 README",
+        "CLI 用法",
+        "硬规则"
+      ],
+      "imports": [],
+      "headings": [
+        "文档同步（Documentation Sync）",
+        "这一步为什么单独存在",
+        "标准顺序",
+        "什么时候该整篇重写 README",
+        "CLI 用法",
+        "硬规则"
+      ],
+      "hash": "0f87a8e5b1c2",
       "score": 4
     },
     {
       "path": "docs/playbooks/feature-功能开发.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 25,
+      "lines": 33,
       "symbols": [
         "Feature Playbook | 功能开发手册",
         "标准顺序",
@@ -245,19 +273,168 @@
         "标准顺序",
         "硬规则"
       ],
-      "hash": "c5db2c972810",
+      "hash": "07a47fa3b93e",
       "score": 3
+    },
+    {
+      "path": "docs/playbooks/investigate-根因调查.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 42,
+      "symbols": [
+        "根因调查（Investigate）",
+        "这一步的目标",
+        "标准顺序",
+        "根因陈述应该长什么样",
+        "硬规则"
+      ],
+      "imports": [],
+      "headings": [
+        "根因调查（Investigate）",
+        "这一步的目标",
+        "标准顺序",
+        "根因陈述应该长什么样",
+        "硬规则"
+      ],
+      "hash": "849e7d532fb6",
+      "score": 4
+    },
+    {
+      "path": "docs/playbooks/plan-engineering-review-工程评审.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 50,
+      "symbols": [
+        "工程评审（Engineering Review）",
+        "这一步的目标",
+        "标准问题",
+        "输出要求",
+        "硬规则"
+      ],
+      "imports": [],
+      "headings": [
+        "工程评审（Engineering Review）",
+        "这一步的目标",
+        "标准问题",
+        "输出要求",
+        "硬规则"
+      ],
+      "hash": "b6178cf174dd",
+      "score": 4
+    },
+    {
+      "path": "docs/playbooks/plan-product-review-产品评审.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 48,
+      "symbols": [
+        "产品评审（Product Review）",
+        "这一步的目标",
+        "标准问题",
+        "输出要求",
+        "硬规则"
+      ],
+      "imports": [],
+      "headings": [
+        "产品评审（Product Review）",
+        "这一步的目标",
+        "标准问题",
+        "输出要求",
+        "硬规则"
+      ],
+      "hash": "73a8c69f0eb5",
+      "score": 4
+    },
+    {
+      "path": "docs/playbooks/qa-live-真实验收.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 41,
+      "symbols": [
+        "真实验收（Live QA）",
+        "这一步的目标",
+        "应该验什么",
+        "标准顺序",
+        "硬规则"
+      ],
+      "imports": [],
+      "headings": [
+        "真实验收（Live QA）",
+        "这一步的目标",
+        "应该验什么",
+        "标准顺序",
+        "硬规则"
+      ],
+      "hash": "2e2cbeef2d38",
+      "score": 4
+    },
+    {
+      "path": "docs/playbooks/stage-router-阶段路由.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 95,
+      "symbols": [
+        "阶段路由（Stage Router）",
+        "核心原则",
+        "标准主线",
+        "功能开发路线",
+        "Bug 修复路线",
+        "阶段门",
+        "判断当前卡在哪一层",
+        "路由的真正价值"
+      ],
+      "imports": [],
+      "headings": [
+        "阶段路由（Stage Router）",
+        "核心原则",
+        "标准主线",
+        "功能开发路线",
+        "Bug 修复路线",
+        "阶段门",
+        "判断当前卡在哪一层",
+        "路由的真正价值"
+      ],
+      "hash": "5d4902e7c037",
+      "score": 4
+    },
+    {
+      "path": "docs/reference/adaptation-principles-本土化改写原则.md",
+      "language": "markdown",
+      "role": "documentation",
+      "lines": 90,
+      "symbols": [
+        "本土化改写原则（Adaptation Principles）",
+        "我们到底在吸收什么",
+        "哪些东西不要照搬",
+        "中文化不是直译",
+        "我们的写法标准",
+        "贴合你的实际意味着什么",
+        "判断一次改写是否合格"
+      ],
+      "imports": [],
+      "headings": [
+        "本土化改写原则（Adaptation Principles）",
+        "我们到底在吸收什么",
+        "哪些东西不要照搬",
+        "中文化不是直译",
+        "我们的写法标准",
+        "贴合你的实际意味着什么",
+        "判断一次改写是否合格"
+      ],
+      "hash": "c5e05364301a",
+      "score": 4
     },
     {
       "path": "docs/reference/open-source-inspiration-开源灵感.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 69,
+      "lines": 96,
       "symbols": [
         "Open-Source Inspiration | 开源灵感",
         "Aider",
         "OpenHands",
         "HyperAgent",
+        "gstack",
         "OpenTelemetry"
       ],
       "imports": [],
@@ -266,33 +443,34 @@
         "Aider",
         "OpenHands",
         "HyperAgent",
+        "gstack",
         "OpenTelemetry"
       ],
-      "hash": "4686adc3597e",
+      "hash": "b23ee105fef0",
       "score": 4
     },
     {
       "path": "docs/reference/terminology-glossary-术语对照.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 37,
+      "lines": 50,
       "symbols": [
-        "Terminology Glossary | 术语对照",
+        "术语对照（Terminology Glossary）",
         "记忆方式"
       ],
       "imports": [],
       "headings": [
-        "Terminology Glossary | 术语对照",
+        "术语对照（Terminology Glossary）",
         "记忆方式"
       ],
-      "hash": "430fd30215fe",
+      "hash": "a167a20fc1b5",
       "score": 2
     },
     {
       "path": "examples/README.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 19,
+      "lines": 20,
       "symbols": [
         "Examples | 示例"
       ],
@@ -300,7 +478,7 @@
       "headings": [
         "Examples | 示例"
       ],
-      "hash": "a815f017ed5a",
+      "hash": "281449d9d614",
       "score": 7
     },
     {
@@ -318,7 +496,7 @@
       "path": "ONBOARDING.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 59,
+      "lines": 82,
       "symbols": [
         "Onboarding | 入门说明",
         "核心转变",
@@ -326,7 +504,7 @@
         "这套系统试图防止的坏味道",
         "必备工件",
         "集成到其他项目的步骤",
-        "如果你现在只能落三件事"
+        "如果你现在只能先落四件事"
       ],
       "imports": [],
       "headings": [
@@ -336,9 +514,9 @@
         "这套系统试图防止的坏味道",
         "必备工件",
         "集成到其他项目的步骤",
-        "如果你现在只能落三件事"
+        "如果你现在只能先落四件事"
       ],
-      "hash": "f1595686b181",
+      "hash": "7608ed6c3db2",
       "score": 10
     },
     {
@@ -356,35 +534,35 @@
       "path": "README.md",
       "language": "markdown",
       "role": "documentation",
-      "lines": 246,
+      "lines": 302,
       "symbols": [
         "AI Dev Runtime Protocol（AI 开发运行协议）",
         "这是什么",
-        "解决什么问题",
-        "你会得到什么",
-        "核心术语",
+        "这版新增了什么",
+        "中文化原则",
+        "阶段路由",
+        "核心工件",
+        "文档同步原则",
         "安装",
         "快速开始",
-        "0. 需求还不清楚时，先做 `discovery interview | 需求访谈`",
+        "0. 需求还不清楚时，先做 `需求访谈（discovery interview）`",
         "1. 初始化工作区",
-        "2. 生成 `repo-map | 仓库地图`",
-        "3. 用 CLI 生成 `requirement-brief | 需求简报`",
-        "4. 开工前再生成 `task-packet | 任务包`"
+        "2. 生成 `仓库地图（repo-map）`"
       ],
       "imports": [],
       "headings": [
         "AI Dev Runtime Protocol（AI 开发运行协议）",
         "这是什么",
-        "解决什么问题",
-        "你会得到什么",
-        "核心术语",
+        "这版新增了什么",
+        "中文化原则",
+        "阶段路由",
+        "核心工件",
+        "文档同步原则",
         "安装",
         "快速开始",
-        "0. 需求还不清楚时，先做 `discovery interview | 需求访谈`",
-        "1. 初始化工作区",
-        "2. 生成 `repo-map | 仓库地图`"
+        "0. 需求还不清楚时，先做 `需求访谈（discovery interview）`"
       ],
-      "hash": "869bdda04544",
+      "hash": "277b87f345e2",
       "score": 10
     },
     {
@@ -407,6 +585,17 @@
       "imports": [],
       "headings": [],
       "hash": "e764b303abe4",
+      "score": 0
+    },
+    {
+      "path": "schemas/doc-sync.schema.json",
+      "language": "json",
+      "role": "schema",
+      "lines": 66,
+      "symbols": [],
+      "imports": [],
+      "headings": [],
+      "hash": "5be2263d90ed",
       "score": 0
     },
     {
@@ -457,11 +646,11 @@
       "path": "schemas/workspace-config.schema.json",
       "language": "json",
       "role": "schema",
-      "lines": 43,
+      "lines": 58,
       "symbols": [],
       "imports": [],
       "headings": [],
-      "hash": "f25ff39ea7a7",
+      "hash": "92b5af203554",
       "score": 0
     },
     {
@@ -492,7 +681,7 @@
       "path": "src/aidrp/cli.py",
       "language": "python",
       "role": "source",
-      "lines": 245,
+      "lines": 271,
       "symbols": [
         "_path",
         "_project_path",
@@ -505,6 +694,7 @@
         "argparse",
         "pathlib",
         "aidrp.debug_pack",
+        "aidrp.doc_sync",
         "aidrp.eval_case",
         "aidrp.requirement_brief",
         "aidrp.repo_map",
@@ -514,7 +704,7 @@
         "aidrp.workspace"
       ],
       "headings": [],
-      "hash": "d8b5b57b4b2a",
+      "hash": "bf55438c4701",
       "score": 9
     },
     {
@@ -539,6 +729,30 @@
       ],
       "headings": [],
       "hash": "1254ad42b352",
+      "score": 9
+    },
+    {
+      "path": "src/aidrp/doc_sync.py",
+      "language": "python",
+      "role": "source",
+      "lines": 223,
+      "symbols": [
+        "_parse_changed_files",
+        "_classify_change",
+        "_impact_action",
+        "build_doc_sync",
+        "doc_sync_to_markdown",
+        "write_doc_sync"
+      ],
+      "imports": [
+        "__future__",
+        "pathlib",
+        "typing",
+        "aidrp.utils",
+        "aidrp.workspace"
+      ],
+      "headings": [],
+      "hash": "a438ec6e6f6c",
       "score": 9
     },
     {
@@ -611,7 +825,7 @@
         "aidrp.utils"
       ],
       "headings": [],
-      "hash": "45244055e06e",
+      "hash": "90bd1ceafd65",
       "score": 8
     },
     {
@@ -694,7 +908,7 @@
       "path": "src/aidrp/workspace.py",
       "language": "python",
       "role": "source",
-      "lines": 114,
+      "lines": 139,
       "symbols": [
         "workspace_dir",
         "config_path",
@@ -708,18 +922,18 @@
         "aidrp.utils"
       ],
       "headings": [],
-      "hash": "86c500f95ffd",
+      "hash": "49c7ebb1c0d3",
       "score": 9
     },
     {
       "path": "templates/AGENTS.md.template",
       "language": "text",
       "role": "source",
-      "lines": 23,
+      "lines": 27,
       "symbols": [],
       "imports": [],
       "headings": [],
-      "hash": "d471c172dedf",
+      "hash": "bd77f76bfd7f",
       "score": 2
     },
     {
@@ -765,6 +979,31 @@
       "score": 4
     },
     {
+      "path": "templates/documentation-sync-文档同步包.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 33,
+      "symbols": [
+        "文档同步包（Documentation Sync Pack）",
+        "变更摘要",
+        "README 判断",
+        "受影响文档",
+        "同步顺序",
+        "完成定义"
+      ],
+      "imports": [],
+      "headings": [
+        "文档同步包（Documentation Sync Pack）",
+        "变更摘要",
+        "README 判断",
+        "受影响文档",
+        "同步顺序",
+        "完成定义"
+      ],
+      "hash": "9e784a7065a8",
+      "score": 6
+    },
+    {
       "path": "templates/eval-case-回归用例.md",
       "language": "markdown",
       "role": "source",
@@ -786,28 +1025,112 @@
       "score": 6
     },
     {
+      "path": "templates/plan-engineering-review-工程评审.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 31,
+      "symbols": [
+        "工程评审（Engineering Review）",
+        "输入",
+        "最小改动边界",
+        "风险与失败模式",
+        "验证与止损",
+        "评审结论"
+      ],
+      "imports": [],
+      "headings": [
+        "工程评审（Engineering Review）",
+        "输入",
+        "最小改动边界",
+        "风险与失败模式",
+        "验证与止损",
+        "评审结论"
+      ],
+      "hash": "6a1071ed85f4",
+      "score": 6
+    },
+    {
+      "path": "templates/plan-product-review-产品评审.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 33,
+      "symbols": [
+        "产品评审（Product Review）",
+        "输入",
+        "用户与问题",
+        "第一版切片",
+        "Scope 决策",
+        "成功标准",
+        "未决问题"
+      ],
+      "imports": [],
+      "headings": [
+        "产品评审（Product Review）",
+        "输入",
+        "用户与问题",
+        "第一版切片",
+        "Scope 决策",
+        "成功标准",
+        "未决问题"
+      ],
+      "hash": "cedf30c9934b",
+      "score": 6
+    },
+    {
       "path": "templates/prompts-提示词.md",
       "language": "markdown",
       "role": "source",
-      "lines": 22,
+      "lines": 42,
       "symbols": [
         "Prompt Starters | 提示词起手式",
         "Discovery Interview First | 先需求访谈",
+        "Product Review First | 先产品评审",
+        "Engineering Review First | 先工程评审",
         "Task Packet First | 先任务包",
         "Debug Pack First | 先排障包",
+        "Investigate First | 先根因调查",
+        "Live QA First | 先真实验收",
         "Trace Discipline | 轨迹纪律",
-        "Eval Discipline | 回归纪律"
+        "Eval Discipline | 回归纪律",
+        "Documentation Sync Discipline | 文档同步纪律"
       ],
       "imports": [],
       "headings": [
         "Prompt Starters | 提示词起手式",
         "Discovery Interview First | 先需求访谈",
+        "Product Review First | 先产品评审",
+        "Engineering Review First | 先工程评审",
         "Task Packet First | 先任务包",
         "Debug Pack First | 先排障包",
+        "Investigate First | 先根因调查",
+        "Live QA First | 先真实验收",
         "Trace Discipline | 轨迹纪律",
         "Eval Discipline | 回归纪律"
       ],
-      "hash": "a9bccf37c362",
+      "hash": "7f615470b73c",
+      "score": 6
+    },
+    {
+      "path": "templates/qa-report-真实验收报告.md",
+      "language": "markdown",
+      "role": "source",
+      "lines": 23,
+      "symbols": [
+        "真实验收报告（Live QA Report）",
+        "基本信息",
+        "验收场景",
+        "证据",
+        "结果"
+      ],
+      "imports": [],
+      "headings": [
+        "真实验收报告（Live QA Report）",
+        "基本信息",
+        "验收场景",
+        "证据",
+        "结果"
+      ],
+      "hash": "e75ffc743392",
       "score": 6
     },
     {
@@ -842,7 +1165,7 @@
         "Success Metrics | 成功标准",
         "Open Questions | 未决问题"
       ],
-      "hash": "a3fe647ea6b9",
+      "hash": "454b7d7ce88d",
       "score": 6
     },
     {
@@ -878,18 +1201,18 @@
       "path": "templates/workspace-config-工作区配置.json",
       "language": "json",
       "role": "configuration",
-      "lines": 33,
+      "lines": 53,
       "symbols": [],
       "imports": [],
       "headings": [],
-      "hash": "d0e71dac6259",
+      "hash": "f4a1f4bf3a02",
       "score": 0
     },
     {
       "path": "tests/test_runtime_protocol.py",
       "language": "python",
       "role": "test",
-      "lines": 112,
+      "lines": 124,
       "symbols": [
         "RuntimeProtocolTests"
       ],
@@ -899,6 +1222,7 @@
         "unittest",
         "pathlib",
         "aidrp.debug_pack",
+        "aidrp.doc_sync",
         "aidrp.eval_case",
         "aidrp.requirement_brief",
         "aidrp.repo_map",
@@ -907,7 +1231,7 @@
         "aidrp.workspace"
       ],
       "headings": [],
-      "hash": "d6fcfe24642c",
+      "hash": "6e73ce86324d",
       "score": 6
     }
   ]

@@ -10,7 +10,13 @@
 | debug-pack | 排障包 | 一次 bug 的排查资料包 |
 | decision-trace | 决策轨迹 | 为什么这么改的记录 |
 | eval-case | 回归用例 | 为了防止 bug 再犯的检查项 |
+| doc-sync | 文档同步包 | 判断 README 和核心文档该怎么同步 |
 | discovery interview | 需求访谈 | 用提问把真实需求聊清楚 |
+| product review | 产品评审 | 先决定第一版该做什么、不该做什么 |
+| engineering review | 工程评审 | 先决定边界、风险、验证与最小改动面 |
+| investigate | 根因调查 | 修 bug 前先找到最能解释问题的原因 |
+| live QA | 真实验收 | 在真实入口、真实界面、真实流程里验证 |
+| stage router | 阶段路由 | 告诉你现在到底该走到哪一阶段 |
 | seed files | 起始文件 | 最先该读的文件 |
 | candidate files | 候选文件 | 本任务最相关的文件 |
 | context budget | 上下文预算 | 一次最多读多少文件/文本 |
@@ -40,3 +46,4 @@
 - 看到 `debug-pack` 就知道要先找证据
 - 看到 `eval-case` 就知道要防回归
 - 看到 `requirement-brief` 就知道要先把想法落稳
+- 看到 `doc-sync` 就知道要检查 README 是否已经过期

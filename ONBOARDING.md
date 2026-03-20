@@ -2,7 +2,7 @@
 
 这个仓库不是教你“怎么写更花哨的 Prompt”，而是教你：
 
-怎么把 AI 开发从聊天模式，升级成可控的运行模式。
+怎么把 AI 开发从聊天模式，升级成一个有阶段门、有工件、有验收、有文档守门的运行模式。
 
 ## 核心转变
 
@@ -12,25 +12,46 @@
 
 转成：
 
-- “你先根据工件工作，只有证据不足时才扩大上下文”
+- “你先按阶段工作，先读工件，只有证据不足时才扩大上下文”
+
+再往前一步，现在还要做到：
+
+- “代码改完以后，必须确认 README 和核心文档是否还是当前事实”
 
 ## 默认工作模型
 
+功能开发默认顺序：
+
 1. 初始化 `.aidrp/`
-2. 生成 `repo-map | 仓库地图`
-3. 想法不清楚时，先做 `discovery interview | 需求访谈` 并落成 `requirement-brief | 需求简报`
-4. 任务生成 `task-packet | 任务包`，bug 生成 `debug-pack | 排障包`
-5. 优先阅读短名单，不要一上来全仓扫描
-6. 关键推理变化写入 `decision-trace | 决策轨迹`
-7. 被确认的 bug 变成 `eval-case | 回归用例`
+2. 想法不清楚时，先做 `需求访谈（discovery interview）`
+3. 落成 `需求简报（requirement-brief）`
+4. 过 `产品评审（product review）`
+5. 过 `工程评审（engineering review）`
+6. 生成 `仓库地图（repo-map）`
+7. 生成 `任务包（task-packet）`
+8. 按短名单实现，不要直接全仓扫描
+9. 做 `真实验收（live QA）`
+10. 用 `文档同步包（doc-sync）` 收尾
+
+Bug 修复默认顺序：
+
+1. 生成或刷新 `仓库地图（repo-map）`
+2. 生成 `排障包（debug-pack）`
+3. 先做 `根因调查（investigate）`
+4. 必要时记录 `决策轨迹（decision-trace）`
+5. 定点修复
+6. 做 `真实验收（live QA）`
+7. 把 bug 变成 `回归用例（eval-case）`
+8. 用 `文档同步包（doc-sync）` 收尾
 
 ## 这套系统试图防止的坏味道
 
 - 一个本地 bug 却要扫整个仓库
 - 每次新会话都重新讲架构
-- 有日志但没有 trace id，串不起来
-- 线上问题修一次，后面还会回来
-- 验证命令太慢或者根本没人知道该跑什么
+- 需求还没收敛就直接设计系统
+- 没有根因调查就开始修 bug
+- 只跑了单元测试，就宣布已经验证完成
+- 代码和 README 慢慢分叉，最后互相误导
 
 ## 必备工件
 
@@ -41,6 +62,7 @@
 - `.aidrp/debug/*.json` 与 `*.md`
 - `.aidrp/traces/*.json`
 - `.aidrp/evals/*.json` 与 `*.md`
+- `.aidrp/docsync/*.json` 与 `*.md`
 
 ## 集成到其他项目的步骤
 
@@ -48,11 +70,12 @@
 2. 运行 `python -m aidrp init-workspace --project-root /path/to/project`
 3. 修改 `.aidrp/config.json`
 4. 提交 `.aidrpignore`、配置文件和生成后的 `AGENTS.md`
-5. 把任务包 / 排障包 生成加入你的日常流程
+5. 把 `任务包 / 排障包 / 文档同步包` 加入你的日常流程
+6. 把真实验收和回归用例纳入默认收尾
 
-## 如果你现在只能落三件事
+## 如果你现在只能先落四件事
 
-- 固定提交 `repo-map | 仓库地图`
-- 想法没收敛前先写 `requirement-brief | 需求简报`
-- 修 bug 前必须先写 `debug-pack | 排障包`
-- 真实 bug 修完后必须补 `eval-case | 回归用例`
+- 固定提交 `仓库地图（repo-map）`
+- 想法没收敛前先写 `需求简报（requirement-brief）`
+- 修 bug 前必须先写 `排障包（debug-pack）`，并先做根因调查
+- 非 trivial 变更收尾前必须补 `文档同步包（doc-sync）`

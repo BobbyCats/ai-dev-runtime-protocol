@@ -31,5 +31,25 @@
     "security/*",
     "auth/*",
     "payments/*"
-  ]
+  ],
+  "documentation": {
+    "canonical_docs": [
+      "README.md",
+      "ONBOARDING.md",
+      "AGENTS.md",
+      "docs/architecture-架构说明.md"
+    ],
+    "readme_priority_sections": [
+      "这是什么",
+      "这版新增了什么",
+      "阶段路由",
+      "核心工件",
+      "文档同步原则",
+      "快速开始",
+      "默认工作流",
+      "仓库结构"
+    ],
+    "section_rewrite_threshold": 2,
+    "full_rewrite_threshold": 3
+  }
 }

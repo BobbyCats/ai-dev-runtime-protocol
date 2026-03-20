@@ -40,6 +40,26 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "auth/*",
         "payments/*",
     ],
+    "documentation": {
+        "canonical_docs": [
+            "README.md",
+            "ONBOARDING.md",
+            "AGENTS.md",
+            "docs/architecture-架构说明.md",
+        ],
+        "readme_priority_sections": [
+            "这是什么",
+            "这版新增了什么",
+            "阶段路由",
+            "核心工件",
+            "文档同步原则",
+            "快速开始",
+            "默认工作流",
+            "仓库结构",
+        ],
+        "section_rewrite_threshold": 2,
+        "full_rewrite_threshold": 3,
+    },
 }
 
 
@@ -65,13 +85,18 @@ def load_workspace_config(project_root: Path) -> dict[str, Any]:
             **DEFAULT_CONFIG["validation_commands"],
             **data["validation_commands"],
         }
+    if "documentation" in data:
+        merged["documentation"] = {
+            **DEFAULT_CONFIG["documentation"],
+            **data["documentation"],
+        }
     return merged
 
 
 def init_workspace(project_root: Path, write_agents_template: bool = False) -> list[Path]:
     created: list[Path] = []
     workspace = workspace_dir(project_root)
-    for relative in ["briefs", "tasks", "debug", "evals", "traces", "cache", "artifacts"]:
+    for relative in ["briefs", "tasks", "debug", "evals", "traces", "docsync", "cache", "artifacts"]:
         path = workspace / relative
         path.mkdir(parents=True, exist_ok=True)
         created.append(path)

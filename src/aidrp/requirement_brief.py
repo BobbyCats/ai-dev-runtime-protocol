@@ -35,7 +35,7 @@ def build_requirement_brief(
         "success_metrics": success_metrics,
         "open_questions": open_questions,
         "assumptions": assumptions,
-        "recommended_next_step": "Convert this brief into a task-packet after scope is stable. | 范围稳定后转成 task-packet | 任务包。",
+        "recommended_next_step": "Run product review first, then engineering review, and only convert to a task-packet after scope is stable. | 先过产品评审和工程评审，范围稳定后再转成 task-packet | 任务包。",
     }
 
 

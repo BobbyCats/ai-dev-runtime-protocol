@@ -5,17 +5,23 @@
 ## 工作规则
 
 - 大改之前先读 [ONBOARDING.md](ONBOARDING.md)
+- 优先遵守 [docs/playbooks/stage-router-阶段路由.md](docs/playbooks/stage-router-阶段路由.md)
 - 优先生成 `.aidrp/` 工件，而不是直接大范围扫仓库
-- 想法不清楚时，先做 `discovery interview | 需求访谈`，再写 `requirement-brief | 需求简报`
-- 非 trivial 任务先生成 `task-packet | 任务包`
-- bug 先生成 `debug-pack | 排障包`
-- 判断方向变了，就写 `decision-trace | 决策轨迹`
-- 真实 bug 修完后，补 `eval-case | 回归用例`
+- 想法不清楚时，先做 `需求访谈（discovery interview）`，再写 `需求简报（requirement-brief）`
+- 功能开发先过 `产品评审（product review）` 和 `工程评审（engineering review）`
+- 非 trivial 任务先生成 `任务包（task-packet）`
+- bug 先生成 `排障包（debug-pack）`，再做 `根因调查（investigate）`
+- 判断方向变了，就写 `决策轨迹（decision-trace）`
+- 影响用户路径、CLI、API、文件输出的改动，必须做 `真实验收（live QA）`
+- 真实 bug 修完后，补 `回归用例（eval-case）`
+- 非 trivial 改动收尾前，必须补 `文档同步包（doc-sync）`
+- 如果命令表面、阶段顺序或系统定位变了，不允许只往 README 追加一段，必须按章节或整篇重写
 
 ## 验证
 
 - `python -m unittest discover -s tests -v`
 - `python -m aidrp repo-map --project-root . --output-dir .aidrp`
+- `python -m aidrp --help`
 
 ## 编辑边界
 

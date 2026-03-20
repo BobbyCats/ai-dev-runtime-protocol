@@ -11,3 +11,9 @@ dist/
 venv/
 node_modules/
 .aidrp/cache/
+.aidrp/briefs/
+.aidrp/tasks/
+.aidrp/debug/
+.aidrp/evals/
+.aidrp/traces/
+.aidrp/docsync/

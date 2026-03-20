@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 from aidrp.debug_pack import build_debug_pack
+from aidrp.doc_sync import build_doc_sync
 from aidrp.eval_case import build_eval_case
 from aidrp.requirement_brief import build_requirement_brief
 from aidrp.repo_map import build_repo_map
@@ -30,6 +31,7 @@ class RuntimeProtocolTests(unittest.TestCase):
 
             self.assertGreaterEqual(repo_map["summary"]["file_count"], 2)
             self.assertIn("README.md", repo_map["summary"]["seed_files"])
+            self.assertTrue((root / ".aidrp" / "docsync").exists())
 
             task = build_task_packet(
                 root,
@@ -62,6 +64,16 @@ class RuntimeProtocolTests(unittest.TestCase):
             )
             self.assertEqual(debug["trace_id"], "trace-123")
             self.assertTrue(debug["suspected_files"])
+
+            doc_sync = build_doc_sync(
+                root,
+                title="Runtime workflow refresh",
+                summary="Added a new runtime command and updated execution workflow.",
+                changed_files=["src/aidrp/cli.py", "docs/playbooks/stage-router-阶段路由.md"],
+                change_notes=["README should be reviewed from a whole-system perspective."],
+            )
+            self.assertEqual(doc_sync["readme_strategy"], "full-rewrite")
+            self.assertTrue(any(item["path"] == "README.md" for item in doc_sync["impacted_docs"]))
 
     def test_eval_case_and_trace(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

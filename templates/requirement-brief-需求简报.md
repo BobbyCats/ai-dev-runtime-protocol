@@ -45,4 +45,4 @@
 
 ## Next Step | 下一步
 
-- Convert to task-packet | 转成任务包
+- Run product review first, then engineering review, and only convert to task-packet after scope is stable | 先过产品评审和工程评审，范围稳定后再转成任务包

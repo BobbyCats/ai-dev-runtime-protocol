@@ -51,6 +51,33 @@
 - 排障包做故障定位
 - 决策轨迹记录推理转向
 
+## gstack
+
+参考：
+
+- [gstack](https://github.com/garrytan/gstack)
+
+吸收点：
+
+- 用阶段路由把“想法 -> 计划 -> 实现 -> 验收 -> 收尾”串起来
+- 在正式开工前设置产品评审和工程评审
+- 明确“没有根因调查就不要修 bug”
+- 强调真实入口、真实界面的 QA，而不是只看单元测试
+
+落地到本仓库：
+
+- `docs/playbooks/stage-router-阶段路由.md`
+- `docs/playbooks/plan-product-review-产品评审.md`
+- `docs/playbooks/plan-engineering-review-工程评审.md`
+- `docs/playbooks/investigate-根因调查.md`
+- `docs/playbooks/qa-live-真实验收.md`
+
+没有照搬的部分：
+
+- 常驻浏览器 daemon
+- 宿主平台强绑定
+- 它特有的人设和交互语气
+
 ## OpenTelemetry
 
 参考：
